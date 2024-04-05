@@ -11,3 +11,19 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  height: 100vh;
+}
+
+.grid {
+  display: grid;
+  place-items: center;
+  border: 1px solid black;
+}
+
+.separator {
+  background-color: black;
+}
