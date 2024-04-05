@@ -1,3 +1,9 @@
+locals {
+  lambda_arns = [
+    for lambda in local.lambda_names : "arn:aws:execute-api:${var.region}:${local.account_id}:${aws_apigatewayv2_integration.ingest.api_id}/*/*/${lambda}"
+  ]
+}
+
 data "aws_iam_policy_document" "apigw" {
   depends_on = [aws_apigatewayv2_integration.evaluate]
   statement {
@@ -20,6 +26,11 @@ data "aws_iam_policy_document" "apigw" {
   }
 }
 
+resource "aws_cloudwatch_log_group" "lowspot_http_apigw" {
+  name              = "/aws/api-gw/${aws_apigatewayv2_api.lowspot_http_apigw.name}"
+  retention_in_days = 5
+}
+
 resource "aws_apigatewayv2_api" "lowspot_http_apigw" {
   name          = "lowspot"
   protocol_type = "HTTP"
@@ -29,6 +40,24 @@ resource "aws_apigatewayv2_stage" "dev" {
   name        = "dev"
   api_id      = aws_apigatewayv2_api.lowspot_http_apigw.id
   auto_deploy = true
+
+  access_log_settings {
+    destination_arn = aws_cloudwatch_log_group.lowspot_http_apigw.arn
+
+    format = jsonencode({
+      requestId               = "$context.requestId"
+      sourceIp                = "$context.identity.sourceIp"
+      requestTime             = "$context.requestTime"
+      protocol                = "$context.protocol"
+      httpMethod              = "$context.httpMethod"
+      resourcePath            = "$context.resourcePath"
+      routeKey                = "$context.routeKey"
+      status                  = "$context.status"
+      responseLength          = "$context.responseLength"
+      integrationErrorMessage = "$context.integrationErrorMessage"
+      }
+    )
+  }
 }
 
 resource "aws_apigatewayv2_integration" "evaluate" {
@@ -72,3 +101,4 @@ resource "aws_lambda_permission" "ingest_permission" {
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.lowspot_http_apigw.execution_arn}/*/*"
 }
+

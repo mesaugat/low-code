@@ -1,3 +1,7 @@
+locals {
+  lambda_names = ["ingest", "evaluate"]
+}
+
 data "archive_file" "lambda_ingest" {
   type        = "zip"
   source_file = "../backend/lambda-ingest.py"
@@ -106,3 +110,4 @@ resource "aws_lambda_function_url" "lowspot_evaluate_url" {
   function_name      = aws_lambda_function.lowspot_evaluate.function_name
   authorization_type = "NONE"
 }
+
