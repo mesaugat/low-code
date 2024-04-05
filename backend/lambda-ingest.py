@@ -15,7 +15,7 @@ def lambda_handler(ev, context):
     file_name = event['name']
 
     s3.put_object(
-        Bucket='dump-to-s3-hackathon',
+        Bucket='',
         Key=os.path.join(repo_name, f'{current_timestamp}_{file_name}'),
         Body=file_content.encode('utf-8')
     )
