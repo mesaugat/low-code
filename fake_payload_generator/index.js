@@ -55,19 +55,28 @@ function randomInRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Generate 1000 sets of JSON data
+// Generate 10 sets of githubURLs and User
 const possibleUrls = new Set();
+
 for (let i = 0; i < 10; i++) {
   possibleUrls.add(generateFakeGitHubURL());
 }
 
+// Generate 10 sets of github Users
+let possibleUsers = [];
+for (let i = 0; i < 10; i++) {
+  const user = faker.internet.userName();
+  possibleUsers.push(user);
+}
+
+// Generate 1000 sets of JSON data
 for (let i = 0; i < 1000; i++) {
   let startLine = randomInRange(1, 1000);
   let endLine = randomInRange(startLine, 1000); // Ensure end line is greater than or equal to start line
 
   const thisRepo = faker.random.arrayElement([...possibleUrls]);
   const repo = thisRepo.split("/")[4];
-  const user = faker.internet.userName();
+  const user = faker.random.arrayElement(possibleUsers);
 
   const jsonData = {
     id: faker.datatype.number(),
