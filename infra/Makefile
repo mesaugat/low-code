@@ -10,10 +10,6 @@ plan: init
 	@echo "Executing Plan 🤖"
 	@terraform plan -out .tfplan
 
-apply: init plan
-	@echo "Applying Terraform 🚀"
-	@terraform apply -parallelism=10 .tfplan
-
 applyonly:
 	@echo "Applying Terraform 🚀"
 	@terraform apply -parallelism=10 .tfplan
@@ -26,3 +22,5 @@ destroy: init
 all: init plan apply
 
 plan: init
+
+apply: init plan applyonly
