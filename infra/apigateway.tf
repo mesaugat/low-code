@@ -35,7 +35,7 @@ resource "aws_apigatewayv2_integration" "evaluate" {
   api_id           = aws_apigatewayv2_api.lowspot_http_apigw.id
   integration_type = "AWS_PROXY"
   connection_type  = "INTERNET"
-  integration_uri  = aws_lambda_function.lowspot_ingest.invoke_arn
+  integration_uri  = aws_lambda_function.lowspot_evaluate.invoke_arn
 }
 
 resource "aws_apigatewayv2_route" "evaluate" {
