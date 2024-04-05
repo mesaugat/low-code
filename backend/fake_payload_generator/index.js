@@ -59,10 +59,8 @@ for (let i = 0; i < 1000; i++) {
         "github_head": faker.git.commitSha(),
         "changed_file": faker.random.arrayElement(repoToFileName[thisRepo]),
         "change_reason": faker.random.arrayElement(['redo', 'undo']),
-        "range": {
-            "start_line": startLine,
-            "end_line": endLine
-        },
+        "range_start_line": startLine,
+        "range_end_line": endLine,
         "current_timestamp": getRandomTimestamp()
     };
 
