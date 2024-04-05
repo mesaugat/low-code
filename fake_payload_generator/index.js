@@ -1,6 +1,7 @@
 import path from "path";
-import faker from "faker";
 import fs from "fs/promises";
+import { faker } from "@faker-js/faker";
+import PD from 'probability-distributions';
 
 const repoToData = new Map();
 const repoToFileName = {};
@@ -31,10 +32,11 @@ function generateFileNames() {
   const d = Date.now();
   const ex = d % 2 === 0 ? ".js" : ".py";
   let files = [];
-
-  for (let i = 0; i < getRandomNumberFiles(); i++) {
+  let nFiles = getRandomNumberFiles();
+  let weights = PD.rnorm(nFiles);
+  for (let i = 0; i < nFiles; i++) {
     const fileName = faker.system.fileName();
-    files.push(fileName.split(".")[0] + ex);
+    files.push({value: fileName.split(".")[0] + ex, weight: Math.abs(weights[i])});
   }
 
   return files;
@@ -57,36 +59,36 @@ function randomInRange(min, max) {
 
 // Generate 10 sets of githubURLs and User
 const possibleUrls = new Set();
-
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 1; i++) {
   possibleUrls.add(generateFakeGitHubURL());
 }
 
 // Generate 10 sets of github Users
 let possibleUsers = [];
+let weights = PD.rnorm(10);
 for (let i = 0; i < 10; i++) {
   const user = faker.internet.userName();
-  possibleUsers.push(user);
+  possibleUsers.push({value: user, weight: Math.abs(weights[i])});
 }
 
 // Generate 1000 sets of JSON data
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 100000; i++) {
   let startLine = randomInRange(1, 1000);
   let endLine = randomInRange(startLine, 1000); // Ensure end line is greater than or equal to start line
 
-  const thisRepo = faker.random.arrayElement([...possibleUrls]);
+  const thisRepo = faker.helpers.arrayElement([...possibleUrls]);
   const repo = thisRepo.split("/")[4];
-  const user = faker.random.arrayElement(possibleUsers);
+  const user = faker.helpers.weightedArrayElement(possibleUsers);
 
   const jsonData = {
-    id: faker.datatype.number(),
+    id: faker.number.int(),
     github_url: thisRepo,
     repo,
     github_user: user,
     github_branch: faker.git.branch(),
     github_head: faker.git.commitSha(),
-    changed_file: faker.random.arrayElement(repoToFileName[thisRepo]),
-    change_reason: faker.random.arrayElement(["redo", "undo"]),
+    changed_file: faker.helpers.weightedArrayElement(repoToFileName[thisRepo]),
+    change_reason: faker.helpers.arrayElement(["redo", "undo"]),
     range_start_line: startLine,
     range_end_line: endLine,
     current_timestamp: getRandomTimestamp(),
