@@ -24,3 +24,4 @@ all: init plan apply
 plan: init
 
 apply: init plan applyonly
+
