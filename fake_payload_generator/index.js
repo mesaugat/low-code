@@ -54,6 +54,7 @@ for (let i = 0; i < 1000; i++) {
     const jsonData = {
         "id": faker.random.number(),
         "github_url": thisRepo,
+        "repo": thisRepo.split('/')[4],
         "github_user": faker.random.arrayElement(possibleUsers),
         "github_branch": faker.git.branch(),
         "github_head": faker.git.commitSha(),
