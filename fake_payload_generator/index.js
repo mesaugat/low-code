@@ -1,6 +1,22 @@
 import faker from 'faker';
 import fs from 'fs'
 
+// Function to ensure a directory exists
+function ensureDirectory(dirPath) {
+  try {
+    // Check if the directory already exists
+    if (fs.existsSync(dirPath)) {
+      console.log(`Directory ${dirPath} already exists.`);
+      return;
+    }
+
+    // Create the directory recursively
+    fs.mkdirSync(dirPath, { recursive: true });
+    console.log(`Directory ${dirPath} created successfully.`);
+  } catch (err) {
+    console.error(`Error creating directory ${dirPath}:`, err);
+  }
+}
 
 let repoToFileName = {};
 // Function to generate a random file name with .py or .js extension
@@ -70,8 +86,10 @@ for (let i = 0; i < 1000; i++) {
 
 let arr  = [];
 for (let i =0; i < dataSet.length; i++){    
-    const thisUrl = dataSet[i].github_url;
-    fs.promises.writeFile(`./fake_data/data_${Date.now()}${i}.json`, JSON.stringify(dataSet[i], null, 2), err => console.log)
+    const thisobj = dataSet[i];
+    const pathCreate= `fake_data/${thisobj.repo}`;
+    ensureDirectory(pathCreate)
+    fs.promises.writeFile(`${pathCreate}/data_${Date.now()}${i}.json`, JSON.stringify(dataSet[i], null, 2), err => console.log)
 }
 
 console.log(JSON.stringify(dataSet, null, 2));
