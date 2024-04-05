@@ -6,4 +6,12 @@ terraform {
       configuration_aliases = [aws.main_region]
     }
   }
+
+  backend "s3" {
+    region         = "us-east-1"
+    bucket         = "com.lowkey.tfstate"
+    key            = "lowkey/terraform.tfstate"
+    dynamodb_table = "com.lowkey.tflock"
+    encrypt        = true
+  }
 }
