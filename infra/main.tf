@@ -101,7 +101,7 @@ resource "aws_lambda_function_url" "lowspot_ingest_url" {
 resource "aws_lambda_function" "lowspot_evaluate" {
   depends_on       = [data.archive_file.lambda_evaluate]
   filename         = "${path.module}/../backend/lambda-evaluate.zip"
-  function_name    = "ingest"
+  function_name    = "evaluate"
   role             = aws_iam_role.lambda_policy_execution_role.arn
   handler          = "lambda-dump.lambda_handler"
   runtime          = "python3.12"
