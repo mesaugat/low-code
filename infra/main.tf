@@ -1,7 +1,7 @@
 locals {
-  lowspot_lambdas = ["ingest", "evaluate"]
-  bucket_name     = "dump-to-s3-hackathon"
-  lambda_src_zip  = "../scripts/lambda.zip"
+  bucket_name    = "dump-to-s3-hackathon"
+  lambda_src_zip = "../scripts/lambda.zip"
+  account_id     = data.aws_caller_identity.current.account_id
 }
 
 data "archive_file" "lambda_ingest" {
@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "lambda_policy_execution_role" {
       "logs:CreateLogGroup"
     ]
     resources = [
-      "arn:aws:logs:us-east-1:730335460744:*"
+      "arn:aws:logs:${var.region}:${local.account_id}:*"
     ]
   }
 
@@ -36,8 +36,8 @@ data "aws_iam_policy_document" "lambda_policy_execution_role" {
       "logs:PutLogEvents"
     ]
     resources = [
-      "arn:aws:logs:us-east-1:730335460744:log-group:/aws/lambda/${local.lowspot_lambdas[0]}:*",
-      "arn:aws:logs:us-east-1:730335460744:log-group:/aws/lambda/${local.lowspot_lambdas[1]}:*"
+      "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/ingest:*",
+      "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/evaluate:*"
     ]
   }
 
@@ -84,7 +84,7 @@ resource "aws_iam_role_policy_attachment" "lambda_policy_execution_role_attachme
 }
 
 resource "aws_lambda_function" "lowspot_ingest" {
-  depends_on = [ data.archive_file.lambda_ingest ]
+  depends_on       = [data.archive_file.lambda_ingest]
   filename         = "${path.module}/../backend/lambda-ingest.zip"
   function_name    = "ingest"
   role             = aws_iam_role.lambda_policy_execution_role.arn
@@ -99,7 +99,7 @@ resource "aws_lambda_function_url" "lowspot_ingest_url" {
 }
 
 resource "aws_lambda_function" "lowspot_evaluate" {
-  depends_on = [ data.archive_file.lambda_evaluate ]
+  depends_on       = [data.archive_file.lambda_evaluate]
   filename         = "${path.module}/../backend/lambda-evaluate.zip"
   function_name    = "ingest"
   role             = aws_iam_role.lambda_policy_execution_role.arn
