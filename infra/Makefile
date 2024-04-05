@@ -1,21 +1,26 @@
-.SHELLFLAGS := -ec
 .DEFAULT_GOAL := plan
 
+.PHONY: init plan apply destroy applyonly
+
 init:
-	echo "Initializing Terraform 🏃"
-	terraform init
+	@echo "Initializing Terraform 🏃"
+	@terraform init
 
-plan:
-	echo "Executing Plan 🤖"
-	terraform plan -out .tfplan
+plan: init
+	@echo "Executing Plan 🤖"
+	@terraform plan -out .tfplan
 
-apply:
-	echo "Applying Terraform 🚀"
-	terraform apply .tfplan
+apply: init plan
+	@echo "Applying Terraform 🚀"
+	@terraform apply -parallelism=10 .tfplan
 
-destroy:
-	echo "Destroying Infrastructure 😈"
-	terraform destroy
+applyonly:
+	@echo "Applying Terraform 🚀"
+	@terraform apply -parallelism=10 .tfplan
+
+destroy: init
+	@echo "Destroying Infrastructure 😈"
+	@terraform destroy
 
 
 all: init plan apply

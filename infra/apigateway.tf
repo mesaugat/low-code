@@ -1,3 +1,23 @@
+data "aws_iam_policy_document" "apigw" {
+  statement {
+    sid = "InvokeAccessToApiGw"
+    actions = [
+      "lambda:InvokeFunction"
+    ]
+    principals {
+      type        = "AWS"
+      identifiers = ["apigateway.amazonaws.com"]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "SourceArn"
+      values = [
+        "arn:aws:execute-api:us-east-1:730335533844:q3209t5r2d/*/*/ingest"
+      ]
+    }
+  }
+}
+
 resource "aws_apigatewayv2_api" "lowspot_http_apigw" {
   name          = "lowspot_http_apigw"
   protocol_type = "HTTP"
@@ -22,5 +42,3 @@ resource "aws_apigatewayv2_integration" "ingest" {
   integration_uri    = aws_lambda_function.lowspot_ingest.invoke_arn
   integration_method = "POST"
 }
-
-

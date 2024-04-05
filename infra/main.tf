@@ -103,7 +103,7 @@ resource "aws_lambda_function" "lowspot_evaluate" {
   filename         = "${path.module}/../backend/lambda-evaluate.zip"
   function_name    = "evaluate"
   role             = aws_iam_role.lambda_policy_execution_role.arn
-  handler          = "lambda-dump.lambda_handler"
+  handler          = "lambda-evaluate.lambda_handler"
   runtime          = "python3.12"
   source_code_hash = filebase64sha256("../backend/lambda-evaluate.zip")
 }
