@@ -1,6 +1,6 @@
 locals {
-  bucket_name    = "dump-to-s3-hackathon"
   lambda_src_zip = "../scripts/lambda.zip"
+  bucket_name    = aws_s3_bucket.dumpbucket.bucket
   account_id     = data.aws_caller_identity.current.account_id
 }
 
@@ -50,8 +50,8 @@ data "aws_iam_policy_document" "lambda_policy_execution_role" {
       "s3:GetObject"
     ]
     resources = [
-      "arn:aws:s3:::dump-to-s3-hackathon",
-      "arn:aws:s3:::dump-to-s3-hackathon/*"
+      "arn:aws:s3:::${local.bucket_name}",
+      "arn:aws:s3:::${local.bucket_name}/*"
     ]
   }
 }
@@ -88,7 +88,7 @@ resource "aws_lambda_function" "lowspot_ingest" {
   filename         = "${path.module}/../backend/lambda-ingest.zip"
   function_name    = "ingest"
   role             = aws_iam_role.lambda_policy_execution_role.arn
-  handler          = "lambda-dump.lambda_handler"
+  handler          = "lambda-ingest.lambda_handler"
   runtime          = "python3.12"
   source_code_hash = filebase64sha256("../backend/lambda-ingest.zip")
 }
