@@ -1,10 +1,27 @@
+import * as d3 from 'd3';
+import useSWR from 'swr';
+import { useState } from 'react';
+
 import Header from './Header';
 import Select from './Select';
 import D3TreeMap from './D3TreeMap';
-import * as d3 from 'd3';
-import flare from './flare.json';
+
+// const API_ENDPOINT = 'https://qsyjt1qvn9.execute-api.us-east-1.amazonaws.com/dev';
 
 function App() {
+  const fetcher = url => fetch(url).then((res) => res.json());
+
+  const queryParameters =  new URLSearchParams(window.location.search);
+  const searchParamRepoUrl = queryParameters.get('repoUrl');
+
+  const [repoUrl, setRepoUrl] = useState(searchParamRepoUrl);
+  const { data, error, isLoading } = useSWR(`/evaluate?repoUrl=${repoUrl}`, fetcher);
+
+  if (!repoUrl) return <div className="container">Nothing low about you!</div>;
+
+  if (error) return <div className="container">Error loading data</div>;
+  if (isLoading) return <div className="container">Loading...</div>;
+
   return (
     <>
       <Header title="LowCode Visualizer" />
@@ -12,17 +29,15 @@ function App() {
         Group By:{' '}
         <Select
           options={[
-            { value: 'Folder', label: 'Folder' },
-            { value: 'User', label: 'User' },
-            { value: 'Edits', label: 'Edits' }
+            { value: 'something', label: 'something' }
           ]}
-          defaultValue="option1"
-          onChange={(e) => console.log(e.target.value)}
+          defaultValue="something"
+          onChange={(e) => setRepoUrl(e.target.value)}
         />
       </p>
       <div className="container">
         <div className="grid">
-          <D3TreeMap data={flare} tile={d3.treemapBinary} />
+          <D3TreeMap data={data} tile={d3.treemapSquarify} />
         </div>
         <div className="separator"></div>
         <div className="grid"></div>
