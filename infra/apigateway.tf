@@ -111,7 +111,7 @@ resource "aws_lambda_permission" "ingest_permission" {
 
 resource "aws_apigatewayv2_route" "suggest" {
   api_id    = aws_apigatewayv2_api.lowspot_http_apigw.id
-  route_key = "POST /suggest"
+  route_key = "GET /suggest"
   target    = "integrations/${aws_apigatewayv2_integration.suggest.id}"
 }
 
