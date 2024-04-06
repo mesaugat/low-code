@@ -26,6 +26,13 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "ss3_tflock" {
   }
 }
 
+resource "aws_s3_bucket_versioning" "terraform_lock" {
+  bucket = aws_s3_bucket.terraform_lock.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 resource "aws_s3_bucket_public_access_block" "analysis" {
   bucket = aws_s3_bucket.analysis.id
 

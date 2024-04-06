@@ -1,7 +1,28 @@
+locals {
+  clickhouse_ip       = aws_instance.clickhouse.public_ip
+  clickhouse_password = var.clickhouse_password
+}
+
 resource "aws_security_group" "clickhouse_sg" {
   name        = "${local.clickhouse_ec2_name}-sg"
   description = "Allow traffic from and to ClickHouse server"
   vpc_id      = local.vpc_id
+
+  ingress {
+    description = "Allow all temp"
+    from_port   = 8123
+    to_port     = 8123
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "Allow all temp"
+    from_port   = 9000
+    to_port     = 9000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   ingress {
     description = "Allow traffic from Leapfrog IPs to ClickHouse server"
@@ -15,8 +36,8 @@ resource "aws_security_group" "clickhouse_sg" {
     description = "Allow HTTPS traffic from Leapfrog IPs to Clickhouse server"
     from_port   = 8443
     to_port     = 8443
-    protocol    = "tcp"
     cidr_blocks = [local.subnet_cidr, local.leapfrog_ip]
+    protocol    = "tcp"
   }
 
   ingress {

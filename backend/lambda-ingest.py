@@ -1,42 +1,87 @@
-#!/usr/bin/env python3
-
 import os
 import json
-import boto3
+import clickhouse_driver
 
-s3 = boto3.client("s3")
+from dateutil.parser import isoparse
+
+
+def connect_to_clickhouse():
+    # Connect to ClickHouse
+    connection = clickhouse_driver.connect(
+            host=os.getenv("host", ""),
+            port=os.getenv("port", 9000),
+            user=os.getenv("user", "default"),
+            password=os.getenv("password", ""),
+            database=os.getenv("database", "default")
+        )
+    return connection
 
 
 def lambda_handler(event, context):
-    event = json.loads(event["body"])
-
-    # Extract data from event
-    repo_name = event["repo"]
-    json_data = json.dumps(event)
-
-    # S3 bucket and file_key
-    bucket_name = "com.lowkey.dumpbucketwa"
-    file_key = os.path.join(repo_name, f"{repo_name}.json")
+    # Parse incoming request
+    request_body = json.loads(event['body'])
 
     try:
-        # Check if the file exists
-        s3.head_object(Bucket=bucket_name, Key=file_key)
+        con = connect_to_clickhouse()
+        cur = con.cursor()
 
-        # If file exists, append new data to it
-        existing_data = (
-            s3.get_object(Bucket=bucket_name, Key=file_key)["Body"]
-            .read()
-            .decode("utf-8")
-        )
-        existing_json = json.loads(existing_data)
-        existing_json.append(event)
-        new_data = json.dumps(existing_json)
+        cur.execute("SHOW TABLES LIKE 'ingestion_payload'")
+        table_exists = cur.fetchone() is not None
 
-    except s3.exceptions.ClientError:
-        # If file doesn't exist, create a new JSON
-        new_data = json.dumps([event])
+        if not table_exists:
+            cur.execute("""
+                CREATE TABLE default.ingestion_payload (
+                    id UUID DEFAULT generateUUIDv4(),
+                    repo_url String,
+                    repo_branch String,
+                    repo_head String,
+                    repo_user String,
+                    changed_file String,
+                    change_reason String,
+                    range_start_line UInt64,
+                    range_end_line UInt64,
+                    is_dirty UInt8,
+                    timestamp DateTime64(3, 'UTC')
+                ) ENGINE = MergeTree()
+                ORDER BY (id)
+                """)
 
-    # Save the updated/created data back to S3
-    s3.put_object(Bucket=bucket_name, Key=file_key, Body=new_data.encode("utf-8"))
+        # Insert the request payload
+        for item in request_body:
+            item['timestamp'] = isoparse(item['timestamp'])
+            cur.execute("""
+                INSERT INTO default.ingestion_payload (
+                change_reason,
+                changed_file,
+                is_dirty,
+                range_start_line,
+                range_end_line,
+                repo_branch,
+                repo_head,
+                repo_url,
+                repo_user,
+                timestamp
+                ) VALUES (
+                    %(change_reason)s,
+                    %(changed_file)s,
+                    %(is_dirty)s,
+                    %(range_start_line)s,
+                    %(range_end_line)s,
+                    %(repo_branch)s,
+                    %(repo_head)s,
+                    %(repo_url)s,
+                    %(repo_user)s,
+                    %(timestamp)s
+                    )
+                    """, item)
 
-    return {"statusCode": 200, "body": f"File {file_key} uploaded successfully!"}
+        return {
+        'statusCode': 200,
+        'body': json.dumps('Data inserted successfully!')
+        }
+    
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'body': json.dumps(str(e))
+        }
