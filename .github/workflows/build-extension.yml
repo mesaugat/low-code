@@ -26,6 +26,7 @@ jobs:
       run:
         working-directory: extension
     steps:
+      - uses: actions/checkout@v4
       - run: |
           sudo curl https://raw.githubusercontent.com/fsaintjacques/semver-tool/3.0.0/src/semver -o /usr/local/bin/semver && sudo chmod +x /usr/local/bin/semver
       - id: get-version
@@ -43,7 +44,6 @@ jobs:
             new_version=$(semver bump patch "$last_version")
           fi
           echo "new_version=$new_version" >> $GITHUB_OUTPUT
-      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - name: Building
         id: build
