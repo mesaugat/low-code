@@ -1,14 +1,13 @@
 {
   "id": 8861,
   "github_url": "https://github.com/Cydney.Thiel63/nulla-voluptatem-qui",
+  "repo": "nulla-voluptatem-qui",
   "github_user": "Lucio40",
   "github_branch": "hard-drive-override",
   "github_head": "20c7e583f87a94cb0bd55ef584fd6163618d5fb5",
   "changed_file": "multi_byte_prairie_utah.py",
   "change_reason": "undo",
-  "range": {
-    "start_line": 928,
-    "end_line": 955
-  },
+  "range_start_line": 928,
+  "range_end_line": 955,
   "current_timestamp": "2024-04-05T05:36:20.357Z"
 }

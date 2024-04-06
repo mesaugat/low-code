@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "faker": "^5.5.3"
+    "@faker-js/faker": "^8.4.1",
+    "probability-distributions": "^0.9.1"
   }
 }

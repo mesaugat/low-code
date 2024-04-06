@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "app/**"
 jobs:
   deploy:
     name: Deploy
@@ -29,4 +31,6 @@ jobs:
         with:
           folder: app/dist
           bucket: ${{ secrets.AWS_S3_BUCKET }}
+          dist-id: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
+          delete-removed: true
           bucket-region: us-east-1
