@@ -244,6 +244,13 @@ def lambda_handler(event, context):
 
         cursor.execute(
             """
+            DELETE FROM ai_suggestions WHERE repo_url = %(repo_url)s;
+            """,
+            {repo_url: repo_url},
+        )
+
+        cursor.execute(
+            """
             INSERT INTO ai_suggestions(repo_url, prompt, response)
             VALUES (%(repo_url)s, %(prompt)s, %(response)s)
             """,

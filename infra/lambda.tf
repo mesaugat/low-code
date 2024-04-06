@@ -1,5 +1,5 @@
 locals {
-  lambda_names      = ["ingest", "evaluate"]
+  lambda_names      = ["ingest", "evaluate", "suggest", "run_ai"]
   requirements_path = "../backend/requirements.txt"
   requirements_name = "requirements.txt"
   layer_path        = "../backend"
@@ -25,6 +25,12 @@ data "archive_file" "lambda_suggest" {
   output_path = "../backend/lambda-suggest.zip"
 }
 
+data "archive_file" "lambda_run_ai" {
+  type        = "zip"
+  source_file = "../backend/lambda-run-ai.py"
+  output_path = "../backend/lambda-run-ai.zip"
+}
+
 data "aws_iam_policy_document" "lambda_policy_execution_role" {
   statement {
     sid    = "CreateLogGroup"
@@ -47,7 +53,8 @@ data "aws_iam_policy_document" "lambda_policy_execution_role" {
     resources = [
       "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/ingest:*",
       "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/evaluate:*",
-      "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/suggest:*"
+      "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/suggest:*",
+      "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/run_ai:*"
     ]
   }
 
@@ -219,5 +226,33 @@ resource "aws_lambda_function" "lowspot_suggest" {
 
 resource "aws_lambda_function_url" "lowspot_suggest_url" {
   function_name      = aws_lambda_function.lowspot_suggest.function_name
+  authorization_type = "NONE"
+}
+
+resource "aws_lambda_function" "lowspot_run_ai" {
+  depends_on       = [data.archive_file.lambda_suggest]
+  filename         = "${path.module}/../backend/lambda-run-ai.zip"
+  function_name    = "run-ai"
+  role             = aws_iam_role.lambda_policy_execution_role.arn
+  handler          = "lambda-run-ai.lambda_handler"
+  runtime          = "python3.12"
+  source_code_hash = fileexists("../backend/lambda-run-ai.zip") ? filebase64sha256("../backend/lambda-run-ai.zip") : ""
+  layers = [
+    aws_lambda_layer_version.lambda_layer.arn
+  ]
+
+  environment {
+    variables = {
+      host     = local.clickhouse_ip
+      user     = "default"
+      database = "default"
+      password = local.clickhouse_password
+      port     = "9000"
+    }
+  }
+}
+
+resource "aws_lambda_function_url" "lowspot_run_ai" {
+  function_name      = aws_lambda_function.lowspot_run_ai.function_name
   authorization_type = "NONE"
 }

@@ -41,7 +41,7 @@ def build_dir_tree(data, repo_url, metrics):
             "name": file_name,
             "url": url,
             "value": time_spent if metrics == "time_spent" else num_of_edits,
-            "unit": "minute" if metrics == "time_spent" else "edits",
+            "unit": "minute" if metrics == "time_spent" else "edit",
         }
 
         if file_path in cache_pointer:

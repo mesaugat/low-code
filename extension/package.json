@@ -2,7 +2,7 @@
   "name": "low-code",
   "displayName": "low-code",
   "description": "Find low spot in the code.",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "publisher": "low-key",
   "icon": "low-key.ico",
   "engines": {
