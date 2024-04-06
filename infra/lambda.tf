@@ -1,5 +1,5 @@
 locals {
-  lambda_names      = ["ingest", "evaluate"]
+  lambda_names      = ["ingest", "evaluate", "suggest", "run_ai"]
   requirements_path = "../backend/requirements.txt"
   requirements_name = "requirements.txt"
   layer_path        = "../backend"
@@ -25,6 +25,12 @@ data "archive_file" "lambda_suggest" {
   output_path = "../backend/lambda-suggest.zip"
 }
 
+data "archive_file" "lambda_run_ai" {
+  type        = "zip"
+  source_file = "../backend/lambda-run-ai.py"
+  output_path = "../backend/lambda-run-ai.zip"
+}
+
 data "aws_iam_policy_document" "lambda_policy_execution_role" {
   statement {
     sid    = "CreateLogGroup"
@@ -47,7 +53,8 @@ data "aws_iam_policy_document" "lambda_policy_execution_role" {
     resources = [
       "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/ingest:*",
       "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/evaluate:*",
-      "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/suggest:*"
+      "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/suggest:*",
+      "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/run_ai:*"
     ]
   }
 
