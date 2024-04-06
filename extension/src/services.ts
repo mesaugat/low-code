@@ -3,8 +3,9 @@ import simpleGit from 'simple-git';
 
 import { extractURL } from './utils';
 import { ChangeReasonMaps } from './maps';
-import { DocumentChangePayload, ChangeReason, GitInfo } from './types';
+import { COMMAND_NAVIGATE_TO_URL } from './commands';
 import axiosRequest, { INJEEST_URL } from './request';
+import { DocumentChangePayload, ChangeReason, GitInfo } from './types';
 
 export const initializeApp = async (): Promise<GitInfo> => {
   const workSpaceFolders = vscode.workspace.workspaceFolders;
@@ -140,7 +141,26 @@ export const initializeEvent = async (gitInfo: GitInfo): Promise<void> => {
     }
   };
 
+  setInterval(pushData, INTERVAL_RATE);
+
   vscode.workspace.onDidChangeTextDocument(async (e: vscode.TextDocumentChangeEvent) => {
     await processEvent(e);
   });
+};
+
+export const initializeStatusBar = (context: vscode.ExtensionContext, gitInfo: GitInfo) => {
+  const { subscriptions } = context;
+
+  const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 500);
+
+  const statusBarCommand = {
+    title: 'statusBarCommand',
+    command: COMMAND_NAVIGATE_TO_URL,
+    arguments: ['https://google.com'],
+  };
+
+  statusBarItem.text = 'Low Code';
+  statusBarItem.command = statusBarCommand;
+  subscriptions.push(statusBarItem);
+  statusBarItem.show();
 };

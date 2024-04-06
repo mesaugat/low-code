@@ -1,3 +1,5 @@
+import * as child_process from 'child_process';
+
 const HTTP_REGEX = /(\w+:\/\/)(.+@)*([\w\d\.]+)(:[\d]+){0,1}\/*(.*)/;
 const HTTP_REGEX_PREFIX_SELECTOR = /(\w+:\/\/)/;
 
