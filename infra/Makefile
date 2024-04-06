@@ -9,7 +9,7 @@ init:
 plan: init
 	@echo "Executing Plan 🤖"
 	@if [ -z "$$clickhouse_password" ]; then \
-					echo "Environment variable 'password' not set, skipping tfvars overwrite"; \
+					echo "Environment variable 'TF_VAR_clickhouse_password' not set, skipping tfvars overwrite"; \
 			else \
 					echo "clickhouse_password = \"$$clickhouse_password\"" > terraform.tfvars; \
 					echo "tfvars file overwritten"; \
