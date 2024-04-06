@@ -32,7 +32,7 @@ jobs:
       - id: get-version
         run: |
           git fetch --tags
-          last_version=$(git tag --sort=-version:refname | grep -P "^$package_name@v\d+.\d+.\d+$" | head -n 1 | cut -d v -f 2)
+          last_version=$(git tag --sort=-version:refname | grep -P "^$package_name@\d+.\d+.\d+$" | head -n 1 | cut -d v -f 2)
 
           if [ -z "$last_version" ]; then
             new_version=1.0.0
