@@ -39,10 +39,10 @@ jobs:
           else
             new_version=$(semver bump patch "$last_version")
           fi
-          echo "new_version=$new_version" >> $GITHUB_OUTPUT
+          echo "new_version=$new_version" >> $GITHUB_ENV
+          echo "package_name=$package_name" >> $GITHUB_ENV
       - uses: actions/setup-node@v4
-      - name: Building
-        id: build
+      - id: build
         run: |
           npm install
           npm install -g @vscode/vsce
@@ -54,12 +54,13 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           custom_tag: ${{ env.new_version }}
           tag_prefix: ""
-      - name: Create release
-        uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          repo_token: "${{ secrets.GH_TOKEN }}"
+          tag_name: ${{ env.new_version }}
+          release_name: ${{ env.package_name }} ${{ env.new_version }}
+          draft: false
           prerelease: false
-          title: ${{ env.package_name }}
-          automatic_release_tag: ${{ env.new_version }}
-          files: |
-            *.vsix
