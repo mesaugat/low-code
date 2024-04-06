@@ -116,6 +116,12 @@ export const initializeEvent = async (gitInfo: GitInfo): Promise<void> => {
       return;
     }
 
+    const isInsideWorkSpace = !!vscode.workspace.getWorkspaceFolder(document.uri);
+
+    if (!isInsideWorkSpace) {
+      return;
+    }
+
     const data: DocumentChangePayload = {
       repo_url: gitInfo.remote,
       repo_user: await gitInfo.getUsername(),
@@ -129,6 +135,8 @@ export const initializeEvent = async (gitInfo: GitInfo): Promise<void> => {
       timestamp: new Date().toISOString(),
       is_dirty: document.isDirty,
     };
+
+    console.log(data);
 
     collectedData.push(data);
   };
