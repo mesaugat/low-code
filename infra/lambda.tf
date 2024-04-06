@@ -105,7 +105,7 @@ resource "aws_lambda_function" "lowspot_ingest" {
       user     = "default"
       database = "default"
       password = local.clickhouse_password
-      port     = "8123"
+      port     = "9000"
     }
   }
 }
@@ -134,7 +134,7 @@ resource "aws_lambda_function" "lowspot_evaluate" {
       user     = "default"
       database = "default"
       password = local.clickhouse_password
-      port     = "8123"
+      port     = "9000"
     }
   }
 }
