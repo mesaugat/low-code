@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ChatBubble = (props) => {
   const { children } = props;
 

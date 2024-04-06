@@ -1,4 +1,4 @@
-const Header = ({ title }) => {
+const Header = ({ title, github_url }) => {
   return (
     <header className="sticky top-0 z-50 bg-white">
       <div className="flex items-center">

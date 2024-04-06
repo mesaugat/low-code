@@ -1,6 +1,6 @@
-import path from "path";
-import fs from "fs/promises";
-import { faker } from "@faker-js/faker";
+import path from 'path';
+import fs from 'fs/promises';
+import { faker } from '@faker-js/faker';
 import PD from 'probability-distributions';
 
 const repoToData = new Map();
@@ -12,7 +12,7 @@ async function ensureDirectory(dirPath) {
     await fs.mkdir(dirPath, { recursive: true });
     console.log(`Directory ${dirPath} created successfully.`);
   } catch (err) {
-    if (err.code !== "EEXIST") {
+    if (err.code !== 'EEXIST') {
       console.error(`Error creating directory ${dirPath}:`, err);
     }
   }
@@ -30,13 +30,13 @@ function getRandomNumberFiles() {
 // Function to generate file names with .py or .js extensions
 function generateFileNames() {
   const d = Date.now();
-  const ex = d % 2 === 0 ? ".js" : ".py";
+  const ex = d % 2 === 0 ? '.js' : '.py';
   let files = [];
   let nFiles = getRandomNumberFiles();
   let weights = PD.rnorm(nFiles);
   for (let i = 0; i < nFiles; i++) {
     const fileName = faker.system.fileName();
-    files.push({value: fileName.split(".")[0] + ex, weight: Math.abs(weights[i])});
+    files.push({ value: fileName.split('.')[0] + ex, weight: Math.abs(weights[i]) });
   }
 
   return files;
@@ -44,7 +44,7 @@ function generateFileNames() {
 
 // Function to generate fake GitHub URLs
 function generateFakeGitHubURL() {
-  const baseURL = "https://github.com/";
+  const baseURL = 'https://github.com/';
   const username = faker.internet.userName();
   const repository = faker.lorem.slug();
   const toRet = `${baseURL}${username}/${repository}`;
@@ -68,7 +68,7 @@ let possibleUsers = [];
 let weights = PD.rnorm(10);
 for (let i = 0; i < 10; i++) {
   const user = faker.internet.userName();
-  possibleUsers.push({value: user, weight: Math.abs(weights[i])});
+  possibleUsers.push({ value: user, weight: Math.abs(weights[i]) });
 }
 
 // Generate 1000 sets of JSON data
@@ -77,7 +77,7 @@ for (let i = 0; i < 100000; i++) {
   let endLine = randomInRange(startLine, 1000); // Ensure end line is greater than or equal to start line
 
   const thisRepo = faker.helpers.arrayElement([...possibleUrls]);
-  const repo = thisRepo.split("/")[4];
+  const repo = thisRepo.split('/')[4];
   const user = faker.helpers.weightedArrayElement(possibleUsers);
 
   const jsonData = {
@@ -88,7 +88,7 @@ for (let i = 0; i < 100000; i++) {
     github_branch: faker.git.branch(),
     github_head: faker.git.commitSha(),
     changed_file: faker.helpers.weightedArrayElement(repoToFileName[thisRepo]),
-    change_reason: faker.helpers.arrayElement(["redo", "undo"]),
+    change_reason: faker.helpers.arrayElement(['redo', 'undo']),
     range_start_line: startLine,
     range_end_line: endLine,
     current_timestamp: getRandomTimestamp(),
@@ -100,7 +100,7 @@ for (let i = 0; i < 100000; i++) {
   repoToData.get(repo).push(jsonData);
 }
 
-const outputDir = "fake_data";
+const outputDir = 'fake_data';
 await ensureDirectory(outputDir);
 
 for (const [repo, data] of repoToData.entries()) {
