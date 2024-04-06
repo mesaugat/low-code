@@ -95,4 +95,3 @@ resource "aws_cloudfront_cache_policy" "analysis" {
     enable_accept_encoding_brotli = true
   }
 }
-
