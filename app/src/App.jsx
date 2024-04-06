@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Header from './Header';
 import Dropdown from './Dropdown';
 import D3TreeMap from './D3TreeMap';
+import Suggestion from './Suggestion';
 
 const API_ENDPOINT = 'https://qsyjt1qvn9.execute-api.us-east-1.amazonaws.com/dev/evaluate';
 
@@ -19,6 +20,7 @@ const App = () => {
   const [user, setUser] = useState('');
   const [metric, setMetric] = useState('');
   const [timePeriod, setTimePeriod] = useState(searchParamTimePeriod);
+  console.log(setRepoUrl, setTimePeriod)
 
   const { data, error, isLoading } = useSWR(
     `${API_ENDPOINT}?repo_url=${repoUrl}&user=${user}&metrics=${metric}&time_period=${timePeriod}`,
@@ -31,32 +33,40 @@ const App = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <>
+    <div className='p-8'>
       <Header title="LowCode Visualizer" />
-      <div className="mx-auto flex items-center max-w-8xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center mr-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
-            />
-          </svg>
+      <div className='flex gap-x-2 mt-4'>
+        <div className='flex-1'>
+          <div className="flex items-center">
+            <div className="flex items-center mr-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
+                />
+              </svg>
+            </div>
+            <Dropdown name="Metrics" items={['Time Spent', 'Edits']} onClick={setMetric} />
+            <Dropdown name="Users" items={data.users} onClick={setUser} />
+          </div>
+          <div className='mt-4'>
+            <D3TreeMap data={data.graph} tile={d3.treemapSquarify} />
+          </div>
         </div>
-        <Dropdown name="Metrics" items={['Time Spent', 'Edits']} onClick={setMetric} />
-        <Dropdown name="Users" items={data.users} onClick={setUser} />
+        <div className='w-1/4'>
+          <Suggestion />
+        </div>
       </div>
-      <div className="mx-auto flex max-w-8xl px-4 sm:px-6 lg:px-8">
-        <D3TreeMap data={data.graph} tile={d3.treemapSquarify} />
-      </div>
-    </>
+      
+    </div>
   );
 };
 
@@ -79,7 +89,7 @@ const Loading = () => {
 const NoRepo = () => {
   return (
     <div className="grid">
-      <p>There's nothing low about you!</p>
+      <p>There&apos;s nothing low about you!</p>
     </div>
   );
 };
