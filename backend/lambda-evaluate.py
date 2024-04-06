@@ -23,7 +23,7 @@ def build_dir_tree(data, repo_url, metrics):
     cache_pointer = {"ROOT": tree}
 
     for (repo_branch, changed_file, hours_spent, num_of_edits) in data:
-        url = os.path.normpath(
+        url = (
             repo_url.replace(".git", "")
             + "/"
             + "blob"
@@ -75,6 +75,12 @@ def build_dir_tree(data, repo_url, metrics):
     return tree
 
 
+def api_response(status_code, data):
+    headers = {"Content-Type": "application/json"}
+
+    return {"statusCode": status_code, "body": json.dumps(data), "headers": headers}
+
+
 def lambda_handler(event, context):
     qs = event["queryStringParameters"]
     repo_url = qs["repo_url"]
@@ -102,7 +108,7 @@ def lambda_handler(event, context):
 
         repo_exists = cursor.fetchone()
         if repo_exists is None:
-            return {"statusCode": 404, "body": {"error": "Repository doesn't exist."}}
+            return api_response(404, {"error": "Repository doesn't exist."})
 
         user_filter = "AND repo_user = %(user)s" if user else ""
         path_filter = "AND changed_file LIKE %(base_path)s" if base_path else ""
@@ -224,10 +230,8 @@ def lambda_handler(event, context):
         cursor.close()
         conn.close()
 
-        return {
-            "statusCode": 200,
-            "body": {"users": list(map(lambda user: user[0], users)), "graph": tree},
-        }
+        return api_response(
+            200, {"users": list(map(lambda user: user[0], users)), "graph": tree}
+        )
     except Exception as e:
-        return {"statusCode": 500, "body": json.dumps(str(e))}
-
+        return api_response(500, str(e))
