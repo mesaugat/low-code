@@ -64,13 +64,7 @@ def lambda_handler(event, context):
     # Parse incoming request
     qs = event["queryStringParameters"]
     repo_url = qs["repo_url"]
-    user = qs.get("user", None)
-    base_path = qs.get("base_path", None)
-    metrics = qs.get("metrics", None)
     time_period = qs.get("time_period", None) or 90
-
-    if metrics not in ("time_spent", "edits"):
-        metrics = "time_spent"
 
     try:
         conn = connect_to_clickhouse()
@@ -238,14 +232,22 @@ def lambda_handler(event, context):
 
         cursor.execute(
             """
+            CREATE TABLE IF NOT EXIST ai_suggestions (
+                id UUID DEFAULT generateUUIDv4(),
+                repo_url String,
+                prompt String,
+                response String
+            ) ENGINE = MergeTree()
+            ORDER BY (id);
+            """
+        )
+
+        cursor.execute(
+            """
             INSERT INTO ai_suggestions(repo_url, prompt, response)
             VALUES (%(repo_url)s, %(prompt)s, %(response)s)
             """,
-            {
-                repo_url: repo_url,
-                prompt: prompt,
-                response: prompt_result
-            }
+            {repo_url: repo_url, prompt: prompt, response: prompt_result},
         )
 
         cursor.close()
