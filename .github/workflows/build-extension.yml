@@ -1,4 +1,4 @@
-name: Deploy Visualizer
+name: Build Extension
 
 on:
   workflow_dispatch:
