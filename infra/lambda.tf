@@ -202,9 +202,6 @@ resource "aws_lambda_function" "lowspot_suggest" {
   handler          = "lambda-suggest.lambda_handler"
   runtime          = "python3.12"
   source_code_hash = fileexists("../backend/lambda-suggest.zip") ? filebase64sha256("../backend/lambda-suggest.zip") : ""
-  layers = [
-    aws_lambda_layer_version.lambda_layer.arn
-  ]
 
   environment {
     variables = {
