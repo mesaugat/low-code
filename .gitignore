@@ -3,6 +3,7 @@ node_modules/
 package-lock.json
 backend/*.zip
 backend/python
+backend/ai
 
 .venv/
 
