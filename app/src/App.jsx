@@ -36,7 +36,7 @@ const App = () => {
   const [user, setUser] = useState('');
   const [metric, setMetric] = useState('');
   const [timePeriod, _setTimePeriod] = useState(searchParamTimePeriod);
-  const [basePath, setBasePath] = useState(searchBasePath);
+  const [basePath, _setBasePath] = useState(searchBasePath);
 
   const { data, error, isLoading } = useSWR(
     `${API_ENDPOINT}?repo_url=${repoUrl}&user=${user}&metrics=${metric === 'Edits' ? 'edits' : 'time_spent'}&time_period=${timePeriod}&base_path=${basePath}`,
