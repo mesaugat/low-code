@@ -87,7 +87,7 @@ export const initializeApp = async (): Promise<GitInfo> => {
  * @returns {Promise<void>}
  */
 export const initializeEvent = async (gitInfo: GitInfo): Promise<void> => {
-  const INTERVAL_RATE = 15000;
+  const INTERVAL_RATE = 120000;
 
   let collectedData: DocumentChangePayload[] = [];
 
