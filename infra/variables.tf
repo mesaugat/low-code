@@ -9,3 +9,4 @@ variable "lambdas" {
   ]
 }
 
+variable "clickhouse_password" {}

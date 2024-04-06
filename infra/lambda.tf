@@ -1,5 +1,10 @@
 locals {
-  lambda_names = ["ingest", "evaluate"]
+  lambda_names      = ["ingest", "evaluate"]
+  requirements_path = "../backend/requirements.txt"
+  requirements_name = "requirements.txt"
+  layer_path        = "../backend"
+  layer_name        = "clickhouse-layer"
+  layer_zip_name    = "${local.layer_name}.zip"
 }
 
 data "archive_file" "lambda_ingest" {
@@ -82,6 +87,7 @@ resource "aws_iam_role_policy_attachment" "lambda_policy_execution_role_attachme
 }
 
 resource "aws_lambda_function" "lowspot_ingest" {
+  timeout          = "15"
   depends_on       = [data.archive_file.lambda_ingest]
   filename         = "${path.module}/../backend/lambda-ingest.zip"
   function_name    = "ingest"
@@ -89,6 +95,19 @@ resource "aws_lambda_function" "lowspot_ingest" {
   handler          = "lambda-ingest.lambda_handler"
   runtime          = "python3.12"
   source_code_hash = filebase64sha256("../backend/lambda-ingest.zip")
+  layers = [
+    aws_lambda_layer_version.lambda_layer.arn
+  ]
+
+  environment {
+    variables = {
+      host     = local.clickhouse_ip
+      user     = "default"
+      database = "default"
+      password = local.clickhouse_password
+      port     = "8123"
+    }
+  }
 }
 
 resource "aws_lambda_function_url" "lowspot_ingest_url" {
@@ -97,6 +116,7 @@ resource "aws_lambda_function_url" "lowspot_ingest_url" {
 }
 
 resource "aws_lambda_function" "lowspot_evaluate" {
+  timeout          = "15"
   depends_on       = [data.archive_file.lambda_evaluate]
   filename         = "${path.module}/../backend/lambda-evaluate.zip"
   function_name    = "evaluate"
@@ -104,12 +124,17 @@ resource "aws_lambda_function" "lowspot_evaluate" {
   handler          = "lambda-evaluate.lambda_handler"
   runtime          = "python3.12"
   source_code_hash = filebase64sha256("../backend/lambda-evaluate.zip")
+  layers = [
+    aws_lambda_layer_version.lambda_layer.arn
+  ]
+
   environment {
     variables = {
       host     = local.clickhouse_ip
       user     = "default"
       database = "default"
       password = local.clickhouse_password
+      port     = "8123"
     }
   }
 }
@@ -127,4 +152,25 @@ resource "aws_ssm_parameter" "lambda_ingest" {
   name  = "/secrets/lambda/ingest"
   type  = "SecureString"
   value = local.clickhouse_password
+}
+
+resource "null_resource" "lambda_layer" {
+  # triggers = {
+  #   requirements = filesha1(local.requirements_path)
+  # }
+  provisioner "local-exec" {
+    command = <<EOF
+      cd ${local.layer_path}
+      rm -rf python
+      mkdir python
+      pip3 install -r ${local.requirements_name} -t python/
+      zip -r ${local.layer_zip_name} python/
+    EOF
+  }
+}
+resource "aws_lambda_layer_version" "lambda_layer" {
+  filename            = "${local.layer_path}/${local.layer_zip_name}"
+  layer_name          = local.layer_name
+  compatible_runtimes = ["python3.12"]
+  skip_destroy        = true
 }
