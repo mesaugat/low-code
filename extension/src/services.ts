@@ -4,6 +4,7 @@ import simpleGit from 'simple-git';
 import { extractURL } from './utils';
 import { ChangeReasonMaps } from './maps';
 import { DocumentChangePayload, ChangeReason, GitInfo } from './types';
+import axiosRequest, { INJEEST_URL } from './request';
 
 export const initializeApp = async (): Promise<GitInfo> => {
   const workSpaceFolders = vscode.workspace.workspaceFolders;
@@ -51,12 +52,42 @@ export const initializeApp = async (): Promise<GitInfo> => {
     return '';
   };
 
-  console.log('Config');
+  const getUserEmail = async () => {
+    const localUserEmail = await initilizedGit.getConfig('user.email', 'local');
+    if (localUserEmail.value) {
+      return localUserEmail.value;
+    }
 
-  return { remote: extractURL(repoFullPath), getCurrentBranch, getCurrentHead, getUsername };
+    const globalUserEmail = await initilizedGit.getConfig('user.email', 'global');
+    if (globalUserEmail.value) {
+      return globalUserEmail.value;
+    }
+
+    const systemUserEmail = await initilizedGit.getConfig('user.email', 'system');
+    if (systemUserEmail.value) {
+      return systemUserEmail.value;
+    }
+
+    const worktreeUserEmail = await initilizedGit.getConfig('user.email', 'worktree');
+    if (worktreeUserEmail.value) {
+      return worktreeUserEmail.value;
+    }
+
+    return '';
+  };
+
+  return { remote: extractURL(repoFullPath), getCurrentBranch, getCurrentHead, getUsername, getUserEmail };
 };
 
-export const initializeEvent = async (gitInfo: GitInfo) => {
+/**
+ * Main function to initialize event and data workflow.
+ *
+ * @param {GitInfo} gitInfo
+ * @returns {Promise<void>}
+ */
+export const initializeEvent = async (gitInfo: GitInfo): Promise<void> => {
+  const INTERVAL_RATE = 15000;
+
   let collectedData: DocumentChangePayload[] = [];
 
   const processEvent = async (e: vscode.TextDocumentChangeEvent) => {
@@ -69,9 +100,10 @@ export const initializeEvent = async (gitInfo: GitInfo) => {
     const data: DocumentChangePayload = {
       repo_url: gitInfo.remote,
       repo_user: await gitInfo.getUsername(),
+      repo_user_email: await gitInfo.getUserEmail(),
       repo_branch: await gitInfo.getCurrentBranch(),
       repo_head: await gitInfo.getCurrentHead(),
-      chang_reason: !!reason ? ChangeReasonMaps[reason] : ChangeReason.NONE,
+      change_reason: !!reason ? ChangeReasonMaps[reason] : ChangeReason.NONE,
       changed_file: vscode.workspace.asRelativePath(document.uri),
       range_start_line: contentChanges[0].range.start.line,
       range_end_line: contentChanges[0].range.end.line,
@@ -79,14 +111,36 @@ export const initializeEvent = async (gitInfo: GitInfo) => {
       is_dirty: document.isDirty,
     };
 
-    console.log(e, data);
+    collectedData.push(data);
+  };
+
+  /**
+   * Pushes data to backend server and clears the collected data.
+   * @returns {void}
+   */
+  const postPush = (): void => {
+    collectedData = [];
+  };
+
+  /**
+   * Pushes data to backend server and clears the collected data.
+   *
+   * @returns {Promise<void>}
+   */
+  const pushData = async (): Promise<void> => {
+    if (collectedData.length) {
+      try {
+        console.log(collectedData);
+        const res = await axiosRequest.post(INJEEST_URL, collectedData);
+        console.log('Response', res);
+        postPush();
+      } catch (err) {
+        console.log('Error', err);
+      }
+    }
   };
 
   vscode.workspace.onDidChangeTextDocument(async (e: vscode.TextDocumentChangeEvent) => {
     await processEvent(e);
   });
-
-  const clearCollectedData = () => {
-    collectedData = [];
-  };
 };

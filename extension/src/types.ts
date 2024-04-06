@@ -7,9 +7,10 @@ export enum ChangeReason {
 export interface DocumentChangePayload {
   repo_url: string;
   repo_user: string;
+  repo_user_email: string;
   repo_branch: string;
   repo_head: string;
-  chang_reason: ChangeReason;
+  change_reason: ChangeReason;
   changed_file: string;
   range_start_line: number;
   range_end_line: number;
@@ -22,4 +23,5 @@ export interface GitInfo {
   getCurrentBranch: () => Promise<string>;
   getCurrentHead: () => Promise<string>;
   getUsername: () => Promise<string>;
+  getUserEmail: () => Promise<string>;
 }
