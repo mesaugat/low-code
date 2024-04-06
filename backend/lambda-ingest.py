@@ -23,7 +23,7 @@ def lambda_handler(event, context):
 
     try:
         con = connect_to_clickhouse()
-        cur = con.cur()
+        cur = con.cursor()
 
         cur.execute("SHOW TABLES LIKE 'ingestion_payload'")
         table_exists = cur.fetchone() is not None
