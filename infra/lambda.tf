@@ -94,7 +94,7 @@ resource "aws_lambda_function" "lowspot_ingest" {
   role             = aws_iam_role.lambda_policy_execution_role.arn
   handler          = "lambda-ingest.lambda_handler"
   runtime          = "python3.12"
-  source_code_hash = filebase64sha256("../backend/lambda-ingest.zip")
+  source_code_hash = fileexists("../backend/lambda-ingest.zip") ? filebase64sha256("../backend/lambda-ingest.zip") : ""
   layers = [
     aws_lambda_layer_version.lambda_layer.arn
   ]
@@ -123,7 +123,7 @@ resource "aws_lambda_function" "lowspot_evaluate" {
   role             = aws_iam_role.lambda_policy_execution_role.arn
   handler          = "lambda-evaluate.lambda_handler"
   runtime          = "python3.12"
-  source_code_hash = filebase64sha256("../backend/lambda-evaluate.zip")
+  source_code_hash = fileexists("../backend/lambda-evaluate.zip") ? filebase64sha256("../backend/lambda-evaluate.zip") : ""
   layers = [
     aws_lambda_layer_version.lambda_layer.arn
   ]
@@ -155,9 +155,9 @@ resource "aws_ssm_parameter" "lambda_ingest" {
 }
 
 resource "null_resource" "lambda_layer" {
-  # triggers = {
-  #   requirements = filesha1(local.requirements_path)
-  # }
+  triggers = {
+    requirements = fileexists(local.requirements_path) ? filesha1(local.requirements_path) : ""
+  }
   provisioner "local-exec" {
     command = <<EOF
       cd ${local.layer_path}

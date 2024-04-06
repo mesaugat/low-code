@@ -2,6 +2,15 @@ name: Infra Continuous Integration
 
 on:
   workflow_dispatch:
+    inputs:
+      type:
+        type: choice
+        description: Run type
+        required: true
+        default: "DRY"
+        options:
+          - DRY
+          - REAL
   push:
     branches:
       - main
@@ -18,6 +27,11 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+      TF_VAR_clickhouse_password: ${{ secrets.TF_VAR_clickhouse_password }}
     steps:
       - uses: actions/checkout@v4
-      - run: make
+      - name: "Terraform Plan"
+        run: make clickhouse_password="${TF_VAR_clickhouse_password}"
+      - name: "Terraform Apply"
+        if: inputs.type == 'REAL'
+        run: make applyonly

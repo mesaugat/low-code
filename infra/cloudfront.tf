@@ -44,7 +44,7 @@ resource "aws_cloudfront_distribution" "analysis" {
 
 
 resource "aws_cloudfront_response_headers_policy" "analysis" {
-  name = "forms-app-security-headers-policy"
+  name = "analysis_response_headers_policy"
 
   security_headers_config {
     content_type_options {
@@ -68,16 +68,11 @@ resource "aws_cloudfront_response_headers_policy" "analysis" {
       protection = true
       override   = true
     }
-
-    content_security_policy {
-      content_security_policy = "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' https://cdnjs.cloudflare.com https://api.mixpanel.com; img-src 'self' data: https:; form-action 'self'; base-uri 'self'; frame-ancestors 'self'; block-all-mixed-content; object-src 'none'; connect-src *.mixpanel.com *.sentry.io;"
-      override                = true
-    }
   }
 }
 
 resource "aws_cloudfront_cache_policy" "analysis" {
-  name = "forms-app-cloudfront-cache-policy"
+  name = "analysis_cf_cache_policy"
 
   min_ttl     = 2
   default_ttl = 2

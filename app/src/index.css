@@ -9,13 +9,14 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  width: 100vw;
+  height: 100vh;
 }
 
 .container {
   display: grid;
   grid-template-columns: 3fr 0.5px 1fr;
-  height: 100vh;
-  width: 100vw;
 }
 
 .grid {
