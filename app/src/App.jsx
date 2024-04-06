@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Header from './Header';
 import Dropdown from './Dropdown';
 import D3TreeMap from './D3TreeMap';
-import Suggestion from './Suggestion';
+import SuggestionContainer from './SuggestionContainer';
 
 const API_ENDPOINT = 'https://qsyjt1qvn9.execute-api.us-east-1.amazonaws.com/dev/evaluate';
 
@@ -20,7 +20,6 @@ const App = () => {
   const [user, setUser] = useState('');
   const [metric, setMetric] = useState('');
   const [timePeriod, setTimePeriod] = useState(searchParamTimePeriod);
-  console.log(setRepoUrl, setTimePeriod)
 
   const { data, error, isLoading } = useSWR(
     `${API_ENDPOINT}?repo_url=${repoUrl}&user=${user}&metrics=${metric}&time_period=${timePeriod}`,
@@ -62,7 +61,7 @@ const App = () => {
           </div>
         </div>
         <div className='w-1/4'>
-          <Suggestion />
+          <SuggestionContainer />
         </div>
       </div>
       
