@@ -195,6 +195,7 @@ def lambda_handler(event, context):
                 UNION ALL
                 SELECT 
                     a.repo_user, 
+                    a.repo_branch,
                     a.changed_file, 
                     a.round_start, 
                     a.round_end, 
