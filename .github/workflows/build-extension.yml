@@ -32,7 +32,7 @@ jobs:
           npm install
           npm install -g @vscode/vsce
           vsce package --skip-license
-          echo version=$(*.vsix | grep -oE '[0-9]+\.[0-9]+\.[0-9]+') >> $GITHUB_OUTPUT
+          echo version=$(ls *.vsix | grep -oE '[0-9]+\.[0-9]+\.[0-9]+') >> $GITHUB_OUTPUT
           echo artifact_name="low-code" >> $GITHUB_OUTPUT
       - name: Push Tag
         if: inputs.type == 'REAL'
@@ -49,6 +49,6 @@ jobs:
           repo_token: "${{ secrets.GH_TOKEN }}"
           prerelease: false
           title: ${{ steps.prep.outputs.version }}
-          automatic_release_tag: ${{ steps.prep.outputs.version }}
+          automatic_release_tag: ${{ steps.build.outputs.version }}
           files: |
             ${{ steps.build.outputs.artifact_name }}
