@@ -32,7 +32,7 @@ jobs:
       - id: get-version
         run: |
           git fetch --tags
-          last_version=$(git tag --sort=-version:refname | grep -P "^$package_name@\d+.\d+.\d+$" | head -n 1 | cut -d v -f 2)
+          last_version=$(git tag --sort=-version:refname | grep -P "^\d+.\d+.\d+$" | head -n 1 | cut -d v -f 2)
 
           if [ -z "$last_version" ]; then
             new_version=1.0.0
@@ -55,7 +55,7 @@ jobs:
         uses: mathieudutour/github-tag-action@v5.6
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          custom_tag: ${{ env.package_name }}@${{ env.new_version }}
+          custom_tag: ${{ env.new_version }}
           tag_prefix: ""
       - name: Create release on GitHub
         id: create_release
