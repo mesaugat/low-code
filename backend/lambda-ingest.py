@@ -8,20 +8,22 @@ from dateutil.parser import isoparse
 def connect_to_clickhouse():
     # Connect to ClickHouse
     connection = clickhouse_driver.connect(
-            host=os.getenv("host", ""),
-            port=os.getenv("port", 9000),
-            user=os.getenv("user", "default"),
-            password=os.getenv("password", ""),
-            database=os.getenv("database", "default")
-        )
+        host=os.getenv("host", ""),
+        port=os.getenv("port", 9000),
+        user=os.getenv("user", "default"),
+        password=os.getenv("password", ""),
+        database=os.getenv("database", "default"),
+    )
     return connection
+
 
 def create_table_if_not_exists(cur):
     cur.execute("SHOW TABLES LIKE 'ingestion_payload'")
     table_exists = cur.fetchone() is not None
 
     if not table_exists:
-        cur.execute("""
+        cur.execute(
+            """
             CREATE TABLE default.ingestion_payload (
                 id UUID DEFAULT generateUUIDv4(),
                 repo_url String,
@@ -36,27 +38,33 @@ def create_table_if_not_exists(cur):
                 timestamp DateTime64(3, 'UTC')
             ) ENGINE = MergeTree()
             ORDER BY (id)
-            """)
+            """
+        )
+
 
 def insert_data(cur, request_body):
     # Prepare the data for insertion
-    data = ', '.join([
-        "('{}', '{}', {}, {}, {}, '{}', '{}', '{}', '{}', '{}')".format(
-            item['change_reason'],
-            item['changed_file'],
-            item['is_dirty'],
-            item['range_start_line'],
-            item['range_end_line'],
-            item['repo_branch'],
-            item['repo_head'],
-            item['repo_url'],
-            item['repo_user'],
-            isoparse(item['timestamp']).strftime('%Y-%m-%d %H:%M:%S')
-        ) for item in request_body
-    ])
+    data = ", ".join(
+        [
+            "('{}', '{}', {}, {}, {}, '{}', '{}', '{}', '{}', '{}')".format(
+                item["change_reason"],
+                item["changed_file"],
+                item["is_dirty"],
+                item["range_start_line"],
+                item["range_end_line"],
+                item["repo_branch"],
+                item["repo_head"],
+                item["repo_url"],
+                item["repo_user"],
+                isoparse(item["timestamp"]).strftime("%Y-%m-%d %H:%M:%S"),
+            )
+            for item in request_body
+        ]
+    )
 
     # Insert all the data at once
-    cur.execute(f"""
+    cur.execute(
+        f"""
         INSERT INTO default.ingestion_payload (
             change_reason,
             changed_file,
@@ -69,11 +77,13 @@ def insert_data(cur, request_body):
             repo_user,
             timestamp
         ) VALUES {data}
-    """)
+    """
+    )
+
 
 def lambda_handler(event, context):
     # Parse incoming request
-    request_body = json.loads(event['body'])
+    request_body = json.loads(event["body"])
 
     try:
         con = connect_to_clickhouse()
@@ -82,13 +92,7 @@ def lambda_handler(event, context):
         create_table_if_not_exists(cur)
         insert_data(cur, request_body)
 
-        return {
-            'statusCode': 200,
-            'body': json.dumps('Data inserted successfully!')
-        }
-    
+        return {"statusCode": 200, "body": json.dumps("Data inserted successfully!")}
+
     except Exception as e:
-        return {
-            'statusCode': 500,
-            'body': json.dumps(str(e))
-        }
+        return {"statusCode": 500, "body": json.dumps(str(e))}

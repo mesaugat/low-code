@@ -24,7 +24,7 @@ def build_dir_tree(data, repo_url, metrics):
     tree = {"name": root, "children": []}
     cache_pointer = {root: tree}
 
-    for (repo_branch, changed_file, time_spent, num_of_edits) in data:
+    for repo_branch, changed_file, time_spent, num_of_edits in data:
         url = (
             repo_url.replace(".git", "")
             + "/"
