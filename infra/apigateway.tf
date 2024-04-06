@@ -69,7 +69,7 @@ resource "aws_apigatewayv2_integration" "evaluate" {
 
 resource "aws_apigatewayv2_route" "evaluate" {
   api_id    = aws_apigatewayv2_api.lowspot_http_apigw.id
-  route_key = "GET /evaluate/{repo_url}"
+  route_key = "GET /evaluate"
   target    = "integrations/${aws_apigatewayv2_integration.evaluate.id}"
 }
 

@@ -21,4 +21,4 @@ jobs:
       TF_VAR_clickhouse_password: ${{ secrets.TF_VAR_clickhouse_password }}
     steps:
       - uses: actions/checkout@v4
-      - run: make
+      - run: make clickhouse_password="${TF_VAR_clickhouse_password}"
