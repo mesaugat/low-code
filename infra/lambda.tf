@@ -194,7 +194,7 @@ resource "aws_lambda_layer_version" "lambda_layer" {
 }
 
 resource "aws_lambda_function" "lowspot_suggest" {
-  timeout          = "60"
+  timeout          = "300"
   depends_on       = [data.archive_file.lambda_suggest]
   filename         = "${path.module}/../backend/lambda-suggest.zip"
   function_name    = "suggest"
