@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import { select } from 'd3-selection';
 
 function uniqueId(prefix = 'lowcode') {
   return `${prefix}${Math.random()}`;
@@ -10,8 +9,8 @@ const D3TreeMap = ({ data, tile }) => {
   const ref = useRef();
 
   useEffect(() => {
-    const width = 928;
-    const height = 1060;
+    const width = 1000;
+    const height = 700;
     const color = d3.scaleSequential([8, 0], d3.interpolateMagma);
 
     // Create the treemap layout.
@@ -27,7 +26,7 @@ const D3TreeMap = ({ data, tile }) => {
     const root = treemap(data);
 
     // Create the SVG container.
-    const svg = select(ref.current)
+    const svg = d3.select(ref.current)
         .attr("width", width)
         .attr("height", height)
         .attr("viewBox", [0, 0, width, height])
@@ -55,7 +54,10 @@ const D3TreeMap = ({ data, tile }) => {
     node.append("title")
         .text(d => `${d.ancestors().reverse().map(d => d.data.name).join("/")}\n${format(d.value)}`);
 
-    node.append("rect")
+    node.append("a")
+        .attr("href", d => d.data.url)
+        .attr("target", "_blank")
+        .append("rect")
         .attr("id", d => (d.nodeUid = uniqueId("node")))
         .attr("fill", d => color(d.height))
         .attr("width", d => d.x1 - d.x0)
@@ -64,14 +66,14 @@ const D3TreeMap = ({ data, tile }) => {
     node.append("clipPath")
         .attr("id", d => (d.clipUid = uniqueId("clip")))
       .append("use")
-        .attr("xlink:href", d => { console.log(d.nodeUid); return d.nodeUid.href; });
+        .attr("xlink:href", d => d.data.url);
 
     node.append("text")
         .attr("clip-path", d => d.clipUid)
       .selectAll("tspan")
-      .data(d => d.data.name.split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
+      .data(d => d.data.name)
       .join("tspan")
-        .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
+        .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 7 : null)
         .text(d => d);
 
     node.filter(d => d.children).selectAll("tspan")
