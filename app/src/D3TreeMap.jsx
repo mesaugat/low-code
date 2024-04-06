@@ -15,7 +15,7 @@ const D3TreeMap = ({ data, tile }) => {
 
     // Create the treemap layout.
     const treemap = (data) =>
-      d3.treemap().size([width, height]).paddingOuter(3).paddingTop(19).paddingInner(1).round(true)(
+      d3.treemap().tile(tile).size([width, height]).paddingOuter(3).paddingTop(19).paddingInner(1).round(true)(
         d3
           .hierarchy(data)
           .sum((d) => d.value)
@@ -69,24 +69,23 @@ const D3TreeMap = ({ data, tile }) => {
       .attr('height', (d) => d.y1 - d.y0)
       .attr('cursor', 'pointer')
       .on('mouseover', function (event, d) {
-        d3.select(this).transition().duration(300).style('opacity', '0.6');
+        d3.select(this).transition().duration(300).style('opacity', '0.7');
       })
       .on('mouseout', function (event, d) {
         d3.select(this).transition().duration(300).style('opacity', '1');
-      })
-      .on('click', (event, d) => console.log(event));
+      });
 
     node
       .append('clipPath')
       .attr('id', (d) => (d.clipUid = uniqueId('clip')))
       .append('use')
-      .attr('xlink:href', (d) => d.data.url);
+      .attr('xlink:href', (d) => `#${d.nodeUid}`);
 
     node
       .append('text')
-      .attr('clip-path', (d) => d.clipUid)
+      .attr('clip-path', (d) => `url(#${d.clipUid})`)
       .selectAll('tspan')
-      .data((d) => d.data.name)
+      .data((d) => d.data.name.split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
       .join('tspan')
       .attr('fill-opacity', (d, i, nodes) => (i === nodes.length - 1 ? 7 : null))
       .text((d) => d);
