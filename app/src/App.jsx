@@ -39,7 +39,7 @@ const App = () => {
   const [basePath, setBasePath] = useState(searchBasePath);
 
   const { data, error, isLoading } = useSWR(
-    `${API_ENDPOINT}?repo_url=${repoUrl}&user=${user}&metrics=${metric}&time_period=${timePeriod}&base_path=${basePath}`,
+    `${API_ENDPOINT}?repo_url=${repoUrl}&user=${user}&metrics=${metric === 'Edits' ? 'edits' : 'time_spent'}&time_period=${timePeriod}&base_path=${basePath}`,
     fetcher,
   );
 
@@ -109,7 +109,7 @@ const NoRepo = () => {
       <p>There&apos;s nothing low about you!</p>
       <p className="mt-4">
         <a
-          href="/?repo_url=github.com/mesaugat/low-code"
+          href="/?repo_url=github.com/mesaugat/low-code.git"
           className="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
         >
           Go here!
