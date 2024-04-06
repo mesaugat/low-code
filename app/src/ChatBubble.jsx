@@ -11,7 +11,7 @@ const ChatBubble = (props) => {
           <span className="text-sm font-semibold text-gray-900 dark:text-white">Low Code Bot</span>
           <span className="text-sm font-normal text-gray-500 dark:text-gray-400">{new Date().toLocaleString()}</span>
         </div>
-        <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{children}</p>
+        <div className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{children}</div>
       </div>
     </div>
   );

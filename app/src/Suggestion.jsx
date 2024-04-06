@@ -9,11 +9,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 const Suggestion = (props) => {
   const { repoUrl } = props;
 
-  console.log('Repourl', repoUrl);
-
   const { data: suggestedData, error, isLoading } = useSWR(`${SUGGEST_URL}?repo_url=${repoUrl}`, fetcher);
-
-  console.log('Data', suggestedData, isLoading);
 
   if (isLoading) {
     return <div>Loading Suggestions....</div>;
