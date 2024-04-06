@@ -31,7 +31,7 @@ jobs:
         run: |
           npm install
           npm install -g @vscode/vsce
-          vsce package
+          vsce package --skip-license
           echo version=$(*.vsix | grep -oE '[0-9]+\.[0-9]+\.[0-9]+') >> $GITHUB_OUTPUT
           echo artifact_name="low-code" >> $GITHUB_OUTPUT
       - name: Push Tag
