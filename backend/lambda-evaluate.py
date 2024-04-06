@@ -2,6 +2,7 @@
 
 import os
 import json
+import traceback
 
 from clickhouse_driver import connect
 
@@ -21,7 +22,7 @@ def connect_to_clickhouse():
 def build_dir_tree(data, repo_url, metrics):
     root = repo_url.split("/")[-1]
     tree = {"name": root, "children": []}
-    cache_pointer = {[root]: tree}
+    cache_pointer = {root: tree}
 
     for (repo_branch, changed_file, time_spent, num_of_edits) in data:
         url = (
@@ -258,4 +259,5 @@ def lambda_handler(event, context):
             200, {"users": list(map(lambda user: user[0], users)), "graph": tree}
         )
     except Exception as e:
-        return api_response(500, str(e))
+        traceback.print_exc()
+        return api_response(500, "Something went wrong!")
