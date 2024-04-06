@@ -15,8 +15,8 @@ resource "aws_security_group" "clickhouse_sg" {
     description = "Allow HTTPS traffic from Leapfrog IPs to Clickhouse server"
     from_port   = 8443
     to_port     = 8443
-    protocol    = "tcp"
     cidr_blocks = [local.subnet_cidr, local.leapfrog_ip]
+    protocol    = "tcp"
   }
 
   ingress {
