@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-export const COMMAND_NAVIGATE_TO_URL = 'lowCode.navigateToURL';
+import { COMMAND_NAVIGATE_TO_URL } from './constants';
 
 export const registerCommands = (context: vscode.ExtensionContext) => {
   const { subscriptions } = context;

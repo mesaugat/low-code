@@ -2,16 +2,35 @@ import * as vscode from 'vscode';
 import simpleGit from 'simple-git';
 
 import { extractURL } from './utils';
+import axiosRequest from './request';
 import { ChangeReasonMaps } from './maps';
-import { COMMAND_NAVIGATE_TO_URL } from './commands';
-import axiosRequest, { INJEEST_URL } from './request';
 import { DocumentChangePayload, ChangeReason, GitInfo } from './types';
+import {
+  ANALYSIS_URL,
+  COMMAND_NAVIGATE_TO_URL,
+  INJEEST_URL,
+  INTERVAL_RATE,
+  RETRY_THRESHOLD,
+  STATUS_BAR_ITEM_TEXT,
+  STATUS_BAR_ITEM_TOOLTIP,
+} from './constants';
 
+/**
+ * Check if the workspace folder is open and is a git repository.
+ * If conditions are not matched then early exit is done.
+ *
+ * @returns {Promise<GitInfo>}
+ */
 export const initializeApp = async (): Promise<GitInfo> => {
   const workSpaceFolders = vscode.workspace.workspaceFolders;
 
   if (!workSpaceFolders || !workSpaceFolders.length) {
-    console.log('No git repository found.');
+    console.log('Workspace folder is not available. Exiting the extension....');
+    process.exit(1);
+  }
+
+  if (!workSpaceFolders || !workSpaceFolders.length) {
+    console.log('No git repository found. Exiting the extension....');
     process.exit(1);
   }
 
@@ -87,9 +106,8 @@ export const initializeApp = async (): Promise<GitInfo> => {
  * @returns {Promise<void>}
  */
 export const initializeEvent = async (gitInfo: GitInfo): Promise<void> => {
-  const INTERVAL_RATE = 120000;
-
   let collectedData: DocumentChangePayload[] = [];
+  let retryCount: number = 0;
 
   const processEvent = async (e: vscode.TextDocumentChangeEvent) => {
     const { contentChanges, document, reason } = e;
@@ -119,7 +137,7 @@ export const initializeEvent = async (gitInfo: GitInfo): Promise<void> => {
    * Pushes data to backend server and clears the collected data.
    * @returns {void}
    */
-  const postPush = (): void => {
+  const clearData = (): void => {
     collectedData = [];
   };
 
@@ -131,11 +149,16 @@ export const initializeEvent = async (gitInfo: GitInfo): Promise<void> => {
   const pushData = async (): Promise<void> => {
     if (collectedData.length) {
       try {
-        console.log(collectedData);
         const res = await axiosRequest.post(INJEEST_URL, collectedData);
-        console.log('Response', res);
-        postPush();
+        console.log('Response', res.status);
+        clearData();
       } catch (err) {
+        if (retryCount > RETRY_THRESHOLD) {
+          clearData();
+          retryCount = 0;
+        }
+
+        retryCount++;
         console.log('Error', err);
       }
     }
@@ -153,13 +176,20 @@ export const initializeStatusBar = (context: vscode.ExtensionContext, gitInfo: G
 
   const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 500);
 
+  // building url for analysis web page
+  const urlParams = new URLSearchParams({
+    repo_url: gitInfo.remote,
+  });
+  const url = `${ANALYSIS_URL}?${urlParams.toString()}`;
+
   const statusBarCommand = {
     title: 'statusBarCommand',
     command: COMMAND_NAVIGATE_TO_URL,
-    arguments: ['https://google.com'],
+    arguments: [url],
   };
 
-  statusBarItem.text = 'Low Code';
+  statusBarItem.text = STATUS_BAR_ITEM_TEXT;
+  statusBarItem.tooltip = STATUS_BAR_ITEM_TOOLTIP;
   statusBarItem.command = statusBarCommand;
   subscriptions.push(statusBarItem);
   statusBarItem.show();
