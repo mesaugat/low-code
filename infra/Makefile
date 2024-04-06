@@ -8,7 +8,7 @@ init:
 
 plan: init
 	@echo "Executing Plan 🤖"
-	@terraform plan -out .tfplan
+	@terraform plan -var-file=terraform.tfvars -out=.tfplan -parallelism=20
 
 applyonly:
 	@echo "Applying Terraform 🚀"
