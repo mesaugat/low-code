@@ -44,7 +44,7 @@ resource "aws_cloudfront_distribution" "analysis" {
 
 
 resource "aws_cloudfront_response_headers_policy" "analysis" {
-  name = "forms-app-security-headers-policy"
+  name = "analysis_response_headers_policy"
 
   security_headers_config {
     content_type_options {
@@ -72,7 +72,7 @@ resource "aws_cloudfront_response_headers_policy" "analysis" {
 }
 
 resource "aws_cloudfront_cache_policy" "analysis" {
-  name = "forms-app-cloudfront-cache-policy"
+  name = "analysis_cf_cache_policy"
 
   min_ttl     = 2
   default_ttl = 2
