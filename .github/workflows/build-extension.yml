@@ -18,12 +18,31 @@ on:
       - "extension/**"
 jobs:
   build:
+    env:
+      package_name: "low-code"
     name: Build Extension
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: extension
     steps:
+      - run: |
+          sudo curl https://raw.githubusercontent.com/fsaintjacques/semver-tool/3.0.0/src/semver -o /usr/local/bin/semver && sudo chmod +x /usr/local/bin/semver
+      - id: get-version
+        run: |
+          git fetch --tags
+          last_version=$(git tag --sort=-version:refname | grep -P "^$package_name@v\d+.\d+.\d+$" | head -n 1 | cut -d v -f 2)
+
+          if [ -z "$last_version" ]; then
+            new_version=1.0.0
+          elif [[ ${{ github.head_ref }} =~ ^"major" ]]; then
+            new_version=$(semver bump major "$last_version")
+          elif [[ ${{ github.head_ref }} =~ ^"feat" ]]; then
+            new_version=$(semver bump minor "$last_version")
+          else
+            new_version=$(semver bump patch "$last_version")
+          fi
+          echo "new_version=$new_version" >> $GITHUB_OUTPUT
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - name: Building
@@ -31,24 +50,20 @@ jobs:
         run: |
           npm install
           npm install -g @vscode/vsce
-          vsce package --skip-license
-          echo version=$(ls *.vsix | grep -oE '[0-9]+\.[0-9]+\.[0-9]+') >> $GITHUB_OUTPUT
-          echo artifact_name="low-code" >> $GITHUB_OUTPUT
+          vsce package --skip-license --out ${{ env.package_name }}-${{ env.new_version }}
       - name: Push Tag
-        if: inputs.type == 'REAL'
         id: tag_version
         uses: mathieudutour/github-tag-action@v5.6
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          custom_tag: ${{ steps.build.outputs.version }}
+          custom_tag: ${{ env.new_version }}
           tag_prefix: ""
       - name: Create release
-        if: inputs.type == 'REAL'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GH_TOKEN }}"
           prerelease: false
-          title: ${{ steps.build.outputs.artifact_name }}
-          automatic_release_tag: ${{ steps.build.outputs.version }}
+          title: ${{ env.package_name }}
+          automatic_release_tag: ${{ env.new_version }}
           files: |
             *.vsix
