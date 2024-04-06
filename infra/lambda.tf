@@ -64,6 +64,17 @@ data "aws_iam_policy_document" "lambda_policy_execution_role" {
       "arn:aws:s3:::${local.bucket_name}/*"
     ]
   }
+
+  statement {
+    sid    = "InvokeModel"
+    effect = "Allow"
+    actions = [
+      "bedrock:InvokeModel"
+    ]
+    resources = [
+      "*"
+    ]
+  }
 }
 
 data "aws_iam_policy_document" "lambda_policy_execution_role_policy" {
@@ -183,7 +194,7 @@ resource "aws_lambda_layer_version" "lambda_layer" {
 }
 
 resource "aws_lambda_function" "lowspot_suggest" {
-  timeout          = "15"
+  timeout          = "30"
   depends_on       = [data.archive_file.lambda_suggest]
   filename         = "${path.module}/../backend/lambda-suggest.zip"
   function_name    = "suggest"

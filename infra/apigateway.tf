@@ -20,7 +20,8 @@ data "aws_iam_policy_document" "apigw" {
       variable = "SourceArn"
       values = [
         "arn:aws:execute-api:${var.region}:${local.account_id}:${aws_apigatewayv2_integration.ingest.api_id}/*/*/ingest",
-        "arn:aws:execute-api:${var.region}:${local.account_id}:${aws_apigatewayv2_integration.ingest.api_id}/*/*/evaluate"
+        "arn:aws:execute-api:${var.region}:${local.account_id}:${aws_apigatewayv2_integration.ingest.api_id}/*/*/evaluate",
+        "arn:aws:execute-api:${var.region}:${local.account_id}:${aws_apigatewayv2_integration.ingest.api_id}/*/*/suggest"
       ]
     }
   }
