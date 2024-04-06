@@ -19,10 +19,11 @@ def connect_to_clickhouse():
 
 
 def build_dir_tree(data, repo_url, metrics):
-    tree = {"name": "ROOT", "children": []}
-    cache_pointer = {"ROOT": tree}
+    root = repo_url.split("/")[-1]
+    tree = {"name": root, "children": []}
+    cache_pointer = {[root]: tree}
 
-    for (repo_branch, changed_file, hours_spent, num_of_edits) in data:
+    for (repo_branch, changed_file, time_spent, num_of_edits) in data:
         url = (
             repo_url.replace(".git", "")
             + "/"
@@ -35,19 +36,20 @@ def build_dir_tree(data, repo_url, metrics):
         file_name = os.path.basename(changed_file)
         file_path = os.path.dirname(changed_file)
 
+        data_item = {
+            "name": file_name,
+            "url": url,
+            "value": time_spent if metrics == "time_spent" else num_of_edits,
+            "unit": "minute" if metrics == "time_spent" else "edits",
+        }
+
         if file_path in cache_pointer:
-            tree[cache_pointer[file_path]]["children"].append(
-                {
-                    "name": file_name,
-                    "url": url,
-                    "value": hours_spent if metrics == "time_spent" else num_of_edits,
-                }
-            )
+            tree[cache_pointer[file_path]]["children"].append(data_item)
 
             continue
 
         path_comp = os.path.normpath(file_path).split(os.path.sep)
-        traversed_path = "ROOT"
+        traversed_path = root
         head = tree
 
         if path_comp[0] == "":
@@ -64,13 +66,7 @@ def build_dir_tree(data, repo_url, metrics):
             else:
                 head = curr[0]
 
-        head["children"].append(
-            {
-                "name": file_name,
-                "url": url,
-                "value": hours_spent if metrics == "time_spent" else num_of_edits,
-            }
-        )
+        head["children"].append(data_item)
 
     return tree
 
@@ -142,7 +138,7 @@ def lambda_handler(event, context):
                     MIN("timestamp") AS start_time, 
                     MAX("timestamp") AS end_time, 
                     COUNT(*) AS events,
-                    date_diff('second', MIN("timestamp"), MAX("timestamp")) / (60.0) AS time_spent_second
+                    date_diff('second', MIN("timestamp"), MAX("timestamp")) / (60.0) AS time_spent_minute
                 FROM cte_rounded_event_times
                 GROUP BY 
                     repo_user, 
@@ -182,7 +178,7 @@ def lambda_handler(event, context):
                     date_diff('second', 
                         IF(b.repo_user != '' and abs(date_diff('second', b.end_time, a.start_time)) < abs(date_diff('second', a.start_time, c.start_time)), b.end_time, a.start_time), 
                         IF(c.repo_user != '' and abs(date_diff('second', b.end_time, a.start_time)) > abs(date_diff('second', a.start_time, c.start_time)), c.start_time, a.end_time)
-                    ) / (60.0) AS time_spent_second
+                    ) / (60.0) AS time_spent_minute
                 FROM cte_events_merged_single a
                 LEFT JOIN cte_events_merged_multiple b
                     ON a.repo_user = b.repo_user
@@ -196,11 +192,38 @@ def lambda_handler(event, context):
                     AND a.next_round_end = c.round_end
                 WHERE b.repo_user != '' 
                     AND c.repo_user != ''
+                UNION ALL
+                SELECT 
+                    a.repo_user, 
+                    a.changed_file, 
+                    a.round_start, 
+                    a.round_end, 
+                    a.prev_round_start, 
+                    a.prev_round_end, 
+                    a.next_round_start, 
+                    a.next_round_end,
+                    a.start_time, 
+                    a.end_time, 
+                    a.events,
+                    1 AS time_spent_minute
+                FROM cte_events_merged_single a
+                LEFT JOIN cte_events_merged_multiple b
+                    ON a.repo_user = b.repo_user
+                    AND a.changed_file = b.changed_file
+                    AND a.prev_round_start = b.round_start
+                    AND a.prev_round_end = b.round_end
+                LEFT JOIN cte_events_merged_multiple c
+                    ON a.repo_user = c.repo_user
+                    AND a.changed_file = c.changed_file
+                    AND a.next_round_start = c.round_start
+                    AND a.next_round_end = c.round_end
+                WHERE b.repo_user == '' 
+                    AND c.repo_user == ''
             )
             SELECT
                 repo_branch,
                 changed_file,
-                SUM(time_spent_second) / (60.0) AS hours_spent,
+                SUM(time_spent_minute) AS time_spent,
                 SUM(events) AS num_of_edits
             FROM cte_all_events_time_spent 
             GROUP BY repo_branch, changed_file;
