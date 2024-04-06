@@ -1,9 +1,9 @@
 const Header = ({ title }) => {
   return (
-    <header>
-      <h1>{title}</h1>
+    <header className="sticky top-0 z-50 bg-white">
+      <h1 className="font-bold p-4">{title}</h1>
     </header>
   );
-}
+};
 
 export default Header;

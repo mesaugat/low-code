@@ -10,11 +10,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  width: 100vw;
   height: 100vh;
 }
 
-.container {
+/* .container {
   display: grid;
   grid-template-columns: 3fr 0.5px 1fr;
 }
@@ -30,4 +29,4 @@
 
 h1 {
   font-size: 1.5rem;
-}
+} */
