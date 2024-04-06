@@ -68,11 +68,6 @@ resource "aws_cloudfront_response_headers_policy" "analysis" {
       protection = true
       override   = true
     }
-
-    content_security_policy {
-      content_security_policy = "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' https://cdnjs.cloudflare.com https://api.mixpanel.com; img-src 'self' data: https:; form-action 'self'; base-uri 'self'; frame-ancestors 'self'; block-all-mixed-content; object-src 'none'; connect-src *.mixpanel.com *.sentry.io;"
-      override                = true
-    }
   }
 }
 
