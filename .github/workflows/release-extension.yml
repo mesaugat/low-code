@@ -47,8 +47,6 @@ jobs:
           npm install
           npm install -g @vscode/vsce
           vsce package --skip-license --out ${{ env.package_name }}-${{ env.new_version }}.vsix
-          echo pwd
-          ls **/**
           echo ::set-output name=vsix_path::$(ls *.vsix);
       - name: Push Tag
         id: tag_version
