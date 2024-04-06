@@ -5,7 +5,7 @@ const Dropdown = ({ name, items, onClick }) => {
   const [selected, setSelected] = useState(null);
 
   return (
-    <div className="relative inline-block text-left mr-4">
+    <div className="relative inline-block text-left mr-4 w-auto">
       <div>
         <button
           type="button"
@@ -35,22 +35,23 @@ const Dropdown = ({ name, items, onClick }) => {
       {isOpen && (
         <div className="origin-top-left absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 overflow-auto max-h-60">
           <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            {items.map((item, index) => (
-              <a
-                href="#"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                role="menuitem"
-                key={index}
-                onClick={(event) => {
-                  event.preventDefault();
-                  setSelected(item);
-                  onClick(item);
-                  setIsOpen(false);
-                }}
-              >
-                {item}
-              </a>
-            ))}
+            {items &&
+              items.map((item, index) => (
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  role="menuitem"
+                  key={index}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setSelected(item);
+                    onClick(item);
+                    setIsOpen(false);
+                  }}
+                >
+                  {item}
+                </a>
+              ))}
           </div>
         </div>
       )}

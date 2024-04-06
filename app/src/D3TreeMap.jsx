@@ -112,7 +112,7 @@ const D3TreeMap = ({ data, tile }) => {
       .data((d) => d.data.name.split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
       .join('tspan')
       .attr('fill-opacity', (d, i, nodes) => (i === nodes.length - 1 ? 7 : null))
-      .text((d) => d);
+      .text((d) => (typeof d === 'number' ? `${d === 1 ? d.data.unit : d.data.unit + 's'}` : d));
 
     // Adjust the position of the text in the nodes
     node
