@@ -36,8 +36,10 @@ resource "aws_apigatewayv2_api" "lowspot_http_apigw" {
   name          = "lowspot"
   protocol_type = "HTTP"
   cors_configuration {
-    allow_origins = ["http://localhost:5173", "http://localhost:5174", "https://${aws_cloudfront_distribution.analysis.domain_name}"]
-    allow_methods = ["*"]
+    allow_origins  = ["http://localhost:5173", "http://localhost:5174", "https://${aws_cloudfront_distribution.analysis.domain_name}"]
+    allow_methods  = ["*"]
+    allow_headers  = ["*"]
+    expose_headers = ["*"]
   }
 }
 
