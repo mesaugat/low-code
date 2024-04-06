@@ -5,7 +5,7 @@ locals {
   vpc_id                   = aws_default_vpc.default.id
   subnet_id                = aws_default_subnet.default.id
   subnet_cidr              = aws_default_subnet.default.cidr_block
-  leapfrog_ip              = "182.93.83.51"
+  leapfrog_ip              = "182.93.83.51/32"
 }
 
 resource "aws_default_vpc" "default" {}

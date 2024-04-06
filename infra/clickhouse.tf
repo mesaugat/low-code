@@ -16,7 +16,7 @@ resource "aws_security_group" "clickhouse_sg" {
     from_port   = 8443
     to_port     = 8443
     protocol    = "tcp"
-    cidr_blocks = [local.subnet_cidr, leapfrog_ip]
+    cidr_blocks = [local.subnet_cidr, local.leapfrog_ip]
   }
 
   ingress {
@@ -24,7 +24,7 @@ resource "aws_security_group" "clickhouse_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [local.subnet_cidr, leapfrog_ip]
+    cidr_blocks = [local.subnet_cidr, local.leapfrog_ip]
   }
 
   egress {
@@ -45,19 +45,19 @@ resource "aws_key_pair" "ssh_key" {
   }
 }
 
-# resource "aws_instance" "clickhouse" {
-#   ami             = "ami-0ed19957e49be45d2"
-#   subnet_id       = local.subnet_id
-#   security_groups = [aws_security_group.clickhouse_sg.id]
-#   instance_type   = local.clickhouse_instance_type
-#   key_name        = aws_key_pair.ssh_key.key_name
+resource "aws_instance" "clickhouse" {
+  ami                    = "ami-0ed19957e49be45d2"
+  subnet_id              = local.subnet_id
+  vpc_security_group_ids = [aws_security_group.clickhouse_sg.id]
+  instance_type          = local.clickhouse_instance_type
+  key_name               = aws_key_pair.ssh_key.key_name
 
-#   root_block_device {
-#     encrypted   = true
-#     volume_type = "gp3"
-#     volume_size = 60
-#   }
+  root_block_device {
+    encrypted   = true
+    volume_type = "gp3"
+    volume_size = 60
+  }
 
-#   user_data_replace_on_change = false
-#   user_data                   = file("./scripts/clickhouse.sh")
-# }
+  user_data_replace_on_change = false
+  user_data                   = file("./scripts/clickhouse.sh")
+}

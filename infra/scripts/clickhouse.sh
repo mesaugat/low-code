@@ -14,3 +14,13 @@ sudo sysctl -w vm.swappiness=5
 
 sudo service clickhouse-server start
 
+cat << EOF | sudo tee /etc/clickhouse-server/users.d/default-password.xml
+<clickhouse>
+  <users>
+    <default>
+      <password remove='1' />
+      <password_sha256_hex>bacfb57e42db80620adee3c752483715b4f7be111be51c4297b0f69b77ef8c0b</password_sha256_hex>
+    </default>
+  </users>
+</clickhouse>
+EOF
