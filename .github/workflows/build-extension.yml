@@ -36,10 +36,6 @@ jobs:
 
           if [ -z "$last_version" ]; then
             new_version=1.0.0
-          elif [[ ${{ github.head_ref }} =~ ^"major" ]]; then
-            new_version=$(semver bump major "$last_version")
-          elif [[ ${{ github.head_ref }} =~ ^"feat" ]]; then
-            new_version=$(semver bump minor "$last_version")
           else
             new_version=$(semver bump patch "$last_version")
           fi
