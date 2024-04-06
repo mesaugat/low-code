@@ -11,7 +11,10 @@ const D3TreeMap = ({ data, tile }) => {
   useEffect(() => {
     const width = 1100;
     const height = 720;
-    const color = d3.scaleSequential([8, 0], d3.interpolateMagma);
+    const color = d3.scaleOrdinal(
+      data.children.map((d) => d.name),
+      d3.schemeTableau10,
+    );
 
     // Create the treemap layout.
     const treemap = (data) =>
@@ -69,10 +72,18 @@ const D3TreeMap = ({ data, tile }) => {
       .attr('height', (d) => d.y1 - d.y0)
       .attr('cursor', 'pointer')
       .on('mouseover', function (event, d) {
-        d3.select(this).transition().duration(300).style('opacity', '0.7');
+        d3.select(this).transition().duration(150).style('opacity', '0.7');
       })
       .on('mouseout', function (event, d) {
-        d3.select(this).transition().duration(300).style('opacity', '1');
+        d3.select(this).transition().duration(150).style('opacity', '1');
+      })
+      .on('click', function (event, d) {
+        if (d.data.url === undefined && 'URLSearchParams' in window) {
+          const searchParams = new URLSearchParams(window.location.search);
+          searchParams.set('base_path', d.data.name);
+          window.location.search = searchParams.toString();
+        }
+        window.open(`https://${d.data.url}`, '_blank');
       });
 
     node
@@ -84,6 +95,7 @@ const D3TreeMap = ({ data, tile }) => {
     node
       .append('text')
       .attr('clip-path', (d) => `url(#${d.clipUid})`)
+      .attr('cursor', 'pointer')
       .selectAll('tspan')
       .data((d) => d.data.name.split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
       .join('tspan')

@@ -15,14 +15,16 @@ const App = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const searchParamRepoUrl = queryParameters.get('repo_url');
   const searchParamTimePeriod = queryParameters.get('time_period') || '';
+  const searchBasePath = queryParameters.get('base_path') || '';
 
-  const [repoUrl, setRepoUrl] = useState(searchParamRepoUrl);
+  const [repoUrl, _setRepoUrl] = useState(searchParamRepoUrl);
   const [user, setUser] = useState('');
   const [metric, setMetric] = useState('');
-  const [timePeriod, setTimePeriod] = useState(searchParamTimePeriod);
+  const [timePeriod, _setTimePeriod] = useState(searchParamTimePeriod);
+  const [basePath, _setBasePath] = useState(searchBasePath);
 
   const { data, error, isLoading } = useSWR(
-    `${API_ENDPOINT}?repo_url=${repoUrl}&user=${user}&metrics=${metric}&time_period=${timePeriod}`,
+    `${API_ENDPOINT}?repo_url=${repoUrl}&user=${user}&metrics=${metric}&time_period=${timePeriod}&base_path=${basePath}`,
     fetcher,
   );
 
