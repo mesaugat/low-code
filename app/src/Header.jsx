@@ -1,7 +1,10 @@
 const Header = ({ title }) => {
   return (
     <header className="sticky top-0 z-50 bg-white">
-      <h1 className="font-bold p-y-4">{title}</h1>
+      <div className="flex items-center">
+        <img alt="LowCode Visualizer Logo" className="mr-4" width="40" src="/logo.png"></img>
+        <h1 className="font-bold p-y-4">{title}</h1>
+      </div>
     </header>
   );
 };
