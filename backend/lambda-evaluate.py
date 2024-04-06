@@ -10,7 +10,7 @@ def connect_to_clickhouse():
     # Connect to ClickHouse
     connection = connect(
         host=os.getenv("host", ""),
-        port=os.getenv("port", 8123),
+        port=os.getenv("port", 9000),
         user=os.getenv("user", "default"),
         password=os.getenv("password", ""),
         database=os.getenv("database", "default"),
