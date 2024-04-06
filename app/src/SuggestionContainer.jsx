@@ -35,10 +35,10 @@ const IS_DEMO = false;
 const SuggestionContainer = (props) => {
   return (
     <div>
-      <div className="whitespace-pre-line max-h-[80vh] overflow-auto">
+      <div className="whitespace-pre-line max-h-[90vh] overflow-auto">
         {IS_DEMO ? (
           <ChatBubble>
-            <Typewriter words={[demoText]} typeSpeed={5} />
+            <Typewriter words={[demoText]} typeSpeed={1} />
           </ChatBubble>
         ) : (
           <ChatBubble>

@@ -28,7 +28,7 @@ const Suggestion = (props) => {
   return (
     <div>
       <div className="whitespace-pre-line">
-        <Typewriter words={[suggestionText]} typeSpeed={5} />
+        <Typewriter words={[suggestionText]} typeSpeed={1} />
       </div>
     </div>
   );
