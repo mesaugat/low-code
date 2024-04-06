@@ -1,40 +1,73 @@
 #!/usr/bin/env python3
 
+import os
 import json
-import boto3
+import traceback
+
+from clickhouse_driver import connect
 
 AWS_REGION = "us-east-1"
 AI_SERVICE_NAME = "bedrock-runtime"
 
 
+def connect_to_clickhouse():
+    # Connect to ClickHouse
+    connection = connect(
+        host=os.getenv("host", ""),
+        port=os.getenv("port", 9000),
+        user=os.getenv("user", "default"),
+        password=os.getenv("password", ""),
+        database=os.getenv("database", "default"),
+    )
+    return connection
+
+
+def api_response(status_code, data):
+    headers = {"Content-Type": "application/json"}
+
+    return {"statusCode": status_code, "body": json.dumps(data), "headers": headers}
+
+
 def lambda_handler(event, context):
     # Parse incoming request
-    event = json.loads(event["body"])
-
-    payload_json = event["payload_json"]
-    prompt_text = event["prompt_text"]
+    qs = event["queryStringParameters"]
+    repo_url = qs["repo_url"]
 
     try:
-        # bedrock runtime client
-        client = boto3.client(AI_SERVICE_NAME, region_name=AWS_REGION)
-        payload = {
-            "prompt": f"<s>[INST] {prompt_text} '{payload_json}' [/INST]",
-            "max_tokens": 500,
-            "temperature": 0.5,
-            "top_p": 0.9,
-            "top_k": 50,
-        }
+        conn = connect_to_clickhouse()
 
-        # invoke model
-        model_id = "mistral.mistral-large-2402-v1:0"
-        response = client.invoke_model(
-            contentType="application/json", body=json.dumps(payload), modelId=model_id
+        cursor = conn.cursor()
+
+        cursor.execute(
+            """
+            SELECT repo_url
+            FROM ai_suggestions
+            WHERE repo_url = %(repo_url)s
+            """,
+            {"repo_url": repo_url},
         )
 
-        prompt_result = response["body"].read().decode("utf-8")
-        json_data = json.loads(prompt_result)
+        repo_exists = cursor.fetchone()
+        if repo_exists is None:
+            return api_response(
+                404, {"error": "AI suggestions for repository doesn't exist."}
+            )
 
-        return {"statusCode": 200, "body": json.dumps(json_data)}
+        cursor.execute(
+            f"""
+            SELECT repo_url, response
+            FROM ai_suggestions
+            LIMIT 1
+            """,
+            {"repo_url": repo_url},
+        )
 
+        _, response = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+
+        return api_response(200, {"suggestions": response})
     except Exception as e:
-        return {"statusCode": 500, "body": json.dumps(str(e))}
+        traceback.print_exc()
+        return api_response(500, "Something went wrong!")
