@@ -1,6 +1,8 @@
 import Header from './Header';
 import Select from './Select';
-import Visualizer from './Visualizer';
+import D3TreeMap from './D3TreeMap';
+import * as d3 from 'd3';
+import flare from './flare.json';
 
 function App() {
   return (
@@ -20,7 +22,7 @@ function App() {
       </p>
       <div className="container">
         <div className="grid">
-          <Visualizer />
+          <D3TreeMap data={flare} tile={d3.treemapBinary} />
         </div>
         <div className="separator"></div>
         <div className="grid"></div>

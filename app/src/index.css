@@ -13,8 +13,9 @@
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 1px 1fr;
+  grid-template-columns: 3fr 0.5px 1fr;
   height: 100vh;
+  width: 100vw;
 }
 
 .grid {
@@ -29,4 +30,3 @@
 h1 {
   font-size: 1.5rem;
 }
-

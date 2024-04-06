@@ -10,9 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/d3": "^7.4.3",
+    "@types/d3-selection": "^3.0.10",
+    "d3": "^7.9.0",
+    "d3-hierarchy": "^3.1.2",
+    "d3-selection": "^3.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "reaviz": "^15.14.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
