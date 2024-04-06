@@ -32,10 +32,10 @@ const App = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className='p-8'>
+    <div className="p-8">
       <Header title="LowCode Visualizer" />
-      <div className='flex gap-x-2 mt-4'>
-        <div className='flex-1'>
+      <div className="flex gap-x-2 mt-4">
+        <div className="flex-1">
           <div className="flex items-center">
             <div className="flex items-center mr-4">
               <svg
@@ -56,7 +56,7 @@ const App = () => {
             <Dropdown name="Metrics" items={['Time Spent', 'Edits']} onClick={setMetric} />
             <Dropdown name="Users" items={data.users} onClick={setUser} />
           </div>
-          <div className='mt-4'>
+          <div className="mt-4">
             <D3TreeMap data={data.graph} tile={d3.treemapSquarify} />
           </div>
         </div>
@@ -64,7 +64,6 @@ const App = () => {
           <SuggestionContainer />
         </div>
       </div>
-      
     </div>
   );
 };
