@@ -28,16 +28,3 @@ export async function activate(context: vscode.ExtensionContext) {
 
 // This method is called when your extension is deactivated
 export function deactivate() {}
-
-const a = {
-  chang_reason: 'none',
-  changed_file: 'src/test.ts',
-  isDirty: true,
-  range_end_line: 2,
-  range_start_line: 0,
-  repo_branch: 'fix/property/design',
-  repo_head: '8ae68ec00b7ce21fd913a0ce2f7f8b0345e70679',
-  repo_url: 'github.com/laudio/web-app.git',
-  repo_user: 'Bhagwan Thapa',
-  timestamp: '2024-04-06T05:41:12.582Z',
-};
