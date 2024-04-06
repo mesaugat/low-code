@@ -1,46 +1,37 @@
 import React from 'react';
 import useSWR from 'swr';
+import { Typewriter } from 'react-simple-typewriter';
 
 const SUGGEST_URL = 'https://qsyjt1qvn9.execute-api.us-east-1.amazonaws.com/dev/suggest';
 
-
-export const fetcher = async (args) => {
-  const [url, payload] = args;
-
-  const options = {
-    method: 'POST',
-    body: payload,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
-  return fetch(url, options).then((r) => r.json());
-};
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Suggestion = (props) => {
-  const { data } = props;
+  const { repoUrl } = props;
 
-  const payloadData = {
-    payload_json: data,
-    prompt_text: 'Summarize this json data.',
-  };
+  console.log('Repourl', repoUrl);
 
-  const {data: suggestedData, isLoading } = useSWR([SUGGEST_URL, JSON.stringify(payloadData)], fetcher, {
-    revalidateOnFocus: false,
-  });
+  const { data: suggestedData, error, isLoading } = useSWR(`${SUGGEST_URL}?repo_url=${repoUrl}`, fetcher);
 
-  const suggestionText = suggestedData?.outputs?.[0]?.text;
+  console.log('Data', suggestedData, isLoading);
 
   if (isLoading) {
     return <div>Loading Suggestions....</div>;
   }
 
+  if (error) {
+    return <div>Opps something went wrong.</div>;
+  }
+
+  const suggestionText = suggestedData.suggestions;
+
   return (
     <div>
-      <div className="whitespace-pre-line">{suggestionText}</div>
+      <div className="whitespace-pre-line">
+        <Typewriter words={[suggestionText]} typeSpeed={5} />
+      </div>
     </div>
-  )
+  );
 };
 
 export default Suggestion;

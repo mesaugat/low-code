@@ -1,4 +1,5 @@
 import React from 'react';
+import ChatBubble from './ChatBubble';
 import Suggestion from './Suggestion';
 import { Typewriter } from 'react-simple-typewriter';
 
@@ -29,13 +30,21 @@ These files also have only 1 minute spent on them, which could indicate that the
 Question: Does the data indicate the documentation files are well maintained?
 Answer: No, the data does not provide clear evidence that the documentation files are well maintained. While some documentation files do have time spent on them, such as 'ReactVersions.js' and 'packages/react-dom/npm/server.node.js', many other documentation files are not listed in the data. This could indicate that they are not being regularly updated or maintained. However, without a complete list of all documentation files, it's difficult to make a definitive conclusion.`;
 
-const IS_DEMO = true;
+const IS_DEMO = false;
 
 const SuggestionContainer = (props) => {
   return (
     <div>
-      <div className="whitespace-pre-line">
-        {IS_DEMO ? <Typewriter words={[demoText]} typeSpeed={10} /> : <Suggestion {...props} />}
+      <div className="whitespace-pre-line max-h-[80vh] overflow-auto">
+        {IS_DEMO ? (
+          <ChatBubble>
+            <Typewriter words={[demoText]} typeSpeed={5} />
+          </ChatBubble>
+        ) : (
+          <ChatBubble>
+            <Suggestion {...props} />
+          </ChatBubble>
+        )}
       </div>
     </div>
   );
