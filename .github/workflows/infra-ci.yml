@@ -1,4 +1,4 @@
-name: Infra Continuous Integration
+name: Deploy Infrastructure
 
 on:
   workflow_dispatch:
