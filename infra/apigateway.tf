@@ -105,7 +105,23 @@ resource "aws_lambda_permission" "ingest_permission" {
   source_arn    = "${aws_apigatewayv2_api.lowspot_http_apigw.execution_arn}/*/*"
 }
 
-# resource "aws_apigatewayv2_api" "apigw" {
-#   name = 
-#   protocol_type = "HTTP"
-# }
+resource "aws_apigatewayv2_route" "suggest" {
+  api_id    = aws_apigatewayv2_api.lowspot_http_apigw.id
+  route_key = "POST /suggest"
+  target    = "integrations/${aws_apigatewayv2_integration.suggest.id}"
+}
+
+resource "aws_apigatewayv2_integration" "suggest" {
+  api_id           = aws_apigatewayv2_api.lowspot_http_apigw.id
+  integration_type = "AWS_PROXY"
+  connection_type  = "INTERNET"
+  integration_uri  = aws_lambda_function.lowspot_suggest.invoke_arn
+}
+
+resource "aws_lambda_permission" "suggest_permission" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lowspot_suggest.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.lowspot_http_apigw.execution_arn}/*/*"
+}
