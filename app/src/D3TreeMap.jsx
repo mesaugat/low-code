@@ -9,8 +9,8 @@ const D3TreeMap = ({ data, tile }) => {
   const ref = useRef();
 
   useEffect(() => {
-    const width = 1000;
-    const height = 700;
+    const width = 1100;
+    const height = 720;
     const color = d3.scaleSequential([8, 0], d3.interpolateMagma);
 
     // Create the treemap layout.
