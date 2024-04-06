@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
+import { getPathFromNode } from './utils';
+
 // Function to generate a unique ID
 function uniqueId(prefix = 'lowcode') {
   return `${prefix}${Math.random()}`;
@@ -88,12 +90,13 @@ const D3TreeMap = ({ data, tile }) => {
         d3.select(this).transition().duration(150).style('opacity', '1');
       })
       .on('click', function (event, d) {
-        if (d.data.url === undefined && 'URLSearchParams' in window) {
+        const basePathObj = getPathFromNode({ nodeData: d });
+        if (!basePathObj.isLeaf && 'URLSearchParams' in window) {
           const searchParams = new URLSearchParams(window.location.search);
-          searchParams.set('base_path', d.data.name);
+          searchParams.set('base_path', basePathObj.url);
           window.location.search = searchParams.toString();
         }
-        window.open(`https://${d.data.url}`, '_blank');
+        window.open(basePathObj.url, '_blank');
       });
 
     // Add a clipping path to each node
