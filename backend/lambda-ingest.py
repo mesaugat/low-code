@@ -9,7 +9,7 @@ def connect_to_clickhouse():
     # Connect to ClickHouse
     connection = clickhouse_driver.connect(
             host=os.getenv("host", ""),
-            port=os.getenv("port", 8123),
+            port=os.getenv("port", 9000),
             user=os.getenv("user", "default"),
             password=os.getenv("password", ""),
             database=os.getenv("database", "default")
@@ -28,9 +28,9 @@ def lambda_handler(event, context):
         cur.execute("SHOW TABLES LIKE 'ingestion_payload'")
         table_exists = cur.fetchone() is not None
 
-        if  table_exists:
+        if table_exists:
             cur.execute("DROP TABLE default.ingestion_payload")
-            cur.execute("""
+        cur.execute("""
             CREATE TABLE default.ingestion_payload (
                 id UUID DEFAULT generateUUIDv4(),
                 repo_url String,
