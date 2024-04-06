@@ -2,6 +2,15 @@ name: Infra Continuous Integration
 
 on:
   workflow_dispatch:
+    inputs:
+      type:
+        type: choice
+        description: Run type
+        required: true
+        default: "DRY"
+        options:
+          - DRY
+          - REAL
   push:
     branches:
       - main
@@ -21,4 +30,8 @@ jobs:
       TF_VAR_clickhouse_password: ${{ secrets.TF_VAR_clickhouse_password }}
     steps:
       - uses: actions/checkout@v4
-      - run: make clickhouse_password="${TF_VAR_clickhouse_password}"
+      - name: "Terraform Plan"
+        run: make clickhouse_password="${TF_VAR_clickhouse_password}"
+      - name: "Terraform Apply"
+        if: inputs.run-type == 'REAL'
+        run: make applyonly
