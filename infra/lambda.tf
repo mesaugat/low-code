@@ -104,6 +104,14 @@ resource "aws_lambda_function" "lowspot_evaluate" {
   handler          = "lambda-evaluate.lambda_handler"
   runtime          = "python3.12"
   source_code_hash = filebase64sha256("../backend/lambda-evaluate.zip")
+  environment {
+    variables = {
+      host     = local.clickhouse_ip
+      user     = "default"
+      database = "default"
+      password = local.clickhouse_password
+    }
+  }
 }
 
 resource "aws_lambda_function_url" "lowspot_evaluate_url" {
@@ -111,3 +119,12 @@ resource "aws_lambda_function_url" "lowspot_evaluate_url" {
   authorization_type = "NONE"
 }
 
+resource "random_password" "lambda_ingest" {
+  length = 16
+}
+
+resource "aws_ssm_parameter" "lambda_ingest" {
+  name  = "/secrets/lambda/ingest"
+  type  = "SecureString"
+  value = local.clickhouse_password
+}

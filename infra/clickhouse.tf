@@ -1,3 +1,8 @@
+locals {
+  clickhouse_ip       = aws_instance.clickhouse.public_ip
+  clickhouse_password = random_password.lambda_ingest.result
+}
+
 resource "aws_security_group" "clickhouse_sg" {
   name        = "${local.clickhouse_ec2_name}-sg"
   description = "Allow traffic from and to ClickHouse server"

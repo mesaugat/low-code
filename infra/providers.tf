@@ -5,6 +5,10 @@ terraform {
       version               = "~> 5.44.0"
       configuration_aliases = [aws.main_region]
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.6.0"
+    }
   }
 
   backend "s3" {
