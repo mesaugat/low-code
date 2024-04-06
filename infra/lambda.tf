@@ -19,6 +19,12 @@ data "archive_file" "lambda_evaluate" {
   output_path = "../backend/lambda-evaluate.zip"
 }
 
+data "archive_file" "lambda_suggest" {
+  type        = "zip"
+  source_file = "../backend/lambda-suggest.py"
+  output_path = "../backend/lambda-suggest.zip"
+}
+
 data "aws_iam_policy_document" "lambda_policy_execution_role" {
   statement {
     sid    = "CreateLogGroup"
@@ -173,4 +179,33 @@ resource "aws_lambda_layer_version" "lambda_layer" {
   layer_name          = local.layer_name
   compatible_runtimes = ["python3.12"]
   skip_destroy        = true
+}
+
+resource "aws_lambda_function" "lowspot_suggest" {
+  timeout          = "15"
+  depends_on       = [data.archive_file.lambda_suggest]
+  filename         = "${path.module}/../backend/lambda-suggest.zip"
+  function_name    = "suggest"
+  role             = aws_iam_role.lambda_policy_execution_role.arn
+  handler          = "lambda-suggest.lambda_handler"
+  runtime          = "python3.12"
+  source_code_hash = fileexists("../backend/lambda-suggest.zip") ? filebase64sha256("../backend/lambda-suggest.zip") : ""
+  layers = [
+    aws_lambda_layer_version.lambda_layer.arn
+  ]
+
+  environment {
+    variables = {
+      host     = local.clickhouse_ip
+      user     = "default"
+      database = "default"
+      password = local.clickhouse_password
+      port     = "9000"
+    }
+  }
+}
+
+resource "aws_lambda_function_url" "lowspot_suggest_url" {
+  function_name      = aws_lambda_function.lowspot_suggest.function_name
+  authorization_type = "NONE"
 }
