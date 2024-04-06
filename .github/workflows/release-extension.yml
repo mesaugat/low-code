@@ -47,7 +47,7 @@ jobs:
           npm install
           npm install -g @vscode/vsce
           vsce package --skip-license --out ${{ env.package_name }}-${{ env.new_version }}.vsix
-          echo ::set-output name=vsix_path::$(ls *.vsix);
+          echo vsix_path=$(ls *.vsix) >> $GITHUB_OUTPUT
       - name: Push Tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v5.6
