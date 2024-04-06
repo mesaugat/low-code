@@ -8,6 +8,9 @@ AI_SERVICE_NAME = "bedrock-runtime"
 
 
 def lambda_handler(event, context):
+    # Parse incoming request
+    event = json.loads(event['body'])
+
     payload_json = event['payload_json']
     prompt_text = event['prompt_text']
 
