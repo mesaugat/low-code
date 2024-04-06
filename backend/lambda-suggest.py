@@ -54,9 +54,10 @@ def lambda_handler(event, context):
             )
 
         cursor.execute(
-            f"""
+            """
             SELECT repo_url, response
             FROM ai_suggestions
+            WHERE repo_url = %(repo_url)s
             LIMIT 1
             """,
             {"repo_url": repo_url},

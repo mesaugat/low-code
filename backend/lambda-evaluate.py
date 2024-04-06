@@ -223,12 +223,12 @@ def lambda_handler(event, context):
                     AND c.repo_user == ''
             )
             SELECT
-                repo_branch,
+                'main' AS repo_branch, -- FIXME: Add filter in app for branch to use actual branch.
                 changed_file,
                 SUM(time_spent_minute) AS time_spent,
                 SUM(events) AS num_of_edits
             FROM cte_all_events_time_spent 
-            GROUP BY repo_branch, changed_file;
+            GROUP BY changed_file;
         """,
             {
                 "repo_url": repo_url,
