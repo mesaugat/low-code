@@ -32,21 +32,24 @@ jobs:
       - id: get-version
         run: |
           git fetch --tags
-          last_version=$(git tag --sort=-version:refname | grep -P "^$package_name@v\d+.\d+.\d+$" | head -n 1 | cut -d v -f 2)
+          last_version=$(git tag --sort=-version:refname | grep -P "^$package_name@\d+.\d+.\d+$" | head -n 1 | cut -d v -f 2)
 
           if [ -z "$last_version" ]; then
             new_version=1.0.0
           else
             new_version=$(semver bump patch "$last_version")
           fi
-          echo "new_version=$new_version" >> $GITHUB_OUTPUT
+          echo "new_version=$new_version" >> $GITHUB_ENV
+          echo "package_name=$package_name" >> $GITHUB_ENV
       - uses: actions/setup-node@v4
-      - name: Building
-        id: build
+      - id: build
         run: |
           npm install
           npm install -g @vscode/vsce
-          vsce package --skip-license --out ${{ env.package_name }}-${{ env.new_version }}
+          vsce package --skip-license --out ${{ env.package_name }}-${{ env.new_version }}.vsix
+          echo pwd
+          ls **/**
+          echo ::set-output name=vsix_path::$(ls *.vsix);
       - name: Push Tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v5.6
@@ -54,12 +57,22 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           custom_tag: ${{ env.new_version }}
           tag_prefix: ""
-      - name: Create release
-        uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Create release on GitHub
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          repo_token: "${{ secrets.GH_TOKEN }}"
+          tag_name: ${{ env.new_version }}
+          release_name: ${{ env.package_name }}@${{ env.new_version }}
+          draft: false
           prerelease: false
-          title: ${{ env.package_name }}
-          automatic_release_tag: ${{ env.new_version }}
-          files: |
-            *.vsix
+      - name: Upload .vsix as release asset to GitHub
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./extension/${{ steps.build.outputs.vsix_path }}
+          asset_name: ${{ steps.build.outputs.vsix_path }}
+          asset_content_type: application/zip
