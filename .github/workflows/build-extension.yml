@@ -1,0 +1,54 @@
+name: Build Extension
+
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        type: choice
+        description: Run type
+        required: true
+        default: "DRY"
+        options:
+          - DRY
+          - REAL
+  push:
+    branches:
+      - main
+    paths:
+      - "extension/**"
+jobs:
+  build:
+    name: Build Extension
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: extension
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - name: Building
+        id: build
+        run: |
+          npm install
+          npm install -g @vscode/vsce
+          vsce package --skip-license
+          echo version=$(*.vsix | grep -oE '[0-9]+\.[0-9]+\.[0-9]+') >> $GITHUB_OUTPUT
+          echo artifact_name="low-code" >> $GITHUB_OUTPUT
+      - name: Push Tag
+        if: inputs.type == 'REAL'
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5.6
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          custom_tag: ${{ steps.build.outputs.version }}
+          tag_prefix: ""
+      - name: Create release
+        if: inputs.type == 'REAL'
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GH_TOKEN }}"
+          prerelease: false
+          title: ${{ steps.prep.outputs.version }}
+          automatic_release_tag: ${{ steps.prep.outputs.version }}
+          files: |
+            ${{ steps.build.outputs.artifact_name }}
