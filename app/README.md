@@ -2,6 +2,16 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+## Project Structure
+
+The main application files are located in the `app` folder. Here's a brief overview of the directory structure:
+
+- `app/components`: This directory contains all the React components.
+- `app/pages`: This directory contains the page components.
+- `app/styles`: This directory contains all the style files.
+
+## Official Plugins
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh

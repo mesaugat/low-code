@@ -1,13 +1,25 @@
-# low-code
+# Low-Code
 
-This project is a low-code VSCode extension and visualizer built with React, D3, Python and ClickHouse. It visualizes data in a treemap format, allowing users to understand the structure and distribution of code updates at a glance.
+![Logo](./app/public/logo.png)
 
-Visualizer Demo URL: https://d1qz38fr588bqj.cloudfront.net/?repo_url=github.com/mesaugat/low-code.git
+This project is a low-code VSCode extension and visualizer built with React, D3, Python, ClickHouse, and Bedrock.
 
-# Things we've built
+> It visualizes data in a treemap format, allowing users to understand the structure and distribution of code updates at a glance.
 
-- VS Code Extension: The extension captures change data from the user's codebase and sends it to the backend for processing.
+## Infrastructure Components
 
-- Backend: The backend is written in Python and utilizes AWS Lambda, API gateway and ClickHouse installed in an EC2 instance using Terraform. The ingestion process involves parsing the change data and storing it in ClickHouse. The backend also provides an API to query the data through AWS API Gateway. The backend also uses AWS Bedrock to analyze the event data and generate insights using Mistral Large.
+- **VS Code Extension**:
 
-- Frontend: The frontend is built with React and D3. It fetches the data from the backend and visualizes it in a treemap format. It shows how much time has been spent in the codebase by different users. The treemap is interactive and you can filter by time spent, number of edits and user.
+    The extension captures change data from the user's codebase changes and sends it to the backend for processing.
+
+- **Backend**:
+
+    The backend is written in Python and utilizes [AWS Lambda](https://aws.amazon.com/lambda/), [API Gateway](https://aws.amazon.com/api-gateway/), and [ClickHouse](https://aws.amazon.com/solutions/implementations/clickhouse-cluster/) installed in an EC2 instance using Terraform. The ingestion process involves parsing the change data and storing it in [ClickHouse](https://aws.amazon.com/solutions/implementations/clickhouse-cluster/). The backend also provides an API to query the data through [API Gateway](https://aws.amazon.com/api-gateway/). The backend also uses [AWS Bedrock](https://aws.amazon.com/bedrock/) to analyze the event data and generate insights using Mistral Large.
+
+- **Frontend**:
+
+    The frontend is built with [React](https://react.dev/) and [D3](https://d3js.org/). It fetches the data from the backend and visualizes it in a treemap format. It shows how much time has been spent in the codebase by different users. The treemap is interactive and you can filter by time spent, number of edits, and user.
+
+## Visualizer Demo
+
+You can access the visualizer demo at the following URL: [https://d1qz38fr588bqj.cloudfront.net/?repo_url=github.com/mesaugat/low-code.git](https://d1qz38fr588bqj.cloudfront.net/?repo_url=github.com/mesaugat/low-code.git)
