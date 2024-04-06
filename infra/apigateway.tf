@@ -2,6 +2,7 @@ locals {
   lambda_arns = [
     for lambda in local.lambda_names : "arn:aws:execute-api:${var.region}:${local.account_id}:${aws_apigatewayv2_integration.ingest.api_id}/*/*/${lambda}"
   ]
+  suggest_lambda_timeout_ms = 300000
 }
 
 data "aws_iam_policy_document" "apigw" {
@@ -116,10 +117,11 @@ resource "aws_apigatewayv2_route" "suggest" {
 }
 
 resource "aws_apigatewayv2_integration" "suggest" {
-  api_id           = aws_apigatewayv2_api.lowspot_http_apigw.id
-  integration_type = "AWS_PROXY"
-  connection_type  = "INTERNET"
-  integration_uri  = aws_lambda_function.lowspot_suggest.invoke_arn
+  api_id               = aws_apigatewayv2_api.lowspot_http_apigw.id
+  integration_type     = "AWS_PROXY"
+  connection_type      = "INTERNET"
+  integration_uri      = aws_lambda_function.lowspot_suggest.invoke_arn
+  timeout_milliseconds = local.suggest_lambda_timeout_ms
 }
 
 resource "aws_lambda_permission" "suggest_permission" {
