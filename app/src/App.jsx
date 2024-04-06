@@ -62,7 +62,7 @@ const App = () => {
             <D3TreeMap data={data.graph} tile={d3.treemapSquarify} />
           </div>
         </div>
-        <div className='w-1/4'>
+        <div className="w-1/4">
           <SuggestionContainer />
         </div>
       </div>
