@@ -4,6 +4,8 @@ package-lock.json
 backend/*.zip
 backend/python
 
+.venv/
+
 # terraform
 .terraform*
 terraform.tfstate*
