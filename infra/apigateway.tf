@@ -34,6 +34,9 @@ resource "aws_cloudwatch_log_group" "lowspot_http_apigw" {
 resource "aws_apigatewayv2_api" "lowspot_http_apigw" {
   name          = "lowspot"
   protocol_type = "HTTP"
+  cors_configuration {
+    allow_origins = ["http://localhost:5173", "http://localhost:5174", "https://d1qz38fr588bqj.cloudfront.net"]
+  }
 }
 
 resource "aws_apigatewayv2_stage" "dev" {
@@ -102,3 +105,7 @@ resource "aws_lambda_permission" "ingest_permission" {
   source_arn    = "${aws_apigatewayv2_api.lowspot_http_apigw.execution_arn}/*/*"
 }
 
+# resource "aws_apigatewayv2_api" "apigw" {
+#   name = 
+#   protocol_type = "HTTP"
+# }
