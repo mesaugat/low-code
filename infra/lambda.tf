@@ -221,3 +221,31 @@ resource "aws_lambda_function_url" "lowspot_suggest_url" {
   function_name      = aws_lambda_function.lowspot_suggest.function_name
   authorization_type = "NONE"
 }
+
+resource "aws_lambda_function" "lowspot_run_ai" {
+  depends_on       = [data.archive_file.lambda_suggest]
+  filename         = "${path.module}/../backend/lambda-run-ai.zip"
+  function_name    = "run-ai"
+  role             = aws_iam_role.lambda_policy_execution_role.arn
+  handler          = "lambda-run-ai.lambda_handler"
+  runtime          = "python3.12"
+  source_code_hash = fileexists("../backend/lambda-run-ai.zip") ? filebase64sha256("../backend/lambda-run-ai.zip") : ""
+  layers = [
+    aws_lambda_layer_version.lambda_layer.arn
+  ]
+
+  environment {
+    variables = {
+      host     = local.clickhouse_ip
+      user     = "default"
+      database = "default"
+      password = local.clickhouse_password
+      port     = "9000"
+    }
+  }
+}
+
+resource "aws_lambda_function_url" "lowspot_run_ai" {
+  function_name      = aws_lambda_function.lowspot_run_ai.function_name
+  authorization_type = "NONE"
+}
