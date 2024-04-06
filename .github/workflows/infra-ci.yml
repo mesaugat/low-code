@@ -33,5 +33,5 @@ jobs:
       - name: "Terraform Plan"
         run: make clickhouse_password="${TF_VAR_clickhouse_password}"
       - name: "Terraform Apply"
-        if: inputs.run-type == 'REAL'
+        if: inputs.type == 'REAL'
         run: make applyonly
