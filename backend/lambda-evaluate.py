@@ -60,7 +60,11 @@ def build_dir_tree(data, repo_url, metrics):
             traversed_path = traversed_path + "/" + comp
             curr = list(filter(lambda child: child["name"] == comp, head["children"]))
             if len(curr) == 0:
-                new_child = {"name": comp, "children": []}
+                new_child = {
+                    "name": comp,
+                    "unit": "minute" if metrics == "time_spent" else "edit",
+                    "children": [],
+                }
                 head["children"].append(new_child)
                 cache_pointer[traversed_path] = new_child
                 head = new_child
