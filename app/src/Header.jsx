@@ -1,5 +1,6 @@
 const Header = ({ title, repo_url = '' }) => {
   const url = repo_url && `https://${repo_url.split('.git')[0]}`;
+
   return (
     <header className="sticky top-0 z-50 bg-white">
       <div className="flex items-center">
