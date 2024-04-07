@@ -57,7 +57,7 @@ const App = () => {
 
   return (
     <div className="p-8">
-      <Header title="LowCode Visualizer" />
+      <Header title="LowCode Visualizer" repo_url={repoUrl} />
       <div className="flex gap-x-2 mt-4">
         <div className="flex-1">
           <div className="flex items-center">
