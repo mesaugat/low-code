@@ -15,11 +15,3 @@ Just continue with your workflow like usual. Leave the analysis to us.
 - Find out your code's low spoit with data visualization.
 
 <br>
-
-![Logo](./lowcode.png)
-
-<br>
-
-## Demo
-
-![Demo](../app/public/demo.gif)
