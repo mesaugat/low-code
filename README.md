@@ -2,11 +2,15 @@
 
 ![Logo](./app/public/logo.png)
 
-This project is a low-code VSCode extension and visualizer built with React, D3, Python, ClickHouse, and Bedrock.
+This project is a low-code VSCode extension and visualizer built with `React`, `D3`, `Python`, `ClickHouse`, and `Bedrock`.
 
 > It visualizes data in a treemap format, allowing users to understand the structure and distribution of code updates at a glance.
 
 ## Infrastructure Components
+
+- **Terraform**:
+
+    [Terraform](https://www.terraform.io/) is used to provision the AWS Infrastructures.
 
 - **VS Code Extension**:
 
@@ -18,7 +22,7 @@ This project is a low-code VSCode extension and visualizer built with React, D3,
 
 - **Frontend**:
 
-    The frontend is built with [React](https://react.dev/) and [D3](https://d3js.org/). It fetches the data from the backend and visualizes it in a treemap format. It shows how much time has been spent in the codebase by different users. The treemap is interactive and you can filter by time spent, number of edits, and user.
+    The frontend is built with [React](https://react.dev/) and [D3](https://d3js.org/) and deployed in [Cloudfront](https://aws.amazon.com/cloudfront/). It fetches the data from the backend and visualizes it in a treemap format. It shows how much time has been spent in the codebase by different users. The treemap is interactive and you can filter by time spent, number of edits, and user.
 
 ## Visualizer Demo
 
