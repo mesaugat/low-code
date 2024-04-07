@@ -54,7 +54,7 @@ data "aws_iam_policy_document" "lambda_policy_execution_role" {
       "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/ingest:*",
       "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/evaluate:*",
       "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/suggest:*",
-      "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/run_ai:*"
+      "arn:aws:logs:${var.region}:${local.account_id}:log-group:/aws/lambda/run-ai:*"
     ]
   }
 
