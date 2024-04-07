@@ -7,7 +7,7 @@ const Header = ({ title, repo_url = '' }) => {
         <h1 className="font-bold p-y-4">
           {title} ·{' '}
           {url && (
-            <a href={url} className="text-sm text-red-500">
+            <a href={url} className="text-sm text-red-500" target="_blank">
               {url}
             </a>
           )}
