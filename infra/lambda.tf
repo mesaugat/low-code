@@ -230,6 +230,7 @@ resource "aws_lambda_function_url" "lowspot_suggest_url" {
 }
 
 resource "aws_lambda_function" "lowspot_run_ai" {
+  timeout          = "300"
   depends_on       = [data.archive_file.lambda_suggest]
   filename         = "${path.module}/../backend/lambda-run-ai.zip"
   function_name    = "run-ai"
