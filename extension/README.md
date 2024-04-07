@@ -17,3 +17,9 @@ Just continue with your workflow like usual. Leave the analysis to us.
 <br>
 
 ![Logo](./lowcode.png)
+
+<br>
+
+## Demo
+
+![Demo](../app/public/demo.gif)
