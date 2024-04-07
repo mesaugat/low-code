@@ -27,3 +27,5 @@ This project is a low-code VSCode extension and visualizer built with `React`, `
 ## Visualizer Demo
 
 You can access the visualizer demo at the following URL: [https://d1qz38fr588bqj.cloudfront.net/?repo_url=github.com/mesaugat/low-code.git](https://d1qz38fr588bqj.cloudfront.net/?repo_url=github.com/mesaugat/low-code.git)
+
+![Demo](./app/public/demo.gif)
