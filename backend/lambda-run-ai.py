@@ -30,7 +30,7 @@ Based on the data please answer the following questions with short description f
 - What are some of the files that indicated poorly defined ownership?
 - What are some of the areas in the code that indicates knowledge gaps?
 - Does the data indicate the documentation files are well maintained?
-- Are there any specific users struggling with any part of the code?
+- Is there any potential bottlenecks while merging?
 
 Please follow the following format while answering:
 Question: Does the data indicate the tests are well maintained?
@@ -49,8 +49,8 @@ Answer: List of files:
 Question: Does the data indicate the documentation files are well maintained?
 Answer: Yes or No. [Your reasoning.]
 
-Question: Are there any specific users struggling with any part of the code?
-Answer: user1 spent most time updating `filename`. They might be stuck on something.
+Question: Is there any potential bottlenecks while merging?
+Answer:  user1 and user2 spent most time updating `filename`. They might face conflicts while merging which can increase merge times.
 """
 
 
@@ -212,10 +212,17 @@ def lambda_handler(event, context):
         data = "user|file_name|time_spent_min|total_edits\n"
         data += "\n".join(map(lambda data: "|".join(map(str, data)), cursor.fetchall()))
 
+        prompt_to_send = f"{data} \n {prompt}"
+
+        # AI model has input limit of 32768
+        if len(prompt_to_send) > 32768:
+            remaining_tokens = 32000 - len(prompt)
+            prompt_to_send = f"{data[0:remaining_tokens]} \n {prompt}"
+
         # bedrock runtime client
         client = boto3.client(AI_SERVICE_NAME, region_name=AWS_REGION)
         payload = {
-            "prompt": f"<s>[INST] {data} \n {prompt} [/INST]",
+            "prompt": f"<s>[INST] {prompt_to_send}  [/INST]",
             "max_tokens": 1000,
             "temperature": 0.5,
             "top_p": 0.9,
@@ -228,11 +235,13 @@ def lambda_handler(event, context):
             contentType="application/json", body=json.dumps(payload), modelId=model_id
         )
 
-        prompt_result = response["body"].read().decode("utf-8")
+        prompt_result = json.loads(response["body"].read().decode("utf-8"))["outputs"][
+            0
+        ]["text"]
 
         cursor.execute(
             """
-            CREATE TABLE IF NOT EXIST ai_suggestions (
+            CREATE TABLE IF NOT EXISTS ai_suggestions (
                 id UUID DEFAULT generateUUIDv4(),
                 repo_url String,
                 prompt String,
@@ -246,7 +255,7 @@ def lambda_handler(event, context):
             """
             DELETE FROM ai_suggestions WHERE repo_url = %(repo_url)s;
             """,
-            {repo_url: repo_url},
+            {"repo_url": repo_url},
         )
 
         cursor.execute(
@@ -254,7 +263,7 @@ def lambda_handler(event, context):
             INSERT INTO ai_suggestions(repo_url, prompt, response)
             VALUES (%(repo_url)s, %(prompt)s, %(response)s)
             """,
-            {repo_url: repo_url, prompt: prompt, response: prompt_result},
+            {"repo_url": repo_url, "prompt": prompt_to_send, "response": prompt_result},
         )
 
         cursor.close()
