@@ -21,7 +21,11 @@ def connect_to_clickhouse():
 
 def build_dir_tree(data, repo_url, metrics):
     root = repo_url.split("/")[-1]
-    tree = {"name": root, "children": []}
+    tree = {
+        "name": root,
+        "unit": "minute" if metrics == "time_spent" else "edit",
+        "children": [],
+    }
     cache_pointer = {root: tree}
 
     for repo_branch, changed_file, time_spent, num_of_edits in data:
