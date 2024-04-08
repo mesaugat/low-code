@@ -1,0 +1,885 @@
+id,repo_url,prompt,response
+e11cfda3-09dc-41e2-8461-6d263e616571,github.com/facebook/react.git,"user|file_name|time_spent_min|total_edits
+Ricky|package.json|21.0|21
+Andrew Clark|package.json|20.0|20
+Sebastian Markbåge|ReactFlightServer.js|26.766666666666666|19
+Ruslan Lesiutin|package.json|15.0|15
+Ricky|ReactFeatureFlags.www.js|13.0|13
+Sebastian Markbåge|ReactFiberHydrationContext.js|10.616666666666667|12
+Sebastian Markbåge|ReactFlightClient.js|19.766666666666666|12
+Sebastian Markbåge|ReactFlight-test.js|12.0|12
+Sebastian Markbåge|ReactDOMServerPartialHydration-test.internal.js|11.0|11
+dan|package.json|11.0|11
+Jan Kassens|ReactFeatureFlags.www.js|10.0|10
+dependabot[bot]|yarn.lock|10.0|10
+Andrew Clark|ReactJSXElement.js|10.0|10
+Sebastian Markbåge|ReactDOMHydrationDiff-test.js|8.616666666666667|10
+Sebastian Markbåge|ReactDOMFizzServer-test.js|10.0|10
+Sebastian Markbåge|ReactFiberBeginWork.js|10.0|10
+Sebastian Markbåge|ReactFiberWorkLoop.js|9.0|9
+Ricky|ReactFeatureFlags.www-dynamic.js|9.0|9
+Sebastian Markbåge|codes.json|8.0|8
+Jan Kassens|ReactFeatureFlags.native-fb.js|8.0|8
+Jan Kassens|ReactFeatureFlags.test-renderer.js|8.0|8
+Ricky|ReactFeatureFlags.native-fb.js|6.183333333333334|8
+Sebastian Silbermann|ReactDebugHooks.js|8.0|8
+Jan Kassens|ReactFeatureFlags.js|8.0|8
+Sebastian Markbåge|ReactFizzServer.js|8.0|8
+Sebastian Markbåge|ReactServerRenderingHydration-test.js|7.0|7
+Sebastian Markbåge|ReactRenderDocument-test.js|7.0|7
+Jan Kassens|ReactFeatureFlags.test-renderer.www.js|7.0|7
+Ricky|ReactFeatureFlags.js|7.0|7
+Sebastian Markbåge|ReactFlightDOMEdge-test.js|5.55|7
+Jan Kassens|ReactFeatureFlags.www-dynamic.js|7.0|7
+Sebastian Markbåge|ReactFeatureFlags.js|7.0|7
+Ricky|ReactFeatureFlags.test-renderer.www.js|7.0|7
+Andrew Clark|ReactFiberBeginWork.js|7.0|7
+Ruslan Lesiutin|utils.js|7.0|7
+Sebastian Markbåge|ReactDOMFloat-test.js|7.0|7
+Ruslan Lesiutin|manifest.json|6.0|6
+Ricky|ReactFeatureFlags.test-renderer.js|6.0|6
+Ricky|ReactFeatureFlags.native-oss.js|4.183333333333334|6
+Sebastian Markbåge|ReactFeatureFlags.test-renderer.js|6.0|6
+Sebastian Silbermann|ReactHooksInspectionIntegration-test.js|6.0|6
+Sebastian Markbåge|ReactDOMRoot-test.js|6.0|6
+Jan Kassens|package.json|6.0|6
+Sebastian Markbåge|ReactFeatureFlags.www.js|6.0|6
+Sebastian Markbåge|ReactFlightDOMClientNode.js|6.0|6
+Sebastian Markbåge|ReactDOMComponent.js|6.0|6
+Sebastian Markbåge|ReactFlightDOMClientBrowser.js|6.0|6
+Sebastian Markbåge|ReactFiber.js|6.0|6
+Jan Kassens|yarn.lock|6.0|6
+Jan Kassens|ReactFeatureFlags.native-oss.js|6.0|6
+Sebastian Markbåge|ReactFeatureFlags.native-oss.js|5.0|5
+Andrew Clark|ReactElementProd.js|5.0|5
+Andrew Clark|ReactJSXRuntime-test.js|5.0|5
+Sebastian Silbermann|ReactFeatureFlags.native-oss.js|5.0|5
+Sebastian Markbåge|ReactFeatureFlags.test-renderer.www.js|5.0|5
+Andrew Clark|ReactDeprecationWarnings-test.js|5.0|5
+Sebastian Markbåge|ReactFeatureFlags.test-renderer.native.js|5.0|5
+Sebastian Silbermann|CustomHooks.js|5.0|5
+Andrew Clark|ReactAsyncActions-test.js|5.0|5
+Ricky|ReactDOMForm-test.js|5.0|5
+Sebastian Markbåge|ReactJSXElement.js|5.0|5
+Sebastian Markbåge|ReactFiberConfigDOM.js|5.0|5
+Ricky|ReactFiberHooks.js|5.0|5
+Sebastian Markbåge|ReactInternalTypes.js|5.0|5
+Andrew Clark|ReactFiberHooks.js|5.0|5
+Andrew Clark|ReactFiberRefs-test.js|5.0|5
+Sebastian Markbåge|ReactDOMOption-test.js|5.0|5
+Andrew Clark|ReactComponent-test.js|5.0|5
+Josh Story|ReactFizzServer.js|5.0|5
+Andrew Clark|ReactChildFiber.js|5.0|5
+Andrew Clark|refs-test.js|5.0|5
+Ricky|ReactDOMFizzServer-test.js|5.0|5
+Andrew Clark|ReactFunctionComponent-test.js|5.0|5
+Sebastian Markbåge|ReactDOMFizzSuppressHydrationWarning-test.js|5.0|5
+Sebastian Markbåge|ReactFeatureFlags.native-fb.js|5.0|5
+Timothy Yung|ReactFeatureFlags.native-fb.js|5.0|5
+Ricky|ReactFeatureFlags.test-renderer.native.js|5.0|5
+Sebastian Markbåge|ReactFiberThrow.js|5.0|5
+Sebastian Markbåge|ReactFlightReplyClient.js|5.0|5
+Andrew Clark|ReactFiberWorkLoop.js|4.0|4
+Ricky|ReactFizzHooks.js|4.0|4
+Andrew Clark|ReactFeatureFlags.js|4.0|4
+Sebastian Markbåge|shouldIgnoreConsoleError.js|4.0|4
+Andrew Clark|ReactElementValidator.js|4.0|4
+Timothy Yung|ReactFeatureFlags.native-fb-dynamic.js|4.0|4
+Ricky|ReactDOMServerIntegrationUntrustedURL-test.js|4.0|4
+Jack Pope|ReactTestRenderer.js|4.0|4
+Andrew Clark|ReactCreateElement-test.js|4.0|4
+Jack Pope|ReactFeatureFlags.test-renderer.js|4.0|4
+Sebastian Silbermann|ReactFeatureFlags.native-fb.js|4.0|4
+Sebastian Markbåge|ReactLazy.js|4.0|4
+Sebastian Markbåge|ReactDOMSingletonComponents-test.js|4.0|4
+Andrew Clark|ReactServer.experimental.js|10.233333333333333|4
+Ricky|ReactFlightDOMForm-test.js|4.0|4
+Sebastian Silbermann|ReactFeatureFlags.test-renderer.native.js|4.0|4
+Jan Kassens|ReactFeatureFlags.test-renderer.native.js|4.0|4
+Timothy Yung|ReactFeatureFlags.test-renderer.native.js|4.0|4
+Jan Kassens|ReactFeatureFlags.native-fb-dynamic.js|4.0|4
+Joseph Savona|index.js|4.0|4
+Jack Pope|ReactFeatureFlags.js|4.0|4
+Ricky|ReactFiberWorkLoop.js|4.0|4
+Sebastian Silbermann|ReactTestUtils-test.js|4.0|4
+Andrew Clark|ReactServer.js|10.233333333333333|4
+Andrew Clark|ReactIncrementalSideEffects-test.js|4.0|4
+Andrew Clark|ReactFiberClassComponent.js|4.0|4
+Sebastian Markbåge|ReactDOMLegacy.js|4.0|4
+Sebastian Silbermann|ReactFeatureFlags.www.js|4.0|4
+Sebastian Markbåge|ReactDOMRoot.js|4.0|4
+Andrew Clark|ReactFizzServer.js|4.0|4
+Ricky|setupTests.js|4.0|4
+Sebastian Markbåge|ReactFiberCompleteWork.js|4.0|4
+Sebastian Markbåge|ReactFlightDOMClientEdge.js|4.0|4
+Sebastian Markbåge|ReactFiberErrorLogger.js|4.0|4
+Sebastian Markbåge|ReactDOMServerIntegrationTestUtils.js|4.0|4
+Sebastian Silbermann|ReactFizzConfigDOM.js|4.0|4
+Sebastian Silbermann|ReactFeatureFlags.test-renderer.js|4.0|4
+Timothy Yung|ReactFeatureFlags.native-oss.js|4.0|4
+Sebastian Silbermann|ReactDOMComponent.js|4.0|4
+Andrew Clark|ReactJSXElementValidator-test.js|4.0|4
+Andrew Clark|ReactFeatureFlags.test-renderer.js|4.0|4
+Sebastian Markbåge|ReactFetch-test.js|4.0|4
+Sebastian Markbåge|renderer.js|4.0|4
+Ricky|ReactDOMServerIntegrationElements-test.js|3.0|3
+Ricky|ReactDOMServerIntegrationHooks-test.js|3.0|3
+Ricky|ReactJSXElementValidator-test.js|3.0|3
+Andrew Clark|ReactJSXTransformIntegration-test.js|3.0|3
+Ricky|ReactFunctionComponent-test.js|3.0|3
+Ricky|ReactDOMServerPartialHydration-test.internal.js|3.0|3
+Sebastian Markbåge|index.classic.fb.js|3.0|3
+Ricky|shouldIgnoreConsoleError.js|3.0|3
+Sebastian Markbåge|ReactFlightDOMServerNode.js|3.0|3
+Josh Story|ReactFiberWorkLoop.js|3.0|3
+Josh Story|ReactFeatureFlags.test-renderer.www.js|3.0|3
+Andrew Clark|ReactFlightDOMForm-test.js|3.0|3
+Sebastian Markbåge|ReactCoffeeScriptClass-test.coffee|3.0|3
+Ricky|ReactStrictMode-test.js|3.0|3
+Ricky|index.experimental.js|3.0|3
+Andrew Clark|ReactFeatureFlags.www.js|3.0|3
+Sebastian Markbåge|ReactFiberRoot.js|3.0|3
+Ricky|ReactDOMLegacy.js|3.0|3
+Sebastian Markbåge|ReactChildFiber.js|3.0|3
+Sebastian Markbåge|index.js|3.0|3
+Jan Kassens|ReactFizzServer.js|3.0|3
+Andrew Clark|ReactFeatureFlags.native-fb.js|3.0|3
+Andrew Clark|ReactFeatureFlags.native-oss.js|3.0|3
+Sebastian Markbåge|ReactComponentStackFrame.js|3.0|3
+Andrew Clark|ReactUse-test.js|3.0|3
+Josh Story|ReactFizzConfigDOM.js|3.0|3
+Sebastian Markbåge|ReactFiberCommitWork.js|3.0|3
+Jan Kassens|ReactFiberBeginWork.js|3.0|3
+Ricky|ReactCreateElement-test.js|3.0|3
+Ricky|ReactDOMEventListener-test.js|3.0|3
+Ruslan Lesiutin|index.js|3.0|3
+Sebastian Markbåge|ReactFiberConfigWithNoHydration.js|3.0|3
+Sebastian Markbåge|ReactLegacyMount-test.js|3.0|3
+Andrew Clark|ReactFeatureFlags.test-renderer.www.js|3.0|3
+Sebastian Markbåge|createReactNoop.js|3.0|3
+Sebastian Markbåge|ReactFiberReconciler.js|3.0|3
+Ricky|refs-test.js|3.0|3
+Andrew Clark|ReactElementClone-test.js|3.0|3
+Ricky|ReactLegacyMount-test.js|3.0|3
+Sebastian Silbermann|ReactFeatureFlags.test-renderer.www.js|3.0|3
+Sebastian Markbåge|ReactLazy-test.internal.js|3.0|3
+Ricky|ReactComponentLifeCycle-test.js|3.0|3
+Jack Pope|ReactFeatureFlags.www.js|3.0|3
+Ruslan Lesiutin|renderer.js|3.0|3
+Ricky|ReactHooksWithNoopRenderer-test.js|3.0|3
+dan|ReactFlightDOMServerNode.js|3.0|3
+Andrew Clark|ReactStrictMode-test.js|3.0|3
+Josh Story|ReactFeatureFlags.native-fb.js|3.0|3
+Ruslan Lesiutin|yarn.lock|3.0|3
+Ruslan Lesiutin|CHANGELOG.md|3.0|3
+Jan Kassens|ReactDOMFizzServer-test.js|3.0|3
+Josh Story|ReactFeatureFlags.native-oss.js|3.0|3
+Jan Kassens|build-all-release-channels.js|3.0|3
+Andrew Clark|ReactCompositeComponent-test.js|3.0|3
+Andrew Clark|ReactElementValidator-test.internal.js|3.0|3
+Sebastian Markbåge|ReactSuspenseWithNoopRenderer-test.js|3.0|3
+Sebastian Markbåge|ReactTypeScriptClass-test.ts|3.0|3
+Jack Pope|ReactLazy-test.internal.js|3.0|3
+Ricky|ReactLegacyUpdates-test.js|3.0|3
+Jan Kassens|ReactFizzConfigDOM.js|3.0|3
+dan|ReactSymbols.js|3.0|3
+Ruslan Lesiutin|types.js|3.0|3
+Sebastian Markbåge|ReactCompositeComponent-test.js|3.0|3
+Sebastian Markbåge|ReactES6Class-test.js|3.0|3
+Andrew Clark|ReactDOMServerIntegrationRefs-test.js|3.0|3
+Ricky|ReactCompositeComponentState-test.js|3.0|3
+Ricky|StrictEffectsMode-test.js|3.0|3
+Sebastian Silbermann|ReactFeatureFlags.js|3.0|3
+Jack Pope|ReactHooksInspectionIntegration-test.js|3.0|3
+Andrew Clark|ReactMemo-test.js|3.0|3
+Ricky|ReactDOMServerIntegrationRefs-test.js|3.0|3
+Sebastian Markbåge|ReactFiberConfig.custom.js|3.0|3
+Sebastian Markbåge|ReactFlightDOMBrowser-test.js|3.0|3
+Andrew Clark|ReactFresh-test.js|3.0|3
+Josh Story|ReactFiberBeginWork.js|3.0|3
+Sebastian Silbermann|ReactDOMServerIntegrationAttributes-test.js|3.0|3
+Timothy Yung|xplat.js|3.0|3
+Ricky|ReactFiberClassComponent.js|3.0|3
+Sebastian Markbåge|ReactFiberComponentStack.js|3.0|3
+Andrew Clark|ReactClient.js|9.233333333333333|3
+Jack Pope|ReactART-test.js|3.0|3
+Josh Story|ReactFeatureFlags.test-renderer.js|3.0|3
+Jan Kassens|ReactFiberConfigDOM.js|3.0|3
+Ricky|ReactCompositeComponent-test.js|3.0|3
+Josh Story|ReactFeatureFlags.js|3.0|3
+Jan Kassens|ReactFreshIntegration-test.js|3.0|3
+Ricky|ReactFlight-test.js|3.0|3
+Jan Kassens|ReactComponentLifeCycle-test.js|3.0|3
+Josh Story|ReactFeatureFlags.www.js|3.0|3
+Josh Story|ReactFeatureFlags.test-renderer.native.js|3.0|3
+Ricky|ReactDOMComponent-test.js|3.0|3
+dan|ReactIs.js|3.0|3
+Ricky|ReactFizzServer.js|3.0|3
+Sebastian Silbermann|AttributeTableSnapshot.md|3.0|3
+Jack Pope|ReactTestRenderer-test.internal.js|3.0|3
+Andrew Clark|index.stable.js|2.0|2
+Ruslan Lesiutin|components.test.js|2.0|2
+Ruslan Lesiutin|profilerStore-test.js|2.0|2
+Jan Kassens|xplat.js|2.0|2
+Josh Story|getComponentNameFromFiber.js|2.0|2
+Sebastian Silbermann|ReactDOMServerIntegrationLegacyContext-test.js|2.0|2
+Ricky|ReactDOMTextarea-test.js|2.0|2
+Sebastian Markbåge|ReactSuspense-test.internal.js|2.0|2
+Ricky|ReactDOMComponent.js|2.0|2
+Andrew Clark|index.js|2.0|2
+Josh Story|ReactDOMFizzServer-test.js|2.0|2
+Josh Story|server.node.js|2.0|2
+Josh Story|ReactDOMSuspensePlaceholder-test.js|2.0|2
+Sebastian Markbåge|ReactErrorBoundaries-test.internal.js|2.0|2
+Andrew Clark|ReactFiberLazyComponent.js|2.0|2
+Sebastian Silbermann|ReactComponentLifeCycle-test.js|2.0|2
+Sebastian Markbåge|ReactFlightClientConfig.dom-browser-turbopack.js|2.0|2
+Ricky|ReactFizzClassComponent.js|2.0|2
+Joseph Savona|index.classic.fb.js|2.0|2
+Ruslan Lesiutin|inspectedElement-test.js|2.0|2
+dan|ReactFizzServer.js|2.0|2
+Jack Pope|shallow.js|2.0|2
+Ricky|ReactDOMRoot-test.js|2.0|2
+Andrew Clark|ReactFlightDOMReplyEdge-test.js|2.0|2
+Josh Story|ReactFizzConfigDOMLegacy.js|2.0|2
+dan|ReactFeatureFlags.js|2.0|2
+Sebastian Markbåge|ReactFlightClientConfig.dom-node-webpack.js|2.0|2
+Ricky|ReactDOMAttribute-test.js|2.0|2
+Ricky|ReactMemo-test.js|2.0|2
+Andrew Clark|ReactStartTransition.js|2.0|2
+Ricky|ReactFiber.js|2.0|2
+Ricky|forwardRef-test.js|2.0|2
+Sebastian Markbåge|ReactDeprecationWarnings-test.js|2.0|2
+Ricky|ReactDOMServerIntegrationModes-test.js|2.0|2
+Ricky|ReactDOMServerIntegrationNewContext-test.js|2.0|2
+Ricky|ReactDOMFloat-test.js|2.0|2
+Josh Story|jsx-runtime.react-server.js|2.0|2
+Noah Lemen|SchedulerFeatureFlags.www.js|2.0|2
+Sebastian Markbåge|ReactDOMFizzShellHydration-test.js|2.0|2
+Ricky|ReactDOMServerLifecycles-test.js|2.0|2
+Sebastian Silbermann|ReactFiberHooks.js|2.0|2
+Josh Story|ReactDOMLegacyServerNodeStream.js|2.0|2
+Ruslan Lesiutin|setupTests.build-devtools-regression.js|2.0|2
+Sebastian Markbåge|ReactSuspensePlaceholder-test.internal.js|2.0|2
+Sebastian Markbåge|EventPluginUtils.js|2.0|2
+Sebastian Markbåge|ReactFlightDOMServerEdge.js|2.0|2
+Andrew Clark|react.react-server.js|2.0|2
+Timothy Yung|ReactFeatureFlags.test-renderer.js|2.0|2
+Sebastian Markbåge|ReactHooks-test.internal.js|2.0|2
+Josh Story|ReactDOMFloat-test.js|2.0|2
+Sebastian Markbåge|types.js|2.0|2
+dan|index.experimental.js|2.0|2
+Noah Lemen|SchedulerFeatureFlags.www-dynamic.js|2.0|2
+Andrew Clark|ReactDOMServerIntegrationElements-test.js|2.0|2
+Sebastian Silbermann|refs-test.js|2.0|2
+Sebastian Markbåge|ReactBrowserEventEmitter-test.js|2.0|2
+Andrew Clark|ReactFlightDOMEdge-test.js|2.0|2
+Sebastian Markbåge|InvalidEventListeners-test.js|2.0|2
+Ricky|ReactInternalTypes.js|2.0|2
+Josh Story|ReactCacheClient.js|2.0|2
+Jan Kassens|ReactIncrementalErrorHandling-test.internal.js|2.0|2
+Josh Story|ReactNoopFlightServer.js|2.0|2
+Andrew Clark|ReactFlightTurbopackDOMReply-test.js|2.0|2
+Ricky|ReactRenderDocument-test.js|2.0|2
+Sebastian Silbermann|ReactChildren-test.js|2.0|2
+Andrew Clark|ReactFlightTurbopackDOMForm-test.js|2.0|2
+Sebastian Silbermann|yarn.lock|2.0|2
+Sebastian Silbermann|ReactDOMInput-test.js|2.0|2
+Ricky|yarn.lock|2.0|2
+Ricky|ReactChildren-test.js|2.0|2
+Ricky|ReactComponent-test.js|2.0|2
+Sebastian Silbermann|ReactMultiChildText-test.js|2.0|2
+Sebastian Markbåge|ReactHooksInspection-test.js|2.0|2
+Joseph Savona|index.modern.fb.js|2.0|2
+Andrew Clark|ReactFreshIntegration-test.js|2.0|2
+Sebastian Markbåge|ReactTestRenderer-test.internal.js|2.0|2
+Josh Story|ReactCompositeComponent-test.js|2.0|2
+Sebastian Markbåge|ReactFizzConfigDOM.js|2.0|2
+Sebastian Markbåge|DOMPluginEventSystem.js|2.0|2
+Ruslan Lesiutin|InspectedElement.js|2.0|2
+Sebastian Markbåge|ReactFlightDOMServerBrowser.js|2.0|2
+Sebastian Markbåge|ReactFabric.js|2.0|2
+Sebastian Silbermann|ReactDOMTextarea-test.js|2.0|2
+Sebastian Markbåge|ReactNativeMount-test.internal.js|2.0|2
+Ricky|refs-destruction-test.js|2.0|2
+Josh Story|ReactDOMSharedInternals.js|2.0|2
+Josh Story|ReactComponentLifeCycle-test.js|2.0|2
+Ruslan Lesiutin|InspectedElementView.js|2.0|2
+Andrew Clark|ReactSchedulerIntegration-test.js|2.0|2
+Ricky|ReactJSXRuntime-test.js|2.0|2
+Jan Kassens|ReactDOMInput-test.js|2.0|2
+Sebastian Markbåge|ReactDebugHooks.js|2.0|2
+Ricky|ReactDOMServerIntegrationTextarea-test.js|2.0|2
+Andrew Clark|ReactDOMInReactServer-test.js|2.0|2
+Sebastian Markbåge|ReactFlightTemporaryReferences.js|2.0|2
+Ruslan Lesiutin|standalone.js|2.0|2
+Andrew Clark|ReactDOMHydrationDiff-test.js|2.0|2
+Andrew Clark|ReactCache-test.js|2.0|2
+Timothy Yung|ReactFeatureFlags.www-dynamic.js|2.0|2
+Sebastian Markbåge|ReactSuspenseFuzz-test.internal.js|2.0|2
+Sebastian Markbåge|ReactTypes.js|2.0|2
+Ricky|ReactNewContext-test.js|2.0|2
+Ruslan Lesiutin|storeComponentFilters-test.js|2.0|2
+Andrew Clark|ReactFlightTurbopackDOMEdge-test.js|2.0|2
+Sebastian Markbåge|ReactLegacyUpdates-test.js|2.0|2
+Ricky|createReactClassIntegration-test.js|2.0|2
+Ricky|ReactDOMFizzForm-test.js|2.0|2
+Ricky|ReactFreshIntegration-test.js|2.0|2
+Sebastian Markbåge|ReactFlightClientConfig.dom-edge-webpack.js|2.0|2
+Sebastian Markbåge|ReactFizzComponentStack.js|2.0|2
+Josh Story|ReactDOMLegacyFiber-test.js|2.0|2
+Sebastian Markbåge|transform-error-messages.js|2.0|2
+Ruslan Lesiutin|store-test.js|2.0|2
+Ricky|ReactJSXElement.js|2.0|2
+Andrew Clark|ReactFiberTransition.js|2.0|2
+Ricky|ReactDOM.js|2.0|2
+Josh Story|renderer.js|2.0|2
+Ricky|ReactBrowserEventEmitter-test.js|2.0|2
+Andrew Clark|ReactTestUtilsActUnmockedScheduler-test.js|2.0|2
+Sebastian Markbåge|ReactDOM-test.js|2.0|2
+Sebastian Markbåge|ReactHooksWithNoopRenderer-test.js|2.0|2
+Josh Story|ReactFiber.js|2.0|2
+Jack Pope|ReactFeatureFlags.www-dynamic.js|2.0|2
+Sebastian Markbåge|ReactDOMConsoleErrorReportingLegacy-test.js|2.0|2
+Sebastian Markbåge|ReactHooksInspectionIntegration-test.js|2.0|2
+Andrew Clark|ReactFeatureFlags.test-renderer.native.js|2.0|2
+Timothy Yung|ReactFiberCommitWork.js|2.0|2
+Andrew Clark|index.modern.fb.js|2.0|2
+Ricky|config.base.js|2.0|2
+Jan Kassens|ReactFlightDOMForm-test.js|2.0|2
+Ricky|ReactDOMServerIntegrationReconnecting-test.js|2.0|2
+dan|ReactFlightDOMServerEdge.js|2.0|2
+Sebastian Markbåge|ReactElementProd.js|2.0|2
+Sebastian Silbermann|DOMPluginEventSystem-test.internal.js|2.0|2
+Andrew Clark|ReactFlight-test.js|2.0|2
+Ricky|xplat.js|2.0|2
+Jan Kassens|ReactErrorBoundaries-test.internal.js|2.0|2
+Sebastian Markbåge|ReactTestUtils.js|2.0|2
+Ricky|useSyncExternalStoreShared-test.js|2.0|2
+Ricky|ReactDOMHydrationDiff-test.js|2.0|2
+Jan Kassens|ReactFiberHooks.js|2.0|2
+Sebastian Markbåge|ReactDOMForm-test.js|2.0|2
+Sebastian Markbåge|componentStacks-test.js|2.0|2
+Josh Story|server.browser.js|2.0|2
+Sebastian Silbermann|ReactDOMServerIntegrationLegacyContextDisabled-test.internal.js|2.0|2
+Ricky|ReactHooks-test.internal.js|2.0|2
+Josh Story|ReactFiberComponentStack.js|2.0|2
+Ricky|ReactDOMServerIntegrationUserInteraction-test.js|2.0|2
+Sebastian Silbermann|config.yml|2.0|2
+Andrew Clark|ReactCacheElement-test.js|2.0|2
+Ricky|ReactFizzConfigDOM.js|2.0|2
+Josh Story|unstable_testing.experimental.js|2.0|2
+Sebastian Silbermann|.gitignore|2.0|2
+Sebastian Markbåge|ReactNativeEvents-test.internal.js|2.0|2
+Jack Pope|ReactFeatureFlags.test-renderer.native.js|2.0|2
+Andrew Clark|ReactES6Class-test.js|2.0|2
+Josh Story|ReactSubtreeFlagsWarning-test.js|2.0|2
+Sebastian Markbåge|ReactFlightClientConfig.dom-fb-experimental.js|2.0|2
+Josh Story|codes.json|2.0|2
+Sebastian Markbåge|ReactElementType.js|2.0|2
+Andrew Clark|ReactTypeScriptClass-test.ts|2.0|2
+Sebastian Markbåge|ReactFiberHydrationDiffs.js|0.6166666666666667|2
+Sebastian Silbermann|ReactDOMServerIntegrationInput-test.js|2.0|2
+Jan Kassens|ReactServerRenderingHydration-test.js|2.0|2
+Jack Pope|ReactProfilerDevToolsIntegration-test.internal.js|2.0|2
+Sebastian Markbåge|useSyncExternalStoreShared-test.js|2.0|2
+Ricky|ReactFiberBeginWork.js|2.0|2
+Ricky|ReactFlightDOMBrowser-test.js|2.0|2
+Josh Story|ReactNoopServer.js|2.0|2
+Sebastian Markbåge|DevToolsFiberComponentStack.js|2.0|2
+Sebastian Markbåge|ReactIncrementalErrorHandling-test.internal.js|2.0|2
+Timothy Yung|ReactFeatureFlags.test-renderer.www.js|2.0|2
+Sebastian Markbåge|ReactFlightWebpackReferences.js|0.5833333333333334|2
+Jan Kassens|ReactDOMComponent.js|2.0|2
+Sebastian Markbåge|ReactDOMLegacyFiber-test.js|2.0|2
+Sebastian Markbåge|ReactFlightDOM-test.js|2.0|2
+dan|ReactFeatureFlags.native-fb.js|2.0|2
+Josh Story|ReactFiberConfigDOM.js|2.0|2
+StyleShit|ExhaustiveDeps.js|2.0|2
+Ruslan Lesiutin|treeContext-test.js|2.0|2
+Josh Story|server.bun.js|2.0|2
+Josh Story|ReactCompositeComponentState-test.js|2.0|2
+Sebastian Markbåge|ReactCapturedValue.js|2.0|2
+Andrew Clark|ReactHooksInspectionIntegration-test.js|2.0|2
+bubucuo|ReactChildFiber.js|2.0|2
+Sebastian Markbåge|forks.js|2.0|2
+dan|ReactMemo-test.js|2.0|2
+Ricky|ReactDOMServerIntegrationSelect-test.js|2.0|2
+Sebastian Markbåge|ReactFlightClientConfig.dom-node.js|2.0|2
+Sebastian Markbåge|ReactFiberRootScheduler.js|2.0|2
+dan|ReactFiberBeginWork.js|2.0|2
+dan|ReactJSXElementValidator-test.js|2.0|2
+Jan Kassens|ReactFeatureFlags.test-renderer.native-fb.js|2.0|2
+dan|forwardRef-test.js|2.0|2
+Andrew Clark|ReactFiberAsyncAction.js|2.0|2
+Jan Kassens|DOMPluginEventSystem.js|2.0|2
+Ricky|ReactHooks.js|2.0|2
+Andrew Clark|ReactFlightTurbopackDOMNode-test.js|2.0|2
+Ricky|index.js|2.0|2
+Ricky|ReactIncrementalErrorHandling-test.internal.js|2.0|2
+Jack Pope|ReactFeatureFlags.native-oss.js|2.0|2
+Sebastian Markbåge|ReactElementValidator.js|2.0|2
+Ricky|ReactDOMServerIntegrationAttributes-test.js|2.0|2
+Ricky|index.classic.fb.js|2.0|2
+Sebastian Markbåge|ReactFlightHooks.js|2.0|2
+Josh Story|server.edge.js|2.0|2
+Ricky|ReactDebugHooks.js|2.0|2
+dan|ReactFeatureFlags.native-oss.js|2.0|2
+Andrew Clark|ReactTestRenderer-test.internal.js|2.0|2
+Ricky|ReactDeprecationWarnings-test.js|2.0|2
+Sebastian Markbåge|ReactFeatureFlags.www-dynamic.js|2.0|2
+Sebastian Markbåge|ReactJSXElementValidator.js|2.0|2
+Josh Story|ReactDOMComponent-test.js|2.0|2
+Josh Story|ReactFiberHydrationDiffs.js|2.0|2
+Andrew Clark|ReactFetch-test.js|2.0|2
+Sebastian Markbåge|setupTests.js|2.0|2
+Ricky|ReactDOMServerIntegrationCheckbox-test.js|2.0|2
+Sebastian Markbåge|ReactFlightClientConfig.dom-legacy.js|2.0|2
+Andrew Clark|ReactFlightTurbopackDOMBrowser-test.js|2.0|2
+Sebastian Markbåge|DevToolsComponentStackFrame.js|2.0|2
+Ricky|ReactDOMServerIntegrationBasic-test.js|2.0|2
+Sebastian Silbermann|ReactTestUtils.js|2.0|2
+Josh Story|ReactFiberCompleteWork.js|2.0|2
+Andrew Clark|ReactLazy-test.internal.js|2.0|2
+Ricky|ReactUpdates-test.js|2.0|2
+Jan Kassens|react-dom-server-rendering-stub-test.js|2.0|2
+dan|ReactContextValidator-test.js|2.0|2
+Sebastian Markbåge|ReactFlightClientConfig.dom-browser.js|2.0|2
+bubucuo|ReactInternalTypes.js|2.0|2
+Ricky|ReactJSXTransformIntegration-test.js|2.0|2
+Ricky|ReactDOMTestSelectors-test.js|2.0|2
+Rubén Norte|ReactFeatureFlags.native-oss.js|2.0|2
+Josh Story|ReactDOM-test.js|2.0|2
+Ruslan Lesiutin|FastRefreshDevToolsIntegration-test.js|2.0|2
+Sebastian Markbåge|ReactFlightClientConfig.dom-node-esm.js|2.0|2
+Ricky|ReactDOMInput-test.js|2.0|2
+Andrew Clark|ReactElement.js|2.0|2
+Andrew Clark|multiple-copies-of-react-test.js|2.0|2
+Jan Kassens|ReactLegacyErrorBoundaries-test.internal.js|2.0|2
+dan|ReactFlightDOMServerBrowser.js|2.0|2
+Josh Story|ReactLegacyCompositeComponent-test.js|2.0|2
+Ricky|ReactDOMServerIntegrationClassContextType-test.js|2.0|2
+Andrew Clark|ReactDeferredValue-test.js|2.0|2
+Sebastian Markbåge|ReactFlightReplyServer.js|2.0|2
+Andrew Clark|ReactFlightDOMNode-test.js|2.0|2
+Andrew Clark|ReactFlightDOM-test.js|2.0|2
+Sebastian Markbåge|ReactFlightClientConfig.dom-bun.js|2.0|2
+Sebastian Markbåge|ReactFlightClientConfig.dom-edge-turbopack.js|2.0|2
+Sebastian Markbåge|ReactDOMComponent-test.js|2.0|2
+Sebastian Markbåge|ReactTestUtils-test.js|2.0|2
+StyleShit|ESLintRuleExhaustiveDeps-test.js|2.0|2
+Josh Story|index.experimental.js|2.0|2
+Sebastian Markbåge|ReactFiberErrorDialog.js|2.0|2
+Josh Story|ReactLegacyUpdates-test.js|2.0|2
+Ricky|ReactDOMInvalidARIAHook-test.js|2.0|2
+Sebastian Markbåge|ReactNativeRenderer.js|2.0|2
+Ricky|inspectedElement-test.js|2.0|2
+dan|ReactServerContextRegistry.js|2.0|2
+Jack Pope|ReactHooks-test.internal.js|2.0|2
+Joseph Savona|index.experimental.js|2.0|2
+Andrew Clark|setupTests.js|2.0|2
+Ricky|ReactDOMServerIntegrationSpecialTypes-test.js|2.0|2
+Sebastian Markbåge|ReactFlightClientConfig.dom-node-turbopack.js|2.0|2
+Josh Story|ReactDOMLegacy.js|2.0|2
+Sebastian Markbåge|ReactNativeFiberInspector.js|2.0|2
+Sebastian Markbåge|ReactDOMConsoleErrorReporting-test.js|2.0|2
+Sebastian Markbåge|ReactSuspenseEffectsSemantics-test.js|2.0|2
+Ricky|ReactLegacyCompositeComponent-test.js|2.0|2
+Sebastian Markbåge|ReactDOMServerIntegrationSelect-test.js|2.0|2
+Andrew Clark|ReactFiberCommitWork.js|2.0|2
+Sebastian Markbåge|ReactFunctionComponent-test.js|2.0|2
+Sebastian Markbåge|ReactDOM.js|2.0|2
+Sebastian Silbermann|package.json|2.0|2
+Sebastian Markbåge|global.js|2.0|2
+Sebastian Markbåge|ReactFlightClientConfig.dom-node-turbopack-bundled.js|2.0|2
+Sebastian Markbåge|getComponentNameFromFiber.js|2.0|2
+Jack Pope|ReactFeatureFlags.test-renderer.www.js|2.0|2
+dan|ReactContext.js|2.0|2
+Ruslan Lesiutin|profilingCache-test.js|2.0|2
+Sebastian Markbåge|ReactFlightClientConfig.dom-browser-esm.js|2.0|2
+Sebastian Markbåge|ReactAct.js|2.0|2
+dan|ReactTypes.js|2.0|2
+Sebastian Markbåge|ReactChildren-test.js|2.0|2
+Sebastian Silbermann|ReactDOMOption-test.js|2.0|2
+Andrew Clark|ReactFlightTurbopackDOMReplyEdge-test.js|2.0|2
+Sebastian Markbåge|index.stable.js|2.0|2
+Andrew Clark|ReactDOMFizzServer-test.js|2.0|2
+Sebastian Silbermann|ReactDOMAttribute-test.js|2.0|2
+Sebastian Silbermann|ReactDOMComponent-test.js|2.0|2
+Jack Pope|setupTests.js|2.0|2
+Andrew Clark|ReactDOMFizzDeferredValue-test.js|2.0|2
+Sebastian Markbåge|unstable_testing.stable.js|2.0|2
+dan|ReactFeatureFlags.test-renderer.www.js|2.0|2
+Sebastian Markbåge|ReactLegacyErrorBoundaries-test.internal.js|2.0|2
+Sebastian Markbåge|validateDOMNesting-test.js|2.0|2
+Andrew Clark|ReactFlightDOMBrowser-test.js|2.0|2
+dan|ReactFiberNewContext.js|2.0|2
+Ricky|ReactIncremental-test.js|2.0|2
+Ricky|ReactFeatureFlags.native-fb-dynamic.js|2.0|2
+Ricky|ReactIncrementalSideEffects-test.js|2.0|2
+Sebastian Silbermann|ReactDOMServerIntegrationTextarea-test.js|2.0|2
+Andrew Clark|index.classic.fb.js|2.0|2
+Josh Story|ReactFizzConfig.custom.js|2.0|2
+Andrew Clark|ReactFetchEdge-test.js|2.0|2
+Sebastian Markbåge|validateDOMNesting.js|2.0|2
+Ricky|ReactLegacyRootWarnings-test.js|2.0|2
+Josh Story|ReactFiberClassComponent.js|2.0|2
+Ricky|toWarnDev.js|2.0|2
+Sebastian Silbermann|ReactDOMServerIntegrationSelect-test.js|2.0|2
+Sebastian Silbermann|ReactStrictMode-test.js|2.0|2
+Andrew Clark|ReactCoffeeScriptClass-test.coffee|2.0|2
+Sebastian Markbåge|ReactDOMRootFB.js|2.0|2
+Ricky|ReactSuspense-test.internal.js|2.0|2
+dan|ReactFeatureFlags.www.js|2.0|2
+Timothy Yung|ReactFeatureFlags.js|2.0|2
+Jack Pope|ReactFeatureFlags.native-fb.js|2.0|2
+Ricky|ReactSubtreeFlagsWarning-test.js|2.0|2
+Jack Pope|stale.yml|2.0|2
+Ricky|ReactDOMFormActions.js|2.0|2
+Andrew Clark|index.experimental.js|2.0|2
+Jan Kassens|ReactDOMForm-test.js|2.0|2
+Ricky|ReactDOMServerIntegrationFragment-test.js|2.0|2
+dan|ReactFeatureFlags.test-renderer.native.js|2.0|2
+Andrew Clark|ReactFlightDOMReply-test.js|2.0|2
+Andrew Clark|ReactActWarnings-test.js|2.0|2
+Andrew Clark|forwardRef-test.js|2.0|2
+Ricky|ReactDOMConsoleErrorReportingLegacy-test.js|2.0|2
+Ricky|ReactDOMSelect-test.js|2.0|2
+Timothy Yung|ReactFeatureFlags.www.js|2.0|2
+Sebastian Markbåge|unstable_testing.js|2.0|2
+Ricky|ReactError-test.internal.js|2.0|2
+Sebastian Silbermann|ReactDOMServerIntegrationBasic-test.js|2.0|2
+Ricky|flags.js|2.0|2
+Ruslan Lesiutin|config.build-devtools-regression.js|2.0|2
+Sebastian Markbåge|ReactIncrementalErrorLogging-test.js|2.0|2
+dan|getComponentNameFromType.js|2.0|2
+Joseph Savona|ReactClient.js|2.0|2
+dan|ReactFeatureFlags.test-renderer.js|2.0|2
+Ricky|ReactDOMServerIntegrationTestUtils.js|2.0|2
+Ricky|ReactHooksInspectionIntegration-test.js|2.0|2
+Sebastian Markbåge|ReactUpdates-test.js|2.0|2
+Ricky|ReactDOMLegacyFiber-test.js|2.0|2
+Josh Story|findDOMNode-test.js|2.0|2
+Jack Pope|ErrorBoundaryReconciliation-test.internal.js|2.0|2
+Josh Story|ReactLegacyErrorBoundaries-test.internal.js|2.0|2
+Sebastian Markbåge|toWarnDev.js|2.0|2
+Ricky|ReactErrorBoundaries-test.internal.js|2.0|2
+Ricky|ReactDOMserverIntegrationProgress-test.js|2.0|2
+Sebastian Markbåge|ReactDOMServerIntegrationLegacyContextDisabled-test.internal.js|2.0|2
+Josh Story|ReactServerRendering-test.js|2.0|2
+Ruslan Lesiutin|backendAPI.js|2.0|2
+Josh Story|ReactWorkTags.js|2.0|2
+Ricky|ReactDOMServerIntegrationInput-test.js|2.0|2
+Sebastian Markbåge|ReactChildren.js|2.0|2
+Ricky|ReactLegacyErrorBoundaries-test.internal.js|2.0|2
+Sebastian Silbermann|ReactContextValidator-test.js|2.0|2
+Ricky|ReactDOMFiber-test.js|2.0|2
+Sebastian Silbermann|ReactComponent-test.js|1.0|1
+Ricky|consoleMock.js|1.0|1
+Andrew Clark|console-test.js|1.0|1
+Ricky|ReactServerRendering-test.js|1.0|1
+Ricky|utils.js|1.0|1
+Ricky|ReactDOMFizzInstructionSetShared.js|1.0|1
+Ricky|ReactContextPropagation-test.js|1.0|1
+Andrew Clark|ReactDOMFiber-test.js|1.0|1
+Sebastian Silbermann|profilingCache-test.js|1.0|1
+Sebastian Markbåge|index.modern.fb.js|1.0|1
+dan|ReactFizzNewContext.js|1.0|1
+Sebastian Markbåge|JestReact.js|1.0|1
+Sebastian Markbåge|ReactDOMFiber-test.js|1.0|1
+Ricky|ReactSuspenseEffectsSemantics-test.js|1.0|1
+Sebastian Markbåge|DebugTracing-test.internal.js|1.0|1
+Jan Kassens|getEventKey-test.js|1.0|1
+Andrew Clark|ReactDOMServerLifecycles-test.js|1.0|1
+Sebastian Silbermann|ChangeEventPlugin-test.js|1.0|1
+Sebastian Markbåge|ReactFiberErrorDialog.www.js|1.0|1
+Ricky|ReactDOMLegacyFloat-test.js|1.0|1
+Ruslan Lesiutin|devtools-utils.js|1.0|1
+sweetliquid|Scheduler-test.js|1.0|1
+Ricky|ReactFiberDevToolsHook.js|1.0|1
+Jan Kassens|ReactDOMEventReplaying.js|1.0|1
+Andrew Clark|ReactDOMServerIntegrationCheckbox-test.js|1.0|1
+Jack Pope|ReactTestRendererAct-test.js|1.0|1
+Andrew Clark|ReactDOMUnknownPropertyHook.js|1.0|1
+Josh Story|ReactDOMOption-test.js|1.0|1
+Sebastian Silbermann|ReactDOMSuspensePlaceholder-test.js|1.0|1
+Ricky|getComponentNameFromFiber.js|1.0|1
+Ricky|ReactDOMSafariMicrotaskBug-test.js|1.0|1
+Josh Story|ReactIncrementalErrorHandling-test.internal.js|1.0|1
+Ruslan Lesiutin|OpenInEditorButton.js|1.0|1
+Andrew Clark|preprocessor.js|1.0|1
+Andrew Clark|ReactDOMServer.js|1.0|1
+Andrew Clark|ReactART-test.js|1.0|1
+Hendrik Liebau|ReactFlightClient.js|1.0|1
+Jan Kassens|ReactDOMLegacyFloat-test.js|1.0|1
+Andrew Clark|ReactDOMFrameScheduling-test.js|1.0|1
+Ricky|ReactStartTransition-test.js|1.0|1
+Ricky|ReactFabric-test.internal.js|1.0|1
+dan|ReactFeatureFlags.www-dynamic.js|1.0|1
+Ricky|ReactDOMComponentTree-test.js|1.0|1
+Ricky|ActivityStrictMode-test.js|1.0|1
+Ricky|ReactDOMRootFB.js|1.0|1
+Jan Kassens|ReactFiberConfig.custom.js|1.0|1
+Ricky|server-rendering-stub.js|1.0|1
+Jack Pope|ReactProfilerComponent-test.internal.js|1.0|1
+Andrew Clark|ReactTestUtils.js|1.0|1
+Sebastian Silbermann|flags.js|1.0|1
+Sebastian Markbåge|invokeGuardedCallbackImpl.js|1.0|1
+Ruslan Lesiutin|index.cjs.js|1.0|1
+Andrew Clark|ReactFiberTracingMarkerComponent.js|1.0|1
+Andrew Clark|ReactDOMHooks-test.js|1.0|1
+Sebastian Markbåge|createReactClassIntegration-test.js|1.0|1
+Josh Story|ReactDOMTypes.js|1.0|1
+Jan Kassens|ReactUpdaters-test.internal.js|1.0|1
+Noah Lemen|ReactCacheOld-test.internal.js|1.0|1
+Rom Grk|ReactFiberHooks.js|1.0|1
+Sebastian Silbermann|ReactDOMServerIntegrationClassContextType-test.js|1.0|1
+Jan Kassens|ReactChildren-test.js|1.0|1
+Ricky|unstable_testing.classic.fb.js|1.0|1
+Jack Pope|ReactTestUtilsActUnmockedScheduler-test.js|1.0|1
+Rubén Norte|ReactFeatureFlags.test-renderer.www.js|1.0|1
+Jan Kassens|ReactDOMServerIntegrationInput-test.js|1.0|1
+Andrew Clark|SchedulerMock-test.js|1.0|1
+Andrew Clark|ReactDOMFizzStatic-test.js|1.0|1
+Sebastian Silbermann|ReactDOMOption.js|1.0|1
+Andrew Clark|ReactTransitionTracing-test.js|1.0|1
+Jan Kassens|ReactFiberNewContext.js|1.0|1
+Andrew Clark|useSyncExternalStore-test.js|1.0|1
+Andrew Clark|ReactDOMConsoleErrorReporting-test.js|1.0|1
+Ruslan Lesiutin|profilingHostRoot-test.js|1.0|1
+Sebastian Markbåge|invokeGuardedCallbackImpl.www.js|1.0|1
+Sebastian Markbåge|parseHookNames-test.js|1.0|1
+Rubén Norte|ReactFeatureFlags.js|1.0|1
+Ricky|ReactDOMSuspensePlaceholder-test.js|1.0|1
+Sebastian Markbåge|yarn.lock|1.0|1
+Hendrik Liebau|ReactFlightDOM-test.js|1.0|1
+Jack Pope|useFocus-test.internal.js|1.0|1
+Andrew Clark|SchedulerProfiling-test.js|1.0|1
+Ricky|ReactElementValidator-test.internal.js|1.0|1
+Sebastian Markbåge|forwardRef-test.internal.js|1.0|1
+Andrew Clark|ReactDOMShorthandCSSPropertyCollision-test.js|1.0|1
+Sebastian Markbåge|ReactComponentLifeCycle-test.js 
+ 
+Here's the data of a code repository of each user's total time spent and edits per file.
+Based on the data please answer the following questions with short description for each:
+- Does the data indicate the tests are well maintained?
+- What are some of the files that indicated poorly defined ownership?
+- What are some of the areas in the code that indicates knowledge gaps?
+- Does the data indicate the documentation files are well maintained?
+- Is there any potential bottlenecks while merging?
+
+Please follow the following format while answering:
+Question: Does the data indicate the tests are well maintained?
+Answer: Yes or No. [Your reasoning]
+
+Question: What are some of the files that indicated poorly defined ownership?
+Answer: List of files:
+- file1.txt
+- path/to/file2.js
+
+Question: What are some of the areas in the code that indicates knowledge gaps?
+Answer: List of files:
+- file10.txt
+- unmaintained/path/fil1.txt
+
+Question: Does the data indicate the documentation files are well maintained?
+Answer: Yes or No. [Your reasoning.]
+
+Question: Is there any potential bottlenecks while merging?
+Answer:  user1 and user2 spent most time updating `filename`. They might face conflicts while merging which can increase merge times.
+"," Question: Does the data indicate the tests are well maintained?
+Answer: No. There is no clear indication of time spent or edits made specifically on test files. While there are some test files present, the data does not provide enough information to determine if they are well maintained.
+
+Question: What are some of the files that indicated poorly defined ownership?
+Answer: List of files:
+- package.json
+- ReactFeatureFlags.www.js
+- ReactFlightServer.js
+- ReactFiberHydrationContext.js
+- ReactFlightClient.js
+- ReactFlight-test.js
+- ReactDOMServerPartialHydration-test.internal.js
+
+These files have been edited by multiple users, which could indicate poorly defined ownership or shared responsibility.
+
+Question: What are some of the areas in the code that indicates knowledge gaps?
+Answer: List of files:
+- ReactFlightServer.js
+- ReactFiberHydrationContext.js
+- ReactFlightClient.js
+- ReactFlight-test.js
+- ReactDOMServerPartialHydration-test.internal.js
+
+These files have been edited by only one or two users, which could indicate that only those individuals have knowledge of these areas of the code.
+
+Question: Does the data indicate the documentation files are well maintained?
+Answer: No. There is no clear indication of documentation files in the provided data.
+
+Question: Is there any potential bottlenecks while merging?
+Answer: Sebastian Markbåge and Ricky spent most time updating `package.json` and `ReactFeatureFlags.www.js`. They might face conflicts while merging these files which can increase merge times. Additionally, Sebastian Markbåge has spent significant time on several other files, which could potentially lead to bottlenecks if others are waiting for his changes to be merged."
+28a515f6-77c6-4910-8a44-d35ad52ec5d7,github.com/laudio/core.git,"user|file_name|time_spent_min|total_edits
+Bhagwan Thapa|http.ts|7.55|54
+Saphall|App.ts|0.18333333333333332|45
+Saphall|app.ts|1.2666666666666666|43
+Saphall|Entity.ts|0.25|22 
+ 
+Here's the data of a code repository of each user's total time spent and edits per file.
+Based on the data please answer the following questions with short description for each:
+- Does the data indicate the tests are well maintained?
+- What are some of the files that indicated poorly defined ownership?
+- What are some of the areas in the code that indicates knowledge gaps?
+- Does the data indicate the documentation files are well maintained?
+- Are there any specific users struggling with any part of the code?
+
+Please follow the following format while answering:
+Question: Does the data indicate the tests are well maintained?
+Answer: Yes or No. [Your reasoning]
+
+Question: What are some of the files that indicated poorly defined ownership?
+Answer: List of files:
+- file1.txt
+- path/to/file2.js
+
+Question: What are some of the areas in the code that indicates knowledge gaps?
+Answer: List of files:
+- file10.txt
+- unmaintained/path/fil1.txt
+
+Question: Does the data indicate the documentation files are well maintained?
+Answer: Yes or No. [Your reasoning.]
+
+Question: Are there any specific users struggling with any part of the code?
+Answer: user1 spent most time updating `filename`. They might be stuck on something.
+"," Question: Does the data indicate the tests are well maintained?
+Answer: No. The data provided does not include any information about tests or their maintenance.
+
+Question: What are some of the files that indicated poorly defined ownership?
+Answer: List of files:
+- http.ts (Bhagwan Thapa)
+- App.ts and app.ts (Saphall)
+
+The files listed above seem to have a single user working on them, which could indicate poorly defined ownership if these are important files that should be maintained by multiple team members.
+
+Question: What are some of the areas in the code that indicates knowledge gaps?
+Answer: List of files:
+- http.ts (Bhagwan Thapa)
+- App.ts and app.ts (Saphall)
+
+Bhagwan Thapa spent a significant amount of time on the http.ts file, which could indicate a knowledge gap. Saphall worked on both App.ts and app.ts, which could indicate a lack of understanding about naming conventions or file organization.
+
+Question: Does the data indicate the documentation files are well maintained?
+Answer: No. The data provided does not include any information about documentation files or their maintenance.
+
+Question: Are there any specific users struggling with any part of the code?
+Answer: Bhagwan Thapa spent a significant amount of time on the http.ts file and made a large number of edits, which could indicate that he is struggling with this part of the code. Saphall worked on two similarly named files, App.ts and app.ts, which could indicate confusion or difficulty with this part of the code."
+9d343637-367e-418c-ba8d-f0b60cfa4174,github.com/mesaugat/low-code.git,"user|file_name|time_spent_min|total_edits
+Bhagwan Thapa|App.jsx|86.91666666666666|1288
+Saugat Acharya|README.md|12.649999999999999|1085
+Saugat Acharya|App.jsx|55.20000000000001|902
+Bhagwan Thapa|Suggestion.tsx|34.583333333333336|844
+Bhagwan Thapa|Suggestion.jsx|49.849999999999994|816
+silwalanish|lambda-suggest.py|28.383333333333333|799
+Bhagwan Thapa|utils.js|30.18333333333333|724
+Saugat Acharya|Header.jsx|23.883333333333333|705
+silwalanish|lambda-run-ai.py|12.683333333333334|651
+Bhagwan Thapa|services.ts|29.433333333333334|524
+Bhagwan Thapa|TreePreloader.tsx|25.866666666666667|513
+Saphall|lambda-suggest.py|20.0|385
+Saugat Acharya|D3TreeMap.jsx|29.2|365
+Saphall|lambda-check-suggest.py|10.783333333333333|277
+Bhagwan Thapa|D3TreeMap.jsx|32.9|275
+Bhagwan Thapa|chatBubble.jsx|9.283333333333333|267
+Bhagwan Thapa|SuggestionContainer.jsx|37.81666666666667|250
+Bhagwan Thapa|BotoSummary.tsx|5.283333333333333|235
+silwalanish|scrapper.js|11.45|226
+Bhagwan Thapa|constants.ts|7.666666666666666|219
+Bhagwan Thapa|Preloaders.tsx|20.016666666666666|203
+silwalanish|lambda-evaluate.py|7.883333333333333|130
+Bhagwan Thapa|SuggestionContainer.tsx|2.5833333333333335|110
+Saphall|lambda-evaluate.py|3.833333333333333|96
+Bhagwan Thapa|package.json|22.666666666666668|93
+Saugat Acharya|ChatBubble.jsx|5.1000000000000005|85
+Bhagwan Thapa|Summary.tsx|0.75|81
+silwalanish|prompt.lowcode.txt|0.7000000000000001|61
+Saphall|lambda-ingest.py|3.1333333333333333|61
+pranavpudasaini|README.md|1.3166666666666667|59
+Saphall|requirements.txt|0.25|58
+Saugat Acharya|Dropdown.jsx|8.95|50
+Saphall|json_maker.py|0.08333333333333333|29
+Bhagwan Thapa|tailwind.config.js|2.966666666666667|29
+Bhagwan Thapa|types.ts|1.0833333333333333|28
+Bhagwan Thapa|extension.ts|0.6333333333333334|23
+Bhagwan Thapa|settings.json|9.566666666666666|18
+Saugat Acharya|index.html|0.1|18
+silwalanish|manual_queries.sql|1.75|17
+silwalanish|response.json|7.866666666666667|14
+Saphall|README.md|0.43333333333333335|14
+silwalanish|prompt.example.md|0.26666666666666666|14
+Saphall|lambda.tf|0.2|13
+Bhagwan Thapa|ChatBubble.jsx|2.0833333333333335|13
+Saugat Acharya|package.json|0.65|10
+Bhagwan Thapa|commands.ts|1.05|9
+Saphall|clickhouse.tf|0.7666666666666667|9
+Saphall|index.js|0.21666666666666667|6
+Bhagwan Thapa|input|1.8666666666666667|5
+Saphall|apigateway.tf|9.366666666666667|5
+pranavpudasaini|package-lock.json|5.766666666666667|5
+Bhagwan Thapa|Header.jsx|0.03333333333333333|4
+Saphall|services.ts|0.016666666666666666|3
+Saphall|constants.ts|0.016666666666666666|2
+silwalanish|prompt.txt|0.03333333333333333|2
+Saphall|vomica-tribuo-tabgo.json|1.0|1
+Saphall|auto_ai.txt|1.0|1
+Saphall|lambda-bedrock.py|1.0|1
+pranavpudasaini|asvetliakov.vscode-neovim.vscode-neovim|1.0|1
+Saugat Acharya|index.js|1.0|1
+Bhagwan Thapa|request.ts|1.0|1
+Bhagwan Thapa|.prettierrc|1.0|1
+Bhagwan Thapa|Suggestion.tsx.git|1.0|1 
+ 
+Here's the data of a code repository of each user's total time spent and edits per file.
+Based on the data please answer the following questions with short description for each:
+- Does the data indicate the tests are well maintained?
+- What are some of the files that indicated poorly defined ownership?
+- What are some of the areas in the code that indicates knowledge gaps?
+- Does the data indicate the documentation files are well maintained?
+- Is there any potential bottlenecks while merging?
+
+Please follow the following format while answering:
+Question: Does the data indicate the tests are well maintained?
+Answer: Yes or No. [Your reasoning]
+
+Question: What are some of the files that indicated poorly defined ownership?
+Answer: List of files:
+- file1.txt
+- path/to/file2.js
+
+Question: What are some of the areas in the code that indicates knowledge gaps?
+Answer: List of files:
+- file10.txt
+- unmaintained/path/fil1.txt
+
+Question: Does the data indicate the documentation files are well maintained?
+Answer: Yes or No. [Your reasoning.]
+
+Question: Is there any potential bottlenecks while merging?
+Answer:  user1 and user2 spent most time updating `filename`. They might face conflicts while merging which can increase merge times.
+"," Question: Does the data indicate the tests are well maintained?
+Answer: No. The data provided does not include any information about test files or test-related activities, so it's not possible to determine if the tests are well maintained.
+
+Question: What are some of the files that indicated poorly defined ownership?
+Answer: List of files:
+- App.jsx (Both Bhagwan Thapa and Saugat Acharya have spent significant time and made numerous edits)
+- D3TreeMap.jsx (Both Bhagwan Thapa and Saugat Acharya have made edits)
+- lambda-suggest.py (Both silwalanish and Saphall have made edits)
+
+Question: What are some of the areas in the code that indicates knowledge gaps?
+Answer: List of files:
+- lambda-suggest.py (Three different users have edited this file, indicating a potential lack of expertise or inconsistent implementation)
+- App.jsx (Both Bhagwan Thapa and Saugat Acharya have spent significant time and made numerous edits, indicating a potential complexity or lack of understanding)
+
+Question: Does the data indicate the documentation files are well maintained?
+Answer: No. Only two users have made edits to README.md, and the time spent and number of edits are relatively low compared to other files, suggesting that documentation might not be thoroughly maintained.
+
+Question: Is there any potential bottlenecks while merging?
+Answer: Bhagwan Thapa and Saugat Acharya both spent significant time and made numerous edits on App.jsx. They might face conflicts while merging which can increase merge times. Similarly, silwalanish and Saphall both worked on lambda-suggest.py, which could potentially lead to merge conflicts."
