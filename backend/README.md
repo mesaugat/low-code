@@ -1,6 +1,6 @@
 # Backend
 
-The backend of our application is designed to handle data processing and storage. 
+The backend of our application is designed to handle data processing and storage.
 It utilizes AWS Lambda and API Gateway to provide a serverless architecture, ensuring scalability and performance.
 
 ## AWS Lambda

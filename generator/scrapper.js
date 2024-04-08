@@ -71,4 +71,4 @@ async function run(repo_url, owner, repo) {
   }
 }
 
-run("github.com/facebook/react.git", "facebook", "react");
+run('github.com/facebook/react.git', 'facebook', 'react');

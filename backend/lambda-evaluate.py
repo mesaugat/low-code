@@ -126,7 +126,7 @@ def lambda_handler(event, context):
                     date_add(MINUTE, 15, toStartOfFifteenMinutes("timestamp")) AS round_end,
                     date_sub(MINUTE, 15, toStartOfFifteenMinutes("timestamp")) AS prev_round_start,
                     toStartOfFifteenMinutes("timestamp") AS prev_round_end,
-                    date_add(MINUTE, 15, toStartOfFifteenMinutes("timestamp")) AS next_round_start, 
+                    date_add(MINUTE, 15, toStartOfFifteenMinutes("timestamp")) AS next_round_start,
                     date_add(MINUTE, 30, toStartOfFifteenMinutes("timestamp")) AS next_round_end
                 FROM ingestion_payload
                 WHERE repo_url = %(repo_url)s
@@ -134,23 +134,23 @@ def lambda_handler(event, context):
                     {user_filter}
                     {path_filter}
             ), cte_events_merged AS (
-                SELECT 
-                    repo_user, 
+                SELECT
+                    repo_user,
                     repo_branch,
-                    changed_file, 
-                    round_start, 
-                    round_end, 
-                    prev_round_start, 
-                    prev_round_end, 
-                    next_round_start, 
+                    changed_file,
+                    round_start,
+                    round_end,
+                    prev_round_start,
+                    prev_round_end,
+                    next_round_start,
                     next_round_end,
-                    MIN("timestamp") AS start_time, 
-                    MAX("timestamp") AS end_time, 
+                    MIN("timestamp") AS start_time,
+                    MAX("timestamp") AS end_time,
                     COUNT(*) AS events,
                     date_diff('second', MIN("timestamp"), MAX("timestamp")) / (60.0) AS time_spent_minute
                 FROM cte_rounded_event_times
-                GROUP BY 
-                    repo_user, 
+                GROUP BY
+                    repo_user,
                     repo_branch,
                     changed_file,
                     round_start,
@@ -171,21 +171,21 @@ def lambda_handler(event, context):
                 SELECT *
                 FROM cte_events_merged_multiple
                 UNION ALL
-                SELECT 
-                    a.repo_user, 
+                SELECT
+                    a.repo_user,
                     a.repo_branch,
-                    a.changed_file, 
-                    a.round_start, 
-                    a.round_end, 
-                    a.prev_round_start, 
-                    a.prev_round_end, 
-                    a.next_round_start, 
+                    a.changed_file,
+                    a.round_start,
+                    a.round_end,
+                    a.prev_round_start,
+                    a.prev_round_end,
+                    a.next_round_start,
                     a.next_round_end,
-                    IF(b.repo_user != '' and abs(date_diff('second', b.end_time, a.start_time)) < abs(date_diff('second', a.start_time, c.start_time)), b.end_time, a.start_time) AS start_time, 
-                    IF(c.repo_user != '' and abs(date_diff('second', b.end_time, a.start_time)) > abs(date_diff('second', a.start_time, c.start_time)), c.start_time, a.end_time) AS end_time, 
+                    IF(b.repo_user != '' and abs(date_diff('second', b.end_time, a.start_time)) < abs(date_diff('second', a.start_time, c.start_time)), b.end_time, a.start_time) AS start_time,
+                    IF(c.repo_user != '' and abs(date_diff('second', b.end_time, a.start_time)) > abs(date_diff('second', a.start_time, c.start_time)), c.start_time, a.end_time) AS end_time,
                     a.events,
-                    date_diff('second', 
-                        IF(b.repo_user != '' and abs(date_diff('second', b.end_time, a.start_time)) < abs(date_diff('second', a.start_time, c.start_time)), b.end_time, a.start_time), 
+                    date_diff('second',
+                        IF(b.repo_user != '' and abs(date_diff('second', b.end_time, a.start_time)) < abs(date_diff('second', a.start_time, c.start_time)), b.end_time, a.start_time),
                         IF(c.repo_user != '' and abs(date_diff('second', b.end_time, a.start_time)) > abs(date_diff('second', a.start_time, c.start_time)), c.start_time, a.end_time)
                     ) / (60.0) AS time_spent_minute
                 FROM cte_events_merged_single a
@@ -199,21 +199,21 @@ def lambda_handler(event, context):
                     AND a.changed_file = c.changed_file
                     AND a.next_round_start = c.round_start
                     AND a.next_round_end = c.round_end
-                WHERE b.repo_user != '' 
+                WHERE b.repo_user != ''
                     AND c.repo_user != ''
                 UNION ALL
-                SELECT 
-                    a.repo_user, 
+                SELECT
+                    a.repo_user,
                     a.repo_branch,
-                    a.changed_file, 
-                    a.round_start, 
-                    a.round_end, 
-                    a.prev_round_start, 
-                    a.prev_round_end, 
-                    a.next_round_start, 
+                    a.changed_file,
+                    a.round_start,
+                    a.round_end,
+                    a.prev_round_start,
+                    a.prev_round_end,
+                    a.next_round_start,
                     a.next_round_end,
-                    a.start_time, 
-                    a.end_time, 
+                    a.start_time,
+                    a.end_time,
                     a.events,
                     1 AS time_spent_minute
                 FROM cte_events_merged_single a
@@ -227,7 +227,7 @@ def lambda_handler(event, context):
                     AND a.changed_file = c.changed_file
                     AND a.next_round_start = c.round_start
                     AND a.next_round_end = c.round_end
-                WHERE b.repo_user == '' 
+                WHERE b.repo_user == ''
                     AND c.repo_user == ''
             )
             SELECT
@@ -235,7 +235,7 @@ def lambda_handler(event, context):
                 changed_file,
                 SUM(time_spent_minute) AS time_spent,
                 SUM(events) AS num_of_edits
-            FROM cte_all_events_time_spent 
+            FROM cte_all_events_time_spent
             GROUP BY changed_file;
         """,
             {
