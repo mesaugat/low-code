@@ -1,12 +1,4 @@
 
-CREATE TABLE ai_suggestions (
-    id UUID DEFAULT generateUUIDv4(),
-    repo_url String,
-    prompt String,
-    response String
-) ENGINE = MergeTree()
-ORDER BY (id);
-
 INSERT INTO ai_suggestions(repo_url, prompt, response)
 VALUES ('github.com/mesaugat/low-code.git', 'user|file_name|time_spent_min|total_edits
 Bhagwan Thapa|Suggestion.tsx|34.58333333333333|844
