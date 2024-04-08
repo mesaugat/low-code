@@ -28,7 +28,7 @@ This project is a low-code VSCode extension and visualizer built with `React`, `
 
 ![Demo](./demo/demo.gif)
 
-### Screenshot
+## Screenshot
 
 ![Extension](./demo/extension.png)
 ![Visualizer](./demo/visualizer.png)
