@@ -11,4 +11,4 @@ CREATE TABLE IF NOT EXISTS ingestion_payload (
     is_dirty UInt8,
     timestamp DateTime64(3, 'UTC')
 ) ENGINE = MergeTree()
-ORDER BY (id) """
+ORDER BY (id);
